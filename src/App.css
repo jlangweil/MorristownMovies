@@ -1,0 +1,215 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-image: url('images/theater.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.App-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #d32f2f;
+  padding: 1rem;
+}
+
+.App-header h1 {
+  color: #fff;
+  font-size: 2rem;
+  margin: 0; /* Remove the "auto" value to prevent centering */
+}
+
+.hamburger {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer; 
+  margin-left: 1rem;
+}
+
+.nav-links {
+  position: fixed;
+  right: 0;
+  top: 3rem; /* Change this to the height of the header (e.g., 3rem) */
+  width: 300px; /* Adjust the width of the options panel */
+  height: calc(100% - 3rem); /* Subtract the height of the header */
+  background-color: rgba(30, 30, 30, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1; /* Add this to make sure the popout is on top of other elements */
+}
+
+.nav-links.show {
+  transform: translateX(0%);
+}
+
+.nav-links {
+  position: fixed;
+  right: 0;
+  top: 4.2rem;
+  width: 300px;
+  height: calc(100% - 3rem);
+  background-color: rgba(30, 30, 30, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* Change this to stretch to make buttons full width */
+  justify-content: flex-start; /* Change this to flex-start to move buttons to the top */
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1;
+  padding: 0.5rem 0; /* Add padding at the top and bottom of the popout */
+}
+
+.nav-links.show {
+  transform: translateX(0%);
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  background-color: #d32f2f;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex; /* Add this to align text to the center */
+  justify-content: center; /* Add this to align text to the center */
+  width: 100%; /* Set the button width to 100% */
+  box-sizing: border-box; /* Add this to include padding in the button width */
+}
+
+.nav-links a:last-child {
+  margin-bottom: 0;
+}
+
+.nav-links a:hover {
+  background-color: #b71c1c;
+}
+
+main {
+  max-width: 50%; /* Limit the content width to 50% */
+  margin: 1rem auto; /* Center the content */
+  color: #fff;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  main {
+    max-width: 100%; /* Use 100% of the screen width on mobile devices */
+  }
+}
+
+section {
+  /* other styles */
+}
+
+h2 {
+  /* other styles */
+}
+
+ul {
+  /* other styles */
+}
+
+li {
+  /* other styles */
+}
+
+article {
+  /* other styles */
+}
+
+article h3 {
+  /* other styles */
+}
+
+article p {
+  /* other styles */
+}
+
+
+.auth-buttons {
+  display: flex;
+  position: relative;
+}
+
+.auth-buttons button {
+  background-color: #d32f2f;
+  border: 1px solid #fff;
+  color: #fff;
+  margin-left: 1rem;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.auth-buttons button:hover {
+  background-color: #f44336;
+  border-color: #f44336;
+}
+
+.login-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-box {
+  background-color: rgba(30, 30, 30, 0.3); /* Change the alpha value (0.8) for the desired transparency */
+  border-radius: 5px;
+  padding: 2rem;
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-box h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.login-box form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-box label {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.login-box input {
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  outline: none;
+  border: 1px solid #d32f2f;
+  border-radius: 5px;
+}
+
+.login-box button {
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  background-color: #d32f2f;
+  color: #fff;
+  border: none
+}
