@@ -1,0 +1,47 @@
+/* UserProfileIcon.module.css */
+
+.iconContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 40%;
+    background-color: #4B9CD3; /* A shade of blue that goes well with a red background */
+    color: #FFFFFF; /* White text color */
+    font-size: 48px;
+    font-weight: bold;
+  }
+  
+  .star-container {
+    position: relative;
+    width: 3rem;
+    height: 3rem;
+  }
+  
+  .star {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .star-bg {
+    fill: #36454f;
+  }
+  
+  .star-brass {
+    fill: #f88379;
+  }
+  
+  .initial {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: Arial, sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #13110c;
+    text-align: center;
+  }
+  
+  

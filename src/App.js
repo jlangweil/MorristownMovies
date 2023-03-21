@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { FaHome } from 'react-icons/fa';
 import './App.css';
+import UserProfileIcon from './components/UserProfile/UserProfileIcon';
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -17,17 +19,24 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1></h1>
-         <div className="auth-buttons">
+        <div className="centered-div">
+           <h1 className="banner-text">The Morristown Movie & Dining (and More) Meetup Group</h1>
+        </div>
+        <div className="right-justified-divs">
+          <div className="auth-buttons">
+          <div>
+            <UserProfileIcon initial="J" />
+          </div>
           <button>Sign In</button>
           <button>Log Out</button>
           <button className="hamburger" onClick={toggleMenu}>
             &#9776;
           </button>
+          </div>
         </div>
       </header>
       <nav className={`nav-links ${menuOpen ? 'show' : ''}`}>
-        <a href="#home" onClick={() => handleMenuClick('home')}>Home</a>
+        <a href="#home" onClick={() => handleMenuClick('home')}><FaHome />&nbsp;&nbsp;Home</a>
         <a href="#events" onClick={() => handleMenuClick('events')}>Events</a>
         <a href="#forum" onClick={() => handleMenuClick('forum')}>Forum</a>
         <a href="#blog" onClick={() => handleMenuClick('blog')}>Blog</a>
@@ -35,7 +44,7 @@ function App() {
       <main>
         {activeSection === 'home' && (
           <section id="home" className="login-section">
-          <h2>Welcome to Morristown Movie Meetup!</h2>
+          <h2>Welcome!  Log on or sign up below.</h2>
           <div className="login-box">
             <h3>Login</h3>
             <form>
