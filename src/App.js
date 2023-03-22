@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { FaHome } from 'react-icons/fa';
 import './App.css';
 import UserProfileIcon from './components/UserProfile/UserProfileIcon';
+import OAuthLogin from './components/Login/OAuthLogin';
+import Events from './Events';
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -16,6 +18,39 @@ function App() {
     setMenuOpen(false);
   };
 
+  const [user, setUser] = useState(null);
+
+  const handleGoogleSuccess = (response) => {
+    const profile = response.getBasicProfile();
+    const userData = {
+      id: profile.getId(),
+      name: profile.getName(),
+      email: profile.getEmail(),
+      imageUrl: profile.getImageUrl(),
+      accessToken: response.getAuthResponse().id_token,
+    };
+    setUser(userData);
+  };
+
+  const handleGoogleFailure = (error) => {
+    console.error('Google Login Error:', error);
+  };
+
+  const handleFacebookSuccess = (response) => {
+    const userData = {
+      id: response.userID,
+      name: response.name,
+      email: response.email,
+      imageUrl: response.picture.data.url,
+      accessToken: response.accessToken,
+    };
+    setUser(userData);
+  };
+
+  const handleFacebookFailure = (error) => {
+    console.error('Facebook Login Error:', error);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -27,7 +62,7 @@ function App() {
           <div>
             <UserProfileIcon initial="J" />
           </div>
-          <button>Sign In</button>
+          <button>Sign Up</button>
           <button>Log Out</button>
           <button className="hamburger" onClick={toggleMenu}>
             &#9776;
@@ -53,8 +88,17 @@ function App() {
               <label htmlFor="password">Password:</label>
               <input type="password" id="password" name="password" required />
               <button type="submit">Log In</button>
+              <text align="right">Forgot Password?</text>
             </form>
           </div>
+          <div><center>or</center></div>
+          &nbsp;
+          <OAuthLogin
+            onGoogleSuccess={handleGoogleSuccess}
+            onGoogleFailure={handleGoogleFailure}
+            onFacebookSuccess={handleFacebookSuccess}
+            onFacebookFailure={handleFacebookFailure}
+          />
         </section>
         )}
         {activeSection === 'events' && (
@@ -65,6 +109,7 @@ function App() {
               <li>April 1st: Movie Night - "Pulp Fiction"</li>
               <li>April 8th: Movie Night - "The Godfather"</li>
             </ul>
+            <Events />
           </section>
         )}
         {activeSection === 'forum' && (

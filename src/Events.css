@@ -1,0 +1,55 @@
+.rbc-calendar {
+  background-color: #2c2c2c; /* dark gray background color */
+  border: 3px solid #3f51b5;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+  
+/* Style for calendar events */
+.rbc-event {
+  background-color: #3f51b5;
+  border: 1px solid #2c2c2c;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+  .rbc-calendar,
+.rbc-calendar * {
+  color: #f5f5f5; /* light gray text color */
+  font-weight: bold; /* bold text */
+}
+
+/* Style for header buttons */
+.rbc-btn-group button {
+  color: #f5f5f5; /* light gray text color */
+}
+
+/* Style for selected header buttons */
+.rbc-btn-group button.rbc-active {
+  color: #2c2c2c; /* dark gray text color */
+}
+
+/* Style for selected date, today's date, and cells on hover */
+.rbc-day-bg.rbc-selected,
+.rbc-day-bg.rbc-today,
+.rbc-day-bg:hover {
+  color: #2c2c2c; /* dark gray text color */
+}
+
+/* Style for current day */
+.rbc-day-bg.rbc-today {
+  background-color: #161616; /* very light gray */
+}
+
+/* Style for calendar events */
+.rbc-event {
+  border: 1px solid white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-size: 0.8rem; /* adjust this value to achieve the desired font size */
+  white-space: normal; /* allow text to wrap */
+  text-overflow: clip; /* disable text truncating */
+  overflow: hidden; /* hide overflowing content */
+  word-break: break-word; /* break words if necessary to fit the content */
+  padding: 2px 4px; /* add padding for better readability */
+  height: 100%; /* set the height of the event box to fill the cell vertically */
+}

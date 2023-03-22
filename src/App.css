@@ -224,7 +224,8 @@ article p {
   cursor: pointer;
   background-color: #d32f2f;
   color: #fff;
-  border: none
+  border: none;
+  margin-bottom: 1rem;
 }
 
 .banner-text {
@@ -234,4 +235,11 @@ article p {
   color: #ffdbb4;
   text-align: center;
   margin: 0;
+}
+
+@media (max-width: 768px) {
+  .banner-text {
+    font-size: 24px; /* Smaller font size for mobile devices */
+    padding: 10px;
+  }
 }
