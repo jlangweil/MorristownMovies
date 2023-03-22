@@ -1,0 +1,38 @@
+.movie-review {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .movie-name {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .review-text {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .user-name {
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+  }
+  
+  .rating {
+    display: flex;
+  }
+
+  .review-date {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .full-star,
+  .half-star {
+    color: gold;
+  }
+  

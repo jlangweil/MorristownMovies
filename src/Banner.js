@@ -6,13 +6,13 @@ function Banner({ onButtonClick }) {
   return (
     <Container fluid>
       <Row className="align-items-center">
-        <Col lg={2} className="text-end">
+        <Col xl={2} className="text-end">
          
         </Col>
-        <Col lg={8} className="text-center">
+        <Col xl={8} className="text-center">
           <div class="banner-text">The Morristown Movie & Dining (and More) Meetup Group</div>
         </Col>
-        <Col lg={2} className="d-flex justify-content-end">
+        <Col xl={2} className="d-flex justify-content-end">
             <div className="auth-buttons">
                 <UserProfileIcon initial="J" />
                 <button>Sign Up</button>

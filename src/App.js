@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 import { FaHome } from 'react-icons/fa';
 import './App.css';
-import UserProfileIcon from './components/UserProfile/UserProfileIcon';
 import OAuthLogin from './components/Login/OAuthLogin';
 import Events from './Events';
 import Banner from './Banner';
+import MovieReview from './MovieReview';
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+
+  const movieName = 'The Shawshank Redemption';
+  const reviewText =
+    "One of the best movies of all time. The characters are well-developed and the story is captivating. A must-watch!";
+  const userName = 'John Doe';
+  const numberOfStars = 4.5;
+  const dateOfReview = '2023-03-22';
+  const formattedDate = new Date(dateOfReview).toLocaleDateString();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -55,35 +63,20 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-{/*         <div className="centered-div">
-           <h1 className="banner-text">The Morristown Movie & Dining (and More) Meetup Group</h1>
-        </div>
-        <div className="right-justified-divs">
-          <div className="auth-buttons">
-          <div>
-            <UserProfileIcon initial="J" />
-          </div>
-          <button>Sign Up</button>
-          <button>Log Out</button>
-          <button className="hamburger" onClick={toggleMenu}>
-            &#9776;
-          </button>
-          </div>
-        </div> */}
         <Banner onButtonClick={toggleMenu}/>
       </header>
       <nav className={`nav-links ${menuOpen ? 'show' : ''}`}>
         <a href="#home" onClick={() => handleMenuClick('home')}><FaHome />&nbsp;&nbsp;Home</a>
         <a href="#events" onClick={() => handleMenuClick('events')}>Events</a>
+        <a href="#reviews" onClick={() => handleMenuClick('reviews')}>Movie Reviews</a>
         <a href="#forum" onClick={() => handleMenuClick('forum')}>Forum</a>
         <a href="#blog" onClick={() => handleMenuClick('blog')}>Blog</a>
       </nav>
       <main>
         {activeSection === 'home' && (
           <section id="home" className="login-section">
-          <h2>Welcome!  Log on or sign up below.</h2>
           <div className="login-box">
-            <h3>Login</h3>
+            <h3>Welcome!</h3>
             <form>
               <label htmlFor="email">Email:</label>
               <input type="email" id="email" name="email" required />
@@ -131,6 +124,18 @@ function App() {
               <h3>How to Analyze a Movie: A Beginner's Guide</h3>
               <p>Discover the key elements of movie analysis and learn how to evaluate films beyond just entertainment.</p>
             </article>
+          </section>
+        )}
+        {activeSection === 'reviews' && (
+          <section id="reviews">
+            <h2>Member Reviews</h2>
+            <MovieReview
+              movieName={movieName}
+              reviewText={reviewText}
+              userName={userName}
+              numberOfStars={numberOfStars}
+              dateOfReview={formattedDate}
+            />
           </section>
         )}
       </main>
