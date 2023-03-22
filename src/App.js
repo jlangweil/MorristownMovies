@@ -4,6 +4,7 @@ import './App.css';
 import UserProfileIcon from './components/UserProfile/UserProfileIcon';
 import OAuthLogin from './components/Login/OAuthLogin';
 import Events from './Events';
+import Banner from './Banner';
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -54,7 +55,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div className="centered-div">
+{/*         <div className="centered-div">
            <h1 className="banner-text">The Morristown Movie & Dining (and More) Meetup Group</h1>
         </div>
         <div className="right-justified-divs">
@@ -68,7 +69,8 @@ function App() {
             &#9776;
           </button>
           </div>
-        </div>
+        </div> */}
+        <Banner onButtonClick={toggleMenu}/>
       </header>
       <nav className={`nav-links ${menuOpen ? 'show' : ''}`}>
         <a href="#home" onClick={() => handleMenuClick('home')}><FaHome />&nbsp;&nbsp;Home</a>
