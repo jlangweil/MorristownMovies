@@ -10,7 +10,7 @@ function Banner({ onButtonClick }) {
          
         </Col>
         <Col xl={8} className="text-center">
-          <div class="banner-text">The Morristown Movie & Dining (and More) Meetup Group</div>
+          <div class="banner-text">The Morristown Movie & Dining Meetup Group</div>
         </Col>
         <Col xl={2} className="d-flex justify-content-end">
             <div className="auth-buttons">

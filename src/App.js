@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaHome } from 'react-icons/fa';
+import { FaHome, FaCalendar, FaStar, FaDiscord, FaNewspaper, FaMeetup } from 'react-icons/fa';
 import './App.css';
 import OAuthLogin from './components/Login/OAuthLogin';
 import Events from './Events';
@@ -67,10 +67,11 @@ function App() {
       </header>
       <nav className={`nav-links ${menuOpen ? 'show' : ''}`}>
         <a href="#home" onClick={() => handleMenuClick('home')}><FaHome />&nbsp;&nbsp;Home</a>
-        <a href="#events" onClick={() => handleMenuClick('events')}>Events</a>
-        <a href="#reviews" onClick={() => handleMenuClick('reviews')}>Movie Reviews</a>
-        <a href="#forum" onClick={() => handleMenuClick('forum')}>Forum</a>
-        <a href="#blog" onClick={() => handleMenuClick('blog')}>Blog</a>
+        <a href="#events" onClick={() => handleMenuClick('events')}><FaCalendar />&nbsp;&nbsp;Events</a>
+        <a href="#reviews" onClick={() => handleMenuClick('reviews')}><FaStar />&nbsp;&nbsp;Movie Reviews</a>
+        <a href="#blog" onClick={() => handleMenuClick('blog')}><FaNewspaper />&nbsp;&nbsp;Blog</a>
+        <a href="https://discord.com/channels/964877736822837349/965064633704661042" target="_blank" rel="noopener noreferrer"><FaDiscord />&nbsp;&nbsp;Discord</a>
+        <a href="https://www.meetup.com/movies-594/" target="_blank" rel="noopener noreferrer"><FaMeetup />&nbsp;&nbsp;Meetup</a>
       </nav>
       <main>
         {activeSection === 'home' && (
@@ -110,7 +111,7 @@ function App() {
         {activeSection === 'forum' && (
           <section id="forum">
             <h2>Discussion Forum</h2>
-            <p>Our online forum is the perfect place to discuss your favorite movies, share opinions, and connect with other movie enthusiasts.</p>
+            <p>Link to or window containing our Discord server goes here</p>
           </section>
         )}
         {activeSection === 'blog' && (

@@ -55,9 +55,9 @@ body {
 .nav-links {
   position: fixed;
   right: 0;
-  top: 8rem;
+  top: 12rem;
   width: 300px;
-  height: 295px;
+  height: 350px;
   background-color: rgba(30, 30, 30, 0.8);
   display: flex;
   flex-direction: column;
@@ -209,16 +209,10 @@ article p {
 
 .banner-text {
   font-family: 'Great Vibes', cursive;
-  font-size: 2rem;
+  font-size: 2.0rem;
   font-weight: normal;
   color: #ffdbb4;
   text-align: center;
-  margin: 0;
+  margin-bottom: 10px;
 }
 
-@media (max-width: 768px) {
-  .banner-text {
-    font-size: 24px; /* Smaller font size for mobile devices */
-    padding: 10px;
-  }
-}
