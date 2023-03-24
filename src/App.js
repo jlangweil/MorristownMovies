@@ -10,13 +10,13 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
-  const movieName = 'The Shawshank Redemption';
+/*   const movieName = 'The Shawshank Redemption';
   const reviewText =
     "One of the best movies of all time. The characters are well-developed and the story is captivating. A must-watch!";
   const userName = 'John Doe';
   const numberOfStars = 4.5;
   const dateOfReview = '2023-03-22';
-  const formattedDate = new Date(dateOfReview).toLocaleDateString();
+  const formattedDate = new Date(dateOfReview).toLocaleDateString(); */
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -130,13 +130,7 @@ function App() {
         {activeSection === 'reviews' && (
           <section id="reviews">
             <h2>Member Reviews</h2>
-            <MovieReview
-              movieName={movieName}
-              reviewText={reviewText}
-              userName={userName}
-              numberOfStars={numberOfStars}
-              dateOfReview={formattedDate}
-            />
+            <MovieReview />
           </section>
         )}
       </main>
