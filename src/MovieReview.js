@@ -34,7 +34,7 @@ const MovieReview = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get('https://morristown-movies.onrender.com/reviews')
+    axios.get('https://movies-six-gilt.vercel.app/api/reviews')
       .then(response => {
         setReviews(response.data);
         setLoading(false);
