@@ -1,0 +1,12 @@
+.all-movies-option {
+    font-weight: bold; /* Make the text bold */
+    color: #333; /* Set the text color */
+  }
+  
+  .filter-dropdown {
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 10px;
+    background-color: black;
+    color: white;
+  }

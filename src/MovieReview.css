@@ -2,9 +2,16 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 1rem;
-    max-width: 600px;
+    width: 600px;
     margin: 0 auto;
     background-color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Ensures that the movie review does not overflow its container */
+    word-wrap: break-word; /* Prevent long words from overflowing */
   }
   
   .movie-name {
