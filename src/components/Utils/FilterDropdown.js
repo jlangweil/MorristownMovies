@@ -22,7 +22,7 @@ const customStyles = {
   }),
   menu: (provided) => ({
     ...provided,
-    backgroundColor: 'black',
+    backgroundColor: '#9A2F2F',
   }),
 };
 

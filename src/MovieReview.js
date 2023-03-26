@@ -58,13 +58,18 @@ const MovieReview = () => {
     
       return (
         <>
-        <FilterDropdown movies={movies} setFilter={setFilter} />
+        <div className="filter-add-container">
+            <FilterDropdown movies={movies} setFilter={setFilter} />
+            <button className="add-review-button" onClick={() => {/* Functionality to open MovieReviewAdd component */}}>
+            <i className="fas fa-plus"></i>
+            </button>
+        </div>
         <InfiniteScroll
         dataLength={reviews.length}
         next={fetchReviews}
         hasMore={hasMore}
         loader={<h4>Loading...</h4>}
-        endMessage={<p>End of Reviews</p>}
+        endMessage={<p><center>End of Reviews</center></p>}
         >
         {reviews
         .filter(review => (filter === '' || review.MovieName === filter))
