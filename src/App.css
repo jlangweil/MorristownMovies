@@ -6,7 +6,7 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-image: url('images/theater.jpg');
+  background-image: url('images/theater2.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -16,6 +16,10 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+.app-content {
+  flex-grow: 1;
 }
 
 .App-header {
@@ -55,7 +59,7 @@ body {
 .nav-links {
   position: fixed;
   right: 0;
-  top: 12rem;
+  top: 15rem;
   width: 300px;
   height: 350px;
   background-color: rgba(30, 30, 30, 0.8);
@@ -110,7 +114,7 @@ main {
 }
 
 section {
-  /* other styles */
+  margin-top: 50px;
 }
 
 h2 {
@@ -126,7 +130,7 @@ li {
 }
 
 article {
-  /* other styles */
+  margin-top: 20px;
 }
 
 article h3 {
@@ -157,62 +161,17 @@ article p {
   border-color: #f44336;
 }
 
-.login-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.login-box {
-  background-color: rgba(30, 30, 30, 0.3); /* Change the alpha value (0.8) for the desired transparency */
-  border-radius: 5px;
-  padding: 2rem;
-  margin-top: 1rem;
-  width: 100%;
-  max-width: 400px;
-}
-
-.login-box h3 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-.login-box form {
-  display: flex;
-  flex-direction: column;
-}
-
-.login-box label {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-.login-box input {
-  font-size: 1.2rem;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  width: 100%;
-  outline: none;
-  border: 1px solid #d32f2f;
-  border-radius: 5px;
-}
-
-.login-box button {
-  font-size: 1.2rem;
-  padding: 0.5rem;
-  cursor: pointer;
-  background-color: #d32f2f;
-  color: #fff;
-  border: none;
-  margin-bottom: 1rem;
-}
-
 .banner-text {
-  font-family: 'Great Vibes', cursive;
-  font-size: 2.0rem;
+  /* font-family: 'Great Vibes', cursive; */
+  font-family: 'Film', serif;
+  font-size: 2.5rem;
   font-weight: normal;
   color: #ffdbb4;
   text-align: center;
   margin-bottom: 10px;
+  text-decoration: underline;
 }
 
+.default-font {
+  font-family: 'Helvetica Neue', sans-serif;
+}

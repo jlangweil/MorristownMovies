@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import UserProfileIcon from './components/UserProfile/UserProfileIcon';
 
-function Banner({ onButtonClick }) {
+function Banner({ onButtonClick, loggedIn, onLoginToggle }) {
   return (
     <Container fluid>
       <Row className="align-items-center">
@@ -10,13 +10,15 @@ function Banner({ onButtonClick }) {
          
         </Col>
         <Col xl={8} className="text-center">
-          <div class="banner-text">The Morristown Movie & Dining Meetup Group</div>
+          <div class="banner-text">The Morristown Movie <span className="default-font">&</span> Dining Meetup Group</div>
         </Col>
         <Col xl={2} className="d-flex justify-content-end">
             <div className="auth-buttons">
                 <UserProfileIcon initial="J" />
                 <button>Sign Up</button>
-                <button>Log Out</button>
+                <button onClick={onLoginToggle}>
+                    {loggedIn ? "Signout" : "Login"}
+                </button>
                 <button className="hamburger" onClick={onButtonClick}>
                     &#9776;
                 </button>

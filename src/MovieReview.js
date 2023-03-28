@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import './MovieReview.css';
+import { Container, Row, Col } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import FilterDropdown from './components/Utils/FilterDropdown';
 
@@ -58,38 +59,55 @@ const MovieReview = () => {
     
       return (
         <>
-        <div className="filter-add-container">
-            <FilterDropdown movies={movies} setFilter={setFilter} />
-            <button className="add-review-button" onClick={() => {/* Functionality to open MovieReviewAdd component */}}>
-            <i className="fas fa-plus"></i>
-            </button>
-        </div>
-        <InfiniteScroll
-        dataLength={reviews.length}
-        next={fetchReviews}
-        hasMore={hasMore}
-        loader={<h4>Loading...</h4>}
-        endMessage={<p><center>End of Reviews</center></p>}
-        >
-        {reviews
-        .filter(review => (filter === '' || review.MovieName === filter))
-        .map(review => (
-            <div className="movie-review" key={review.id}>
-            <h2 className="movie-name">{review.MovieName}</h2>
-            <p className="review-text">{review.ReviewText}</p>
-            <p className="user-name">Reviewed by {review.UserName}</p>
-            <p className="review-date">Date: {review.DateOfReview}</p>
-            <div className="rating">
-                {Array.from({ length: Math.floor(review.Rating) }, (_, index) => (
-                <i className="fas fa-star full-star" key={index}></i>
+        <Container>
+        <Row className="justify-content-center">
+            <Col lg={6}>
+            <div className="filter-add-container">
+                <h3>Member Reviews</h3>
+            </div>
+        </Col>
+        </Row>
+        <Row className="justify-content-center">
+            <Col lg={6}>
+            <div className="filter-add-container">
+                <FilterDropdown movies={movies} setFilter={setFilter} />
+                <button className="add-review-button" onClick={() => {/* Functionality to open MovieReviewAdd component */}}>
+                <i className="fas fa-plus"></i>
+                </button>
+            </div>
+        </Col>
+        </Row>
+        <Row className="justify-content-center">
+            <Col lg={6}>
+                <InfiniteScroll
+                dataLength={reviews.length}
+                next={fetchReviews}
+                hasMore={hasMore}
+                loader={<h4>Loading...</h4>}
+                endMessage={<p><center>End of Reviews</center></p>}
+                >
+                {reviews
+                .filter(review => (filter === '' || review.MovieName === filter))
+                .map(review => (
+                    <div className="movie-review" key={review.id}>
+                    <h2 className="movie-name">{review.MovieName}</h2>
+                    <p className="review-text">{review.ReviewText}</p>
+                    <p className="user-name">Reviewed by {review.UserName}</p>
+                    <p className="review-date">Date: {review.DateOfReview}</p>
+                    <div className="rating">
+                        {Array.from({ length: Math.floor(review.Rating) }, (_, index) => (
+                        <i className="fas fa-star full-star" key={index}></i>
+                        ))}
+                        {review.Rating % 1 !== 0 && (
+                        <i className="fas fa-star-half-alt half-star" key="half"></i>
+                        )}
+                    </div>
+                    </div>
                 ))}
-                {review.Rating % 1 !== 0 && (
-                <i className="fas fa-star-half-alt half-star" key="half"></i>
-                )}
-            </div>
-            </div>
-        ))}
-        </InfiniteScroll>
+                </InfiniteScroll>
+            </Col>
+        </Row>
+        </Container>
         </>
     );
     };

@@ -1,0 +1,34 @@
+.movie-quote-container {
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+  }
+  
+  .movie-quote-text {
+    color: #fff;
+    font-size: 1.5rem;
+    text-align: center;
+    font-style: italic;
+  }
+  
+  .movie-quote-details {
+    color: #ccc;
+    font-size: 1rem;
+    text-align: right;
+    font-style: italic;
+  }
+  
+  .movie-quote-details p {
+    margin: 0;
+  }
+  
+  .movie-quote-details p:before {
+    content: "-";
+    margin-right: 10px;
+  }
+  
+  
+  

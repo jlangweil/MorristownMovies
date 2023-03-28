@@ -1,0 +1,81 @@
+.testimonial-carousel {
+    background-color: #2b2828;
+    border: 2px solid #413e3e;
+    border-radius: 15px;
+    padding: 1.5rem;
+  }
+  
+  .testimonial-text {
+    color: white;
+    font-size: 1.1rem;
+    text-align: center;
+  }
+  
+  .testimonial-author {
+    color: rgb(161, 157, 157);
+    font-style: italic;
+    text-align: center;
+  }
+  
+  h2 {
+    color: #4a4a4a;
+  }
+  
+
+.mission-statement {
+    display: flex;
+    flex-direction: column;
+   
+    margin: 2rem;
+    }
+    
+.mission-statement-heading {
+font-size: 1.7rem;
+font-weight: bold;
+text-align: left;
+margin-bottom: 1rem;
+align-items: center;
+}
+
+.mission-statement-text {
+color: #fff;
+font-size: 1.2rem;
+text-align: justify;
+line-height: 1.5;
+font-style: italic;
+align-items: center;
+}
+
+.white-rule {
+    border: 0;
+    border-top: 7px solid red;
+    width: 12%;
+    margin-top: -5px;
+    margin-bottom: 20px;
+    align-items: left;
+  }
+  
+  .image-container {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+  }
+  
+  .meetup-image {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  a img {
+    margin-right: 0.5rem;
+    opacity: 0.8;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    transition: opacity 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  }
+  
+  a:hover img {
+    opacity: 1;
+    border-color: #fff;
+  }
