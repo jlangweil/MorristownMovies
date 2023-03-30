@@ -13,14 +13,16 @@ const MovieQuote = () => {
   }, []);
 
   return (
-    <div className="movie-quote-container">
-      <div className="movie-quote-text">
-        <p>{movieQuote.quote}</p>
+   
+        <div className="movie-quote-container">
+        <div className="movie-quote-text">
+           <p>{movieQuote.quote}</p>
       </div>
-      <div className="movie-quote-details">
-        <p>{movieQuote.movie} ({movieQuote.year})</p>
-      </div>
-    </div>
+        <div className="movie-quote-details">
+         <p>{movieQuote.movie} ({movieQuote.year})</p>
+        </div>
+        </div>
+    
   );
 };
 

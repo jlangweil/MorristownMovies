@@ -101,7 +101,7 @@ body {
 }
 
 main {
-  max-width: 50%; /* Limit the content width to 50% */
+  max-width: 66%; /* Limit the content width to 50% */
   margin: 1rem auto; /* Center the content */
   color: #fff;
 }
@@ -174,4 +174,10 @@ article p {
 
 .default-font {
   font-family: 'Helvetica Neue', sans-serif;
+}
+
+@media (max-width: 767px) {
+  .banner-text {
+    font-size: 2rem; /* or any other size you want for mobile screens */
+  }
 }

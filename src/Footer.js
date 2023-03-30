@@ -46,7 +46,7 @@ const Footer = () => {
         <hr className="footer-divider" />
         <Row className="justify-content-center">
           <Col xs={12} className="text-center">
-            <p>&copy; {new Date().getFullYear()} Morristown Movie and Dinner Meetup. All Rights Reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Morristown Movie and Dining Meetup. All Rights Reserved.</p>
           </Col>
         </Row>
       </Container>

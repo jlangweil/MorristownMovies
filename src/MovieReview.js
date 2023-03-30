@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import './MovieReview.css';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import FilterDropdown from './components/Utils/FilterDropdown';
+import MovieReviewAdd from './MovieReviewAdd';
+
 
 const MovieReview = () => {
     const [reviews, setReviews] = useState([]);
@@ -13,10 +15,36 @@ const MovieReview = () => {
     const [hasMore, setHasMore] = useState(true);
     const [page, setPage] = useState(1);
     const [filter, setFilter] = useState("");
+    const [showAddReviewModal, setShowAddReviewModal] = useState(false);
+
+    const apiUrl = process.env.REACT_APP_API_URL;
+
+    const toggleAddReviewModal = (submitted = false) => {
+        if (submitted) {
+          // Call the function that fetches the reviews, e.g., fetchReviews()
+          fetchReviews();
+        }
+        setShowAddReviewModal(!showAddReviewModal);
+      };
+
+      const onReviewSubmitted = () => {
+        // Reset state variables
+        setPage(1);
+        setHasMore(true);
+        setLoading(true);
+        setReviews([]);
+        
+        // Call fetchReviews
+        fetchReviews();
+      
+        // Hide the MovieReviewAdd component
+        setShowAddReviewModal(false);
+      };
+
   
     const fetchMovies = useCallback(async () => {
         try {
-          const response = await axios.get('https://movies-six-gilt.vercel.app/api/movies');
+          const response = await axios.get('${apiUrl}/movies');
           setMovies(response.data);
         } catch (error) {
           console.error(error);
@@ -29,7 +57,8 @@ const MovieReview = () => {
 
       const fetchReviews = useCallback(async () => {
         try {
-          const response = await axios.get(`https://movies-six-gilt.vercel.app/api/reviews?page=${page}&limit=10&movie=${encodeURIComponent(filter)}`);
+          const response = await axios.get(`${apiUrl}/reviews?page=${page}&limit=10&movie=${encodeURIComponent(filter)}`);
+          console.log(`URL: ${apiUrl}`);
           if (response.data.length === 0) {
             setHasMore(false);
           } else {
@@ -46,39 +75,47 @@ const MovieReview = () => {
       useEffect(() => {
         setPage(1);
         fetchReviews();
-      }, [filter]);
-      
+      }, [filter, fetchReviews]);
+       
     
       if (loading) {
-        return <div>Loading...</div>;
+        return <center>Loading...</center>;
       }
     
       if (error) {
-        return <div>Error: {error.message}</div>;
+        return <center>Error: {error.message}</center>;
       }
     
       return (
         <>
         <Container>
         <Row className="justify-content-center">
-            <Col lg={6}>
+            <Col lg={8}>
             <div className="filter-add-container">
                 <h3>Member Reviews</h3>
             </div>
         </Col>
         </Row>
         <Row className="justify-content-center">
-            <Col lg={6}>
+            <Col lg={8}>
             <div className="filter-add-container">
                 <FilterDropdown movies={movies} setFilter={setFilter} />
-                <button className="add-review-button" onClick={() => {/* Functionality to open MovieReviewAdd component */}}>
+                <button className="add-review-button" onClick={toggleAddReviewModal}>
                 <i className="fas fa-plus"></i>
                 </button>
             </div>
         </Col>
         </Row>
+        <Modal show={showAddReviewModal} onHide={toggleAddReviewModal} centered>
+            <Modal.Header closeButton>
+                <Modal.Title>Add a Movie Review</Modal.Title>
+            </Modal.Header>
+            <Modal.Body >
+                <MovieReviewAdd onReviewSubmitted={onReviewSubmitted} />
+            </Modal.Body>
+        </Modal>
         <Row className="justify-content-center">
-            <Col lg={6}>
+            <Col lg={8}>
                 <InfiniteScroll
                 dataLength={reviews.length}
                 next={fetchReviews}

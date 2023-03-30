@@ -14,7 +14,7 @@ const Home = () => {
       <Container>
         
         <Row className="justify-content-center">
-          <Col lg={6}>
+          <Col lg={8}>
             <div className="mission-statement">
                 <h1 className="mission-statement-heading">
                     What's better than seeing a movie, then discussing it over food and drink?
@@ -29,7 +29,7 @@ const Home = () => {
         </Row>
 
         <Row className="justify-content-center">
-            <Col lg={6}>
+            <Col lg={7}>
                 <div className="image-container">
                     <a href="https://www.meetup.com/movies-594/"><img src={meetupImage} alt="Meetup" className="meetup-image" /></a>
                 </div>
@@ -37,7 +37,7 @@ const Home = () => {
         </Row>
 
         <Row className="justify-content-center">
-          <Col lg={6}>
+          <Col lg={8}>
             <MovieQuote />
           </Col>
         </Row>
@@ -45,7 +45,7 @@ const Home = () => {
         <Testimonial />
 
         <Row className="justify-content-center">
-            <Col lg={6}>
+            <Col lg={8}>
                 <Blog />
             </Col>
         </Row>
