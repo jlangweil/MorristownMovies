@@ -4,7 +4,7 @@ import './Home.css';
 import Testimonial from './Testimonial';
 import MovieQuote from './MovieQuote';
 import meetupImage from './images/logo.jpg';
-// import meetupImage from './images/meetup.jpeg';
+import Latest from './Latest';
 import Blog from './components/Blog/Blog';
 
 const Home = () => {
@@ -57,6 +57,12 @@ const Home = () => {
         </Row>
 
         <Testimonial />
+
+        <Row className="justify-content-center">
+            <Col lg={8}>
+                <Latest />
+            </Col>
+        </Row>
 
         <Row className="justify-content-center">
             <Col lg={8}>

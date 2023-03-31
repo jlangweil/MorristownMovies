@@ -65,7 +65,7 @@ const Blog = () => {
     <div className="blogPage">
     <Container className="blogPage">
         <Row className="justify-content-center">
-            <Col lg={8}>
+            <Col lg={12}>
             <center><img src={blogTitle} alt="Morristown Movie Blog" className="blogPage-title"/></center>
             </Col>
         </Row>

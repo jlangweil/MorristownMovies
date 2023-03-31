@@ -1,0 +1,51 @@
+.latest-movie-review {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1rem;
+  
+    margin: 0 auto;
+    background-color: transparent !important; /* Changed the background color to transparent */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Ensures that the movie review does not overflow its container */
+    word-wrap: break-word; /* Prevent long words from overflowing */
+  }
+  
+  
+  .latest-movie-name {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #ff9900; /* Changed the text color to a shade of orange */
+  }
+  
+  .latest-review-text {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #fff; /* Changed the text color to white */
+  }
+  
+  .latest-user-name {
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+    color: #ff9900; /* Changed the text color to a shade of orange */
+  }
+  
+  .latest-rating {
+    display: flex;
+  }
+  
+  .latest-review-date {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    color: #999; /* Changed the text color to a lighter shade of gray */
+  }
+  
+  .full-star,
+  .half-star {
+    color: gold;
+  }
+  
