@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import './Home.css';
 import Testimonial from './Testimonial';
 import MovieQuote from './MovieQuote';
-import meetupImage from './images/meetup.jpeg';
+import meetupImage from './images/logo.jpg';
+// import meetupImage from './images/meetup.jpeg';
 import Blog from './components/Blog/Blog';
 
 const Home = () => {
 
+    const handleClick = () => {
+        window.open("https://www.meetup.com/movies-594/", "_blank");
+      };  
 
   return (
     <>
@@ -28,10 +32,20 @@ const Home = () => {
           </Col>
         </Row>
 
+       <Row className="justify-content-center">
+        <Col xs="auto">
+          <Button variant="primary" onClick={handleClick}>
+            Join Us!
+          </Button>
+        </Col>
+      </Row>
+
         <Row className="justify-content-center">
             <Col lg={7}>
                 <div className="image-container">
-                    <a href="https://www.meetup.com/movies-594/"><img src={meetupImage} alt="Meetup" className="meetup-image" /></a>
+                <a href="https://www.meetup.com/movies-594/" target="_blank" rel="noreferrer">
+                    <img src={meetupImage} alt="Meetup" onClick={handleClick} className="meetup-image" />
+                </a>
                 </div>
             </Col>
         </Row>

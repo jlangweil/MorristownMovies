@@ -23,6 +23,7 @@ import BlogPostAdd from './BlogPostAdd';
 import { Container, Row, Col, Button, Modal, Spinner } from 'react-bootstrap';
 import { Axios } from 'axios';
 import './Blog.css';
+import blogTitle from '../../images/blog.JPG';
 
 
 
@@ -65,7 +66,7 @@ const Blog = () => {
     <Container className="blogPage">
         <Row className="justify-content-center">
             <Col lg={8}>
-                <center><h1 className="blogPage-header">Morristown Movie Blog</h1></center>
+            <center><img src={blogTitle} alt="Morristown Movie Blog" className="blogPage-title"/></center>
             </Col>
         </Row>
         {!showAddPost && (

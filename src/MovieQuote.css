@@ -30,24 +30,5 @@
     margin-right: 10px;
   }
 
-  .quote-bubble {
-    background-image: url('images/bubble.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: white;
-    padding: 20px; /* Adjust padding to position your text correctly inside the bubble */
-    width: 300px; /* Set the width and height to match the aspect ratio of your quote bubble image */
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-  }
-  
-  .quote-bubble p {
-    margin: 0;
-    /* Add any additional styles for your text */
-  }
   
   
