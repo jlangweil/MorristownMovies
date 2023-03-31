@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faInstagram, faTwitter, faMeetup } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookF, faInstagram, faTwitter, faMeetup, faDiscord } from '@fortawesome/free-brands-svg-icons';
 import './Footer.css';
 
 const Footer = () => {
@@ -13,7 +13,7 @@ const Footer = () => {
             <h5>About Morristown Movie and Dinner Meetup</h5>
             <p>
               We are a group of movie enthusiasts who love watching and discussing films together. Join us
-              for movie nights and dinner events in Morristown.
+              for movie nights and dinner, and online events, in the Morristown area.
             </p>
           </Col>
           <Col xs={12} sm={4}>
@@ -36,6 +36,9 @@ const Footer = () => {
               </a>
               <a href="#" className="social-icon">
                 <FontAwesomeIcon icon={faTwitter} />
+              </a>
+              <a href="https://discord.com/channels/964877736822837349/965064633704661042" className="social-icon">
+                <FontAwesomeIcon icon={faDiscord} />
               </a>
               <a href="https://www.meetup.com/movies-594/" className="social-icon">
                 <FontAwesomeIcon icon={faMeetup} />

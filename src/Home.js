@@ -4,7 +4,7 @@ import './Home.css';
 import Testimonial from './Testimonial';
 import MovieQuote from './MovieQuote';
 import meetupImage from './images/meetup.jpeg';
-import Blog from './Blog';
+import Blog from './components/Blog/Blog';
 
 const Home = () => {
 

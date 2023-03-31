@@ -5,7 +5,7 @@ import Events from './Events';
 import Banner from './Banner';
 import Login from './components/Login/Login';
 import Home from "./Home";
-import Blog from './Blog';
+import Blog from './components/Blog/Blog';
 import Footer from './Footer';
 
 import MovieReview from './MovieReview';

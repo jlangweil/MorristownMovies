@@ -1,0 +1,66 @@
+/* Set the background color of the editor to black */
+.ql-container {
+    background-color: black;
+    width: 100% !important;
+    height: 300px !important;
+  }
+
+  /* Set the width of the Quill toolbar to 100% */
+  .ql-toolbar {
+    width: 100% !important; 
+  }
+  
+  
+  /* Set the color of the toolbar buttons to white */
+.ql-snow .ql-stroke {
+    stroke: white !important;
+  }
+  
+  /* Set the color of the filled shapes in the toolbar buttons to white */
+  .ql-snow .ql-fill,
+  .ql-snow .ql-stroke.ql-fill {
+    fill: white !important;
+  }
+  
+  /* Set the color of the SVG icons in the toolbar buttons to white */
+  .ql-snow .ql-picker-label::before,
+  .ql-snow .ql-picker-item::before {
+    color: white !important;
+  }
+  
+  /* Set the color of the active toolbar buttons to a lighter shade of gray */
+  .ql-snow.ql-toolbar button:hover,
+  .ql-snow .ql-toolbar button.ql-active,
+  .ql-snow.ql-toolbar button:hover,
+  .ql-snow .ql-toolbar button.ql-active {
+    color: #ccc !important;
+  }
+  
+  
+  /* Set the background color of the dropdown menu to black */
+.ql-snow .ql-picker-options {
+    background-color: black !important;
+  }
+  
+  /* Set the color of the text and icons in the dropdown menu to white */
+  .ql-snow .ql-picker-item {
+    color: white !important;
+  }
+  
+  /* Set the background color of the selected option to a darker shade of gray */
+  .ql-snow .ql-picker-item.ql-selected {
+    background-color: #333 !important;
+  }
+  
+  /* Set the background color of the hovered option to a lighter shade of gray */
+  .ql-snow .ql-picker-item:hover {
+    background-color: #555 !important;
+  }
+
+ .quill-wrapper {
+    width: 100%;
+  }
+  
+
+
+  

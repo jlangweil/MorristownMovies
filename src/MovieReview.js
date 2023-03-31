@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import './MovieReview.css';
-import { Container, Row, Col, Button, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Button, Modal, Spinner } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import FilterDropdown from './components/Utils/FilterDropdown';
 import MovieReviewAdd from './MovieReviewAdd';
@@ -79,7 +79,7 @@ const MovieReview = () => {
        
     
       if (loading) {
-        return <center>Loading...</center>;
+        return <center><Spinner animation="border" role="status"/></center>;
       }
     
       if (error) {

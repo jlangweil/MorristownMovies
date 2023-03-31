@@ -27,7 +27,7 @@ const Testimonial = () => {
                 <Carousel autoPlay infiniteLoop interval={5000} showStatus={false} showThumbs={false} showIndicators={false}>
                   {testimonials.map((testimonial, index) => (
                     <div key={index}>
-                      <p className="testimonial-text"><i class="fa-solid fa-quote-left"></i>&nbsp;&nbsp;{testimonial.text}&nbsp;&nbsp;<i class="fa-solid fa-quote-right"></i></p>
+                      <p className="testimonial-text"><i className="fa-solid fa-quote-left"></i>&nbsp;&nbsp;{testimonial.text}&nbsp;&nbsp;<i className="fa-solid fa-quote-right"></i></p>
                       <p><i className="fas fa-star full-star"></i><i className="fas fa-star full-star"></i><i className="fas fa-star full-star"></i><i className="fas fa-star full-star"></i><i className="fas fa-star full-star"></i></p>
                       <p className="testimonial-author">— {testimonial.author}</p>
                     </div>

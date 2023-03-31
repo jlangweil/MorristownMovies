@@ -10,11 +10,11 @@ function Banner({ onButtonClick, loggedIn, onLoginToggle }) {
          
         </Col>
         <Col xl={8} className="text-center">
-          <div class="banner-text">The Morristown Movie <span className="default-font">&</span> Dining Meetup Group</div>
+          <div className="banner-text">The Morristown Movie <span className="default-font">&</span> Dining Meetup Group</div>
         </Col>
         <Col xl={2} className="d-flex justify-content-end">
             <div className="auth-buttons">
-                <UserProfileIcon initial="J" />
+                {/* <UserProfileIcon initial="J" /> */}
                 <button>Sign Up</button>
                 <button onClick={onLoginToggle}>
                     {loggedIn ? "Signout" : "Login"}
