@@ -99,9 +99,9 @@ const Blog = () => {
   </p>
   <span className="blogPage-postAuthor">Posted By John Doe</span>
     <span>March 24, 2023</span>
-</div>
-
+</div><hr />
     </div>
+    
   );
 };
 

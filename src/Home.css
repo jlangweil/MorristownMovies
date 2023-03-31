@@ -79,3 +79,35 @@ align-items: center;
     opacity: 1;
     border-color: #fff;
   }
+
+  .image-caption-container {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .image-caption-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  
+  .caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px 16px;
+    font-size: 1rem;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .caption:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+  

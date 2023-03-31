@@ -4,6 +4,7 @@ import './Home.css';
 import Testimonial from './Testimonial';
 import MovieQuote from './MovieQuote';
 import meetupImage from './images/logo.jpg';
+import catsImage from './images/cats.jpg';
 import Latest from './Latest';
 import Blog from './components/Blog/Blog';
 
@@ -69,6 +70,16 @@ const Home = () => {
                 <Blog />
             </Col>
         </Row>
+
+        <Row className="justify-content-center">
+            <Col lg={6}>
+            <div class="image-caption-container">
+                <img src={catsImage} alt="cats" className="meetup-image" />
+                <div class="caption">Cats of Morristown Movies - Coming Soon!</div>
+            </div>
+            </Col>
+        </Row>
+
       </Container>
     </>
   );
