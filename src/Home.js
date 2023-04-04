@@ -71,7 +71,7 @@ const Home = () => {
         </Row>
 
         <Row className="justify-content-center">
-            <Col lg={8}>
+            <Col lg={7}>
             <div class="image-caption-container">
                 <img src={catsImage} alt="cats" className="meetup-image" />
                 <div class="caption">Cats of Morristown Movies - Coming Soon!</div>

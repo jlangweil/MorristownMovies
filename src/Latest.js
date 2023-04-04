@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import './Latest.css';
 import { Container, Row, Col, Button, Modal, Spinner } from 'react-bootstrap';
+import DOMPurify from 'dompurify';
 import blogTitle from './images/blog.JPG';
 
 const Latest = () => {
@@ -11,6 +12,12 @@ const Latest = () => {
   const [error, setError] = useState(null);
 
   const apiUrl = process.env.REACT_APP_API_URL;
+
+  const SafeHTML = ({ html }) => {
+    const sanitizedHTML = DOMPurify.sanitize(decodeURIComponent(html));
+  
+    return <p dangerouslySetInnerHTML={{ __html: sanitizedHTML }}></p>;
+  };
 
   const fetchLatestReview = useCallback(async () => {
     try {
@@ -102,7 +109,7 @@ const Latest = () => {
       <div>
         {blogPost && (
           <div key={blogPost.id} className="blogPage-post">
-            <p dangerouslySetInnerHTML={{ __html: decodeURIComponent(blogPost.BlogPost) }}></p>
+            <SafeHTML html={blogPost.BlogPost} />
             <p><i>Posted by: {blogPost.BlogAuthor} on {new Date(blogPost.BlogDateTime).toLocaleString()}</i></p>
           </div>
         )}

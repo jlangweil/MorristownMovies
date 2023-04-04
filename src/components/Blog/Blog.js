@@ -1,26 +1,7 @@
-/* import React from 'react';
-
-const Blog = () => {
-  return (
-    <section id="blog">
-      <h2>Blog</h2>
-      <article>
-        <h3>10 Must-Watch Classic Movies</h3>
-        <p>From timeless dramas to unforgettable thrillers, here's our list of top 10 classic movies every film enthusiast should watch.</p>
-      </article>
-      <article>
-        <h3>How to Analyze a Movie: A Beginner's Guide</h3>
-        <p>Discover the key elements of movie analysis and learn how to evaluate films beyond just entertainment.</p>
-      </article>
-    </section>
-  );
-};
-
-export default Blog; */
-
 import React, { useState, useEffect } from 'react';
 import BlogPostAdd from './BlogPostAdd';
 import { Container, Row, Col, Button, Modal, Spinner } from 'react-bootstrap';
+import DOMPurify from 'dompurify';
 import axios from 'axios';
 import './Blog.css';
 import blogTitle from '../../images/blog.JPG';
@@ -32,6 +13,12 @@ const Blog = () => {
     const [showAddPost, setShowAddPost] = useState(false);
     const [blogPosts, setBlogPosts] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const SafeHTML = ({ html }) => {
+      const sanitizedHTML = DOMPurify.sanitize(decodeURIComponent(html));
+    
+      return <p dangerouslySetInnerHTML={{ __html: sanitizedHTML }}></p>;
+    };
 
     const fetchBlogPosts = async () => {
       setLoading(true);
@@ -108,7 +95,7 @@ const Blog = () => {
       <div>
         {blogPosts.map((post) => (
           <div key={post.id} className="blogPage-post">
-            <p dangerouslySetInnerHTML={{ __html: decodeURIComponent(post.BlogPost) }}></p>
+            <SafeHTML html={post.BlogPost} />
             <p><i>Posted by: {post.BlogAuthor} on {new Date(post.BlogDateTime).toLocaleString()}</i></p>
           </div>
         ))}
