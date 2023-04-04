@@ -15,7 +15,6 @@ const MovieQuote = () => {
   return (
         <>
         <br />
-        <div><center><h2>Random movie quote du jour:</h2></center></div>
         <div className="movie-quote-container">
         <div className="movie-quote-text">
            <p>{movieQuote.quote}</p>

@@ -40,7 +40,7 @@ align-items: center;
 .mission-statement-text {
 color: #fff;
 font-size: 1.2rem;
-text-align: justify;
+text-align: left;
 line-height: 1.5;
 font-style: italic;
 align-items: center;
@@ -110,4 +110,6 @@ align-items: center;
   .caption:hover {
     background-color: rgba(0, 0, 0, 0.9);
   }
+
+  
   

@@ -60,7 +60,7 @@ const Latest = () => {
         <Row className="justify-content-center">
           <Col lg={12}>
             <div className="justify-content-center">
-              <br/><br/><center><h2>Latest Reviews and News:</h2></center><br/>
+            <br/><br/><br/><br/><center><h3>Latest Reviews and News:</h3></center><br/>
             </div>
           </Col>
         </Row>
@@ -83,7 +83,7 @@ const Latest = () => {
               </div>
             )}
           </Col>
-        </Row>
+        </Row><hr/ >
       </Container>
       <div className="blogPage">
         <Container className="blogPage">
@@ -92,7 +92,7 @@ const Latest = () => {
                 <center><img src={blogTitle} alt="Morristown Movie Blog" className="blogPage-title"/></center>
                 </Col>
             </Row>
-            <hr/ >
+            
         </Container>
         {loading ? (
       <center>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaHome, FaCalendar, FaStar, FaDiscord, FaNewspaper, FaMeetup } from 'react-icons/fa';
+import { FaHome, FaCalendar, FaStar, FaDiscord, FaNewspaper, FaMeetup, FaCamera, FaWineGlass } from 'react-icons/fa';
 import './App.css';
 import Events from './Events';
 import Banner from './Banner';
@@ -47,6 +47,8 @@ function App() {
           <a href="#events" onClick={() => handleMenuClick('events')}><FaCalendar />&nbsp;&nbsp;Events</a>
           <a href="#reviews" onClick={() => handleMenuClick('reviews')}><FaStar />&nbsp;&nbsp;Movie Reviews</a>
           <a href="#blog" onClick={() => handleMenuClick('blog')}><FaNewspaper />&nbsp;&nbsp;Blog</a>
+          <a href="#gallery" onClick={() => handleMenuClick('gallery')}><FaCamera />&nbsp;&nbsp;Gallery</a>
+          <a href="#food" onClick={() => handleMenuClick('food')}><FaWineGlass />&nbsp;&nbsp;Restaurants</a>
           <a href="https://discord.com/channels/964877736822837349/965064633704661042" target="_blank" rel="noopener noreferrer"><FaDiscord />&nbsp;&nbsp;Discord</a>
           <a href="https://www.meetup.com/movies-594/" target="_blank" rel="noopener noreferrer"><FaMeetup />&nbsp;&nbsp;Meetup</a>
         </nav>

@@ -57,7 +57,12 @@ const Home = () => {
           </Col>
         </Row>
 
-        <Testimonial />
+        <Row className="justify-content-center">
+            <Col lg={8}>
+                <Testimonial />
+            </Col>
+        </Row>
+        
 
         <Row className="justify-content-center">
             <Col lg={8}>
@@ -65,14 +70,8 @@ const Home = () => {
             </Col>
         </Row>
 
-{/*         <Row className="justify-content-center">
-            <Col lg={8}>
-                <Blog />
-            </Col>
-        </Row> */}
-
         <Row className="justify-content-center">
-            <Col lg={6}>
+            <Col lg={8}>
             <div class="image-caption-container">
                 <img src={catsImage} alt="cats" className="meetup-image" />
                 <div class="caption">Cats of Morristown Movies - Coming Soon!</div>
