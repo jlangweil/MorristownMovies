@@ -24,6 +24,7 @@ const Testimonial = () => {
     return (
           <Row className="justify-content-center">
             <Col lg={6}>
+              <br/ ><center><h2>What others are saying:</h2></center>
               <div className="testimonial-carousel">
                 <Carousel autoPlay infiniteLoop interval={5000} showStatus={false} showThumbs={false} showIndicators={false}>
                   {testimonials.map((testimonial, index) => (

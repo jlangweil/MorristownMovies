@@ -12,7 +12,7 @@ function Banner({ onButtonClick, loggedIn, onLoginToggle }) {
         <Col xl={8} className="text-center">
           <div className="banner-text">The Morristown Movie <span className="default-font">&</span> Dining Meetup Group</div>
         </Col>
-        <Col xl={2} className="d-flex justify-content-end">
+        <Col xl={2} className="d-flex justify-content-xl-end justify-content-center">
             <div className="auth-buttons">
                 {/* <UserProfileIcon initial="J" /> */}
                 <button>Sign Up</button>

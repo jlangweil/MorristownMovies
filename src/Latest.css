@@ -48,4 +48,67 @@
   .half-star {
     color: gold;
   }
+
+  .blogPage {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .blogPage-header {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .blogPage-addBtn {
+    display: block;
+    margin: 0 auto 20px;
+  }
+  
+  hr {
+    border: none;
+    border-top: 2px solid #aaa;
+    margin-bottom: 20px;
+  }
+  
+  .blogPage-post {
+    background-color: #000000;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 20px;
+  }
+  
+  .blogPage-postTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .blogPage-title {
+    width: 80%;
+    height: 80%;
+    margin-bottom: 25px;
+  }
+  
+  .blogPage-postDetails {
+    font-size: 0.9rem;
+    color: #777;
+  }
+  
+  .blogPage-postAuthor {
+    margin-right: 10px;
+  }
+
+  .blogPage .ql-container {
+    width: 100% !important;
+  }
+  
+  .blogPage .ql-toolbar {
+    width: 100%;
+  }
+  
+  
   

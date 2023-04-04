@@ -18,10 +18,10 @@ const Blog = () => {
 
 export default Blog; */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BlogPostAdd from './BlogPostAdd';
 import { Container, Row, Col, Button, Modal, Spinner } from 'react-bootstrap';
-import { Axios } from 'axios';
+import axios from 'axios';
 import './Blog.css';
 import blogTitle from '../../images/blog.JPG';
 
@@ -30,6 +30,26 @@ import blogTitle from '../../images/blog.JPG';
 const Blog = () => {
 
     const [showAddPost, setShowAddPost] = useState(false);
+    const [blogPosts, setBlogPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const fetchBlogPosts = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/blog`);
+        const sortedPosts = response.data.sort((a, b) => new Date(b.BlogDateTime) - new Date(a.BlogDateTime));
+        setBlogPosts(sortedPosts);
+      } catch (error) {
+        console.error(error);
+        alert('An error occurred while fetching blog posts.');
+      }
+      setLoading(false);
+    };
+    
+    useEffect(() => {
+      fetchBlogPosts();
+    }, []);
+    
 
     const toggleAddPost = () => {
         setShowAddPost(!showAddPost);
@@ -38,30 +58,10 @@ const Blog = () => {
     const handlePostSubmitted = () => {
         toggleAddPost();
     // Refresh the list of posts
+        fetchBlogPosts();
     };  
 
-  const samplePosts = [
-    {
-      id: 1,
-      BlogPost: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed imperdiet auctor sapien, vitae vulputate enim aliquet in.',
-      BlogDateTime: '2023-03-20 14:30',
-      BlogAuthor: 'John Doe',
-    },
-    {
-      id: 2,
-      BlogPost: 'Curabitur aliquet scelerisque ante, at consectetur est laoreet sit amet. Maecenas fermentum velit in odio consequat, nec consequat libero lacinia.',
-      BlogDateTime: '2023-03-18 10:45',
-      BlogAuthor: 'Jane Smith',
-    },
-    {
-      id: 3,
-      BlogPost: 'In ac odio sed tortor sollicitudin congue. Donec auctor finibus sapien, et sagittis lacus convallis at. Duis laoreet, quam et posuere dapibus, lectus dui consequat dolor, id tempor sapien mauris vel dui.',
-      BlogDateTime: '2023-03-15 21:20',
-      BlogAuthor: 'Robert Brown',
-    },
-  ];
-
-  return (
+    return (
     <div className="blogPage">
     <Container className="blogPage">
         <Row className="justify-content-center">
@@ -83,7 +83,7 @@ const Blog = () => {
     </Container>
       
       
-      <div className="blogPage-post">
+{/*       <div className="blogPage-post">
   <h2 className="blogPage-postTitle">The Iconic Suit of Cary Grant in 'North by Northwest'</h2>
   <div className="blogPage-postDetails">
    
@@ -99,7 +99,23 @@ const Blog = () => {
   </p>
   <span className="blogPage-postAuthor">Posted By John Doe</span>
     <span>March 24, 2023</span>
-</div><hr />
+</div><hr /> */}
+      {loading ? (
+      <center>
+        <Spinner animation="border" role="status" />
+      </center>
+    ) : (
+      <div>
+        {blogPosts.map((post) => (
+          <div key={post.id} className="blogPage-post">
+            <p dangerouslySetInnerHTML={{ __html: decodeURIComponent(post.BlogPost) }}></p>
+            <p><i>Posted by: {post.BlogAuthor} on {new Date(post.BlogDateTime).toLocaleString()}</i></p>
+          </div>
+        ))}
+      </div>
+    )}
+
+
     </div>
     
   );

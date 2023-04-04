@@ -2,11 +2,12 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import './Latest.css';
 import { Container, Row, Col, Button, Modal, Spinner } from 'react-bootstrap';
-
+import blogTitle from './images/blog.JPG';
 
 const Latest = () => {
   const [review, setReview] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [blogPost, setBlogPost] = useState(null);
   const [error, setError] = useState(null);
 
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -22,9 +23,24 @@ const Latest = () => {
     }
   }, []);
 
+  const fetchLatestContent = useCallback(async () => {
+    try {
+      const reviewResponse = await axios.get(`${apiUrl}/latestreview`);
+      setReview(reviewResponse.data);
+
+      const blogResponse = await axios.get(`${apiUrl}/latestblog`);
+      setBlogPost(blogResponse.data);
+
+      setLoading(false);
+    } catch (error) {
+      setError(error);
+      setLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
-    fetchLatestReview();
-  }, [fetchLatestReview]);
+    fetchLatestContent();
+  }, [fetchLatestContent]);
 
   if (loading) {
     return (
@@ -44,7 +60,7 @@ const Latest = () => {
         <Row className="justify-content-center">
           <Col lg={12}>
             <div className="justify-content-center">
-              <br/><br/><center><h3>Latest Member Review:</h3></center><br/>
+              <br/><br/><center><h2>Latest Reviews and News:</h2></center><br/>
             </div>
           </Col>
         </Row>
@@ -69,6 +85,30 @@ const Latest = () => {
           </Col>
         </Row>
       </Container>
+      <div className="blogPage">
+        <Container className="blogPage">
+            <Row className="justify-content-center">
+                <Col lg={12}>
+                <center><img src={blogTitle} alt="Morristown Movie Blog" className="blogPage-title"/></center>
+                </Col>
+            </Row>
+            <hr/ >
+        </Container>
+        {loading ? (
+      <center>
+        <Spinner animation="border" role="status" />
+      </center>
+    ) : (
+      <div>
+        {blogPost && (
+          <div key={blogPost.id} className="blogPage-post">
+            <p dangerouslySetInnerHTML={{ __html: decodeURIComponent(blogPost.BlogPost) }}></p>
+            <p><i>Posted by: {blogPost.BlogAuthor} on {new Date(blogPost.BlogDateTime).toLocaleString()}</i></p>
+          </div>
+        )}
+      </div>
+    )}
+    </div>
     </>
   );
 };

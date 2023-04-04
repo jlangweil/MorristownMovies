@@ -65,11 +65,11 @@ const Home = () => {
             </Col>
         </Row>
 
-        <Row className="justify-content-center">
+{/*         <Row className="justify-content-center">
             <Col lg={8}>
                 <Blog />
             </Col>
-        </Row>
+        </Row> */}
 
         <Row className="justify-content-center">
             <Col lg={6}>
