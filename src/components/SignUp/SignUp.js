@@ -39,7 +39,7 @@ const SignUp = () => {
     event.preventDefault();
   
     try {
-      const response = await axios.post(`${apiUrl}/api/users`, {
+      const response = await axios.post(`${apiUrl}/users`, {
         first_name: formData.firstName,
         last_name: formData.lastName,
         password: formData.password,
