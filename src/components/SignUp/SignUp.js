@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
+import axios from 'axios';
 import './SignUp.css';
+
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -32,11 +35,34 @@ const SignUp = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Handle form submission logic here
-    console.log(formData);
+  
+    try {
+      const response = await axios.post(`${apiUrl}/api/users`, {
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        password: formData.password,
+        email: formData.email,
+        city: formData.city,
+        state: formData.state,
+      }, {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+        },
+      });
+  
+      console.log(response.data);
+  
+      // Handle success, e.g., navigate to the next page, display a success message, etc.
+    } catch (error) {
+      console.error(error);
+  
+      // Handle error, e.g., display an error message
+    }
   };
+  
+  
 
   const validateEmail = (email) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
