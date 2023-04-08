@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import UserProfileIcon from './components/UserProfile/UserProfileIcon';
+import { Link } from 'react-router-dom'; // Add this import
 
 function Banner({ onButtonClick, loggedIn, onLoginToggle }) {
   return (
@@ -15,13 +16,15 @@ function Banner({ onButtonClick, loggedIn, onLoginToggle }) {
         <Col xl={2} className="d-flex justify-content-xl-end justify-content-center">
             <div className="auth-buttons">
                 {/* <UserProfileIcon initial="J" /> */}
-                <button>Sign Up</button>
-                <button onClick={onLoginToggle}>
+                <Link to="/signup"> {/* Replace button with Link */}
+                  <Button variant="primary">Sign Up</Button>
+                </Link>
+                <Button variant="secondary" onClick={onLoginToggle}>
                     {loggedIn ? "Signout" : "Login"}
-                </button>
-                <button className="hamburger" onClick={onButtonClick}>
+                </Button>
+                <Button className="hamburger" onClick={onButtonClick}>
                     &#9776;
-                </button>
+                </Button>
             </div>
         </Col>
       </Row>

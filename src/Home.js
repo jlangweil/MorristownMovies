@@ -72,9 +72,9 @@ const Home = () => {
 
         <Row className="justify-content-center">
             <Col lg={7}>
-            <div class="image-caption-container">
+            <div className="image-caption-container">
                 <img src={catsImage} alt="cats" className="meetup-image" />
-                <div class="caption">Cats of Morristown Movies - Coming Soon!</div>
+                <div className="caption">Cats of Morristown Movies - Coming Soon!</div>
             </div>
             </Col>
         </Row>
