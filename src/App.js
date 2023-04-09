@@ -16,7 +16,7 @@ function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const toggleLogin = () => {
+  /* const toggleLogin = () => {
     setLoggedIn(!loggedIn);
     if (!loggedIn) {
       handleMenuClick('login');
@@ -25,14 +25,14 @@ function App() {
     { 
       handleMenuClick('home');
     }
-  };
+  }; */
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
   const handleMenuClick = (section) => {
-    setActiveSection(section);
+   // setActiveSection(section);
     setMenuOpen(false);
   };
 
@@ -42,7 +42,7 @@ function App() {
       <div className="App">
         <div className="app-content">
           <header className="App-header">
-            <Banner onButtonClick={toggleMenu} loggedIn={loggedIn} onLoginToggle={toggleLogin} />
+            <Banner onButtonClick={toggleMenu} />
           </header>
           <nav className={`nav-links ${menuOpen ? 'show' : ''}`}>
             <Link to="/" onClick={handleMenuClick}><FaHome />&nbsp;&nbsp;Home</Link>

@@ -1,12 +1,25 @@
 // src/Login.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Login.css';
 import OAuthLogin from './OAuthLogin';
+import axios from 'axios';
+import bcrypt from 'bcryptjs';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../AuthContext';
+
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const Login = () => {
+  const { login } = useAuth();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const { currentUser, userEmail } = useAuth();
+
+  const navigate = useNavigate();
 
   const handleGoogleSuccess = (response) => {
     const profile = response.getBasicProfile();
@@ -25,15 +38,67 @@ const Login = () => {
   };
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     // Perform authentication here
+    try {
+      const requestUrl = `${apiUrl}/users?email=${email}`;
+
+      console.log('Request URL:', requestUrl);
+
+      const response = await axios.get(requestUrl, {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+        },
+      });
+
+  
+      if (response.data && Object.keys(response.data).length > 0) {
+        const user = response.data;
+  
+        // Compare the password hashes
+        const passwordMatches = bcrypt.compareSync(password, user.password);
+  
+        if (passwordMatches) {
+          // Set the logged in user details
+          login(user);
+          console.log("Welcome ", currentUser);
+          // Redirect the user to the desired page after successful login
+          navigate('/');
+          
+         
+          //setLoggedInUser(user);
+  
+          // Handle success, e.g., navigate to the next page, display a success message, etc.
+        } else {
+          // Handle error, e.g., display an error message
+          setErrorMessage('E-mail or password is incorrect.');
+        }
+      } else {
+        // Handle error, e.g., display an error message
+        setErrorMessage('E-mail or password is incorrect.');
+      }
+    } catch (error) {
+      console.error(error);
+  
+      setErrorMessage('E-mail or password is incorrect.');
+    }
   };
+
+  useEffect(() => {
+    console.log('Current User:', currentUser);
+    console.log('User Email:', userEmail);
+  }, [currentUser, userEmail]);
+  
+  
 
   return (
     <div className="login-section">
       <div className="login-box">
         <h3>Welcome!</h3>
+        <div style={{ minHeight: '1.5em' }}>
+          {errorMessage && <p className="text-danger">{errorMessage}</p>}
+        </div>
         <form onSubmit={handleSubmit}>
 
           <label htmlFor="email">Email:</label>
