@@ -9,10 +9,11 @@ function Banner({ onButtonClick }) {
   const { currentUser, logout } = useAuth();
   const loggedIn = currentUser !== null;
   const navigate = useNavigate();
+  
 
-  const handleLogout = () => {
-    logout();
-    navigate('/');
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login');
   };
 
   return (
@@ -22,27 +23,32 @@ function Banner({ onButtonClick }) {
          
         </Col>
         <Col xl={8} className="text-center">
-          <div className="banner-text">The Morristown Movie <span className="default-font">&</span> Dining Meetup Group</div>
+            <div className="banner-text">
+              <Link to="/" className="text-decoration-none text-reset">
+                 The Morristown Movie <span className="default-font">&</span> Dining Meetup Group
+            </Link>
+        </div>
         </Col>
         <Col xl={2} className="d-flex justify-content-xl-end justify-content-center">
           <div className="auth-buttons d-flex align-items-center">
-                {loggedIn && (
-                <UserProfileIcon initial="J" /> 
-                )}
-                {!loggedIn && (
-                  <Link to="/signup">
-                    <Button variant="primary">Sign Up</Button>
-                  </Link>
-                )}
-                <Link to={loggedIn ? '/' : '/login'}>
-                  <Button variant="secondary" onClick={loggedIn ? handleLogout : null}>
-                    {loggedIn ? 'Logout' : 'Login'}
-                  </Button>
-                </Link>
-                <Button className="hamburger" onClick={onButtonClick}>
-                    &#9776;
-                </Button>
-            </div>
+            {loggedIn && (
+              <UserProfileIcon initial={currentUser[0]} />
+            )}
+            {!loggedIn && (
+              <Link to="/signup">
+                <Button variant="primary">Sign Up</Button>
+              </Link>
+            )}
+            <Button
+              variant="secondary"
+              onClick={loggedIn ? handleLogout : () => navigate('/login')}
+            >
+              {loggedIn ? 'Logout' : 'Login'}
+            </Button>
+            <Button className="hamburger" onClick={onButtonClick}>
+              &#9776;
+            </Button>
+          </div>
         </Col>
       </Row>
     </Container>

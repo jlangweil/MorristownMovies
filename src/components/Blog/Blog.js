@@ -3,6 +3,8 @@ import BlogPostAdd from './BlogPostAdd';
 import { Container, Row, Col, Button, Modal, Spinner } from 'react-bootstrap';
 import DOMPurify from 'dompurify';
 import axios from 'axios';
+import { useAuth } from '../../AuthContext';
+import { useNavigate } from 'react-router-dom';
 import './Blog.css';
 import blogTitle from '../../images/blog.JPG';
 
@@ -13,6 +15,10 @@ const Blog = () => {
     const [showAddPost, setShowAddPost] = useState(false);
     const [blogPosts, setBlogPosts] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const { currentUser } = useAuth();
+    const navigate = useNavigate();
+
 
     const SafeHTML = ({ html }) => {
       const sanitizedHTML = DOMPurify.sanitize(decodeURIComponent(html));
@@ -39,8 +45,13 @@ const Blog = () => {
     
 
     const toggleAddPost = () => {
-        setShowAddPost(!showAddPost);
+      if (!currentUser) {
+        navigate('/login');
+        return;
+      }
+      setShowAddPost(!showAddPost);
     };
+    
 
     const handlePostSubmitted = () => {
         toggleAddPost();

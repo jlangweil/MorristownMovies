@@ -5,6 +5,9 @@ import { Container, Row, Col, Button, Modal, Spinner } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import FilterDropdown from './components/Utils/FilterDropdown';
 import MovieReviewAdd from './MovieReviewAdd';
+import { useAuth } from './AuthContext';
+import { useNavigate } from 'react-router-dom';
+
 
 
 const MovieReview = () => {
@@ -19,14 +22,21 @@ const MovieReview = () => {
 
     const apiUrl = process.env.REACT_APP_API_URL;
 
-    const toggleAddReviewModal = (submitted = false) => {
-        if (submitted) {
-          // Call the function that fetches the reviews, e.g., fetchReviews()
-          fetchReviews();
-        }
-        setShowAddReviewModal(!showAddReviewModal);
-      };
+    const { currentUser } = useAuth();
+    const navigate = useNavigate();
 
+    const toggleAddReviewModal = (submitted = false) => {
+      if (!currentUser) {
+        navigate('/login');
+        return;
+      }
+      if (submitted) {
+        // Call the function that fetches the reviews, e.g., fetchReviews()
+        fetchReviews();
+      }
+      setShowAddReviewModal(!showAddReviewModal);
+    };
+    
       const onReviewSubmitted = () => {
         // Reset state variables
         setPage(1);

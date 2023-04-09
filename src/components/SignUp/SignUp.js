@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './SignUp.css';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const SignUp = () => {
+
+  const navigate = useNavigate();
+  
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -25,6 +29,7 @@ const SignUp = () => {
     'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming',
   ];
 
+  const [errorMessage, setErrorMessage] = useState('');
   
   const passwordsMatch = () => {
     return formData.password === formData.confirmPassword;
@@ -51,14 +56,20 @@ const SignUp = () => {
           Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
         },
       });
-  
-      console.log(response.data);
+      setErrorMessage(''); 
+      //console.log(response.data);
   
       // Handle success, e.g., navigate to the next page, display a success message, etc.
+      navigate('/login');
     } catch (error) {
       console.error(error);
   
       // Handle error, e.g., display an error message
+        if (error.response && error.response.data && error.response.data.message) {
+            setErrorMessage(error.response.data.message); // Update the error message with the server response
+        } else {
+            setErrorMessage('Error registering user. Please try again.'); // Fallback error message
+        }
     }
   };
   
@@ -145,6 +156,11 @@ const SignUp = () => {
             <Button variant="primary" type="submit">
               Register
             </Button>
+            {errorMessage && (
+                <div className="error-message mt-3" style={{ color: 'red', fontSize: '1em' }}>
+                    {errorMessage}
+                </div>
+                )}
           </Form>
         </Col>
       </Row>
