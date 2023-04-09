@@ -24,20 +24,6 @@ const Login = () => {
     console.error('Google Login Error:', error);
   };
 
-  const handleFacebookSuccess = (response) => {
-    const userData = {
-      id: response.userID,
-      name: response.name,
-      email: response.email,
-      imageUrl: response.picture.data.url,
-      accessToken: response.accessToken,
-    };
-    setUser(userData);
-  };
-
-  const handleFacebookFailure = (error) => {
-    console.error('Facebook Login Error:', error);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -75,8 +61,6 @@ const Login = () => {
       <OAuthLogin
             onGoogleSuccess={handleGoogleSuccess}
             onGoogleFailure={handleGoogleFailure}
-            onFacebookSuccess={handleFacebookSuccess}
-            onFacebookFailure={handleFacebookFailure}
           />
       </div>
           

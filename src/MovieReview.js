@@ -44,7 +44,7 @@ const MovieReview = () => {
   
     const fetchMovies = useCallback(async () => {
         try {
-          const response = await axios.get('${apiUrl}/movies');
+          const response = await axios.get(`${process.env.REACT_APP_API_URL}/movies`);
           setMovies(response.data);
         } catch (error) {
           console.error(error);

@@ -1,8 +1,7 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
-import FacebookLogin from 'react-facebook-login';
 
-const OAuthLogin = ({ onGoogleSuccess, onGoogleFailure, onFacebookSuccess, onFacebookFailure }) => {
+const OAuthLogin = ({ onGoogleSuccess, onGoogleFailure}) => {
   return (
     <div>
       <GoogleLogin
