@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import axios from 'axios';
+import { useAuth } from '../../AuthContext';
 import 'react-quill/dist/quill.snow.css'; // Import the styles
 import './BlogPostAdd.css';
 
 const BlogPostAdd = ({ onPostSubmitted, onCancel }) => {
   const [postContent, setPostContent] = useState('');
+
+  const { currentUser } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,7 +22,7 @@ const BlogPostAdd = ({ onPostSubmitted, onCancel }) => {
 
   // Prepare the data to be sent to the server
   const data = {
-    BlogAuthor: 'John Doe',
+    BlogAuthor: currentUser,
     BlogPost: encodeURIComponent(postContent),
     BlogDateTime: new Date().toISOString()
   };

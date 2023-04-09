@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
 import axios from 'axios';
+import { useAuth } from './AuthContext';
 import StarRating from './StarRating';
 
 import './MovieReviewAdd.css';
@@ -12,8 +13,8 @@ const [userName, setUserName] = useState('');
 const [rating, setRating] = useState(0);
 const [movieNameError, setMovieNameError] = useState('');
 const [reviewTextError, setReviewTextError] = useState('');
-const [userNameError, setUserNameError] = useState('');
 const [serverError, setServerError] = useState('');
+const { currentUser } = useAuth();
 
 
 const validateForm = () => {
@@ -33,13 +34,6 @@ const validateForm = () => {
       setReviewTextError('');
     }
   
-    if (userName.trim() === '') {
-      setUserNameError('User name is required');
-      isValid = false;
-    } else {
-      setUserNameError('');
-    }
-  
     return isValid;
   };
 
@@ -53,7 +47,7 @@ const validateForm = () => {
         const response = await axios.post(`${process.env.REACT_APP_API_URL}/reviews`, {
           MovieName: movieName,
           ReviewText: reviewText,
-          UserName: userName,
+          UserName: currentUser,
           DateOfReview: currentDate,
           Rating: rating,
         });
@@ -61,7 +55,7 @@ const validateForm = () => {
         // Clear form data
         setMovieName('');
         setReviewText('');
-        setUserName('');
+        setUserName(currentUser);
         setRating(0);
   
         // Hide the form after submitting the review
@@ -113,14 +107,8 @@ const validateForm = () => {
         </Form.Group>
   
         <Form.Group controlId="userName">
-        <Form.Label>Reviewed by</Form.Label>
-        <Form.Control
-        type="text"
-        value={userName}
-        required
-        onChange={(event) => setUserName(event.target.value)}
-        />
-         {userNameError && <div className="error-message">{userNameError}</div>}
+          <Form.Label>Reviewed by</Form.Label>
+          <p style={{ color: 'white' }}>{currentUser}</p>
         </Form.Group>
 
         <Form.Group controlId="rating">

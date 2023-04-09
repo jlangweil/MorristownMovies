@@ -25,6 +25,8 @@
   .star-rating-value {
     position: absolute;
     font-size: 1rem;
+    color: #000;
+    font-weight: bold;
   }
 
   #decreaseRating {

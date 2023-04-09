@@ -26,7 +26,7 @@ const StarRating = ({ rating, setRating }) => {
         -
       </button>
       <div className="star-rating-input">
-        <i className="far fa-star fa-3x"></i>
+        <i className="fas fa-star fa-3x"></i>
         <span className="star-rating-value">{rating.toFixed(1)}</span>
       </div>
       <button
