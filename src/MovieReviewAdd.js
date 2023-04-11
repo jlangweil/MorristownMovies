@@ -3,19 +3,45 @@ import { Form, Button, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { useAuth } from './AuthContext';
 import StarRating from './StarRating';
+import Autosuggest from 'react-autosuggest';
+
 
 import './MovieReviewAdd.css';
 
-const MovieReviewAdd = ({onReviewSubmitted}) => {
+const MovieReviewAdd = ({onReviewSubmitted, movies}) => {
 const [movieName, setMovieName] = useState('');
 const [reviewText, setReviewText] = useState('');
 const [userName, setUserName] = useState('');
 const [rating, setRating] = useState(0);
 const [movieNameError, setMovieNameError] = useState('');
+const [suggestions, setSuggestions] = useState('');
 const [reviewTextError, setReviewTextError] = useState('');
 const [serverError, setServerError] = useState('');
 const { currentUser } = useAuth();
 
+const getSuggestions = (value) => {
+  const inputValue = value.trim().toLowerCase();
+  const inputLength = inputValue.length;
+  return inputLength === 0 ? [] : movies.filter(movie => movie.MovieName.toLowerCase().slice(0, inputLength) === inputValue);
+};
+
+const onSuggestionsFetchRequested = ({ value }) => {
+  setSuggestions(getSuggestions(value));
+};
+
+const onSuggestionsClearRequested = () => {
+  setSuggestions([]);
+};
+
+const onChange = (event, { newValue }) => {
+  setMovieName(newValue);
+};
+
+const inputProps = {
+  placeholder: 'Start Typing...',
+  value: movieName,
+  onChange: onChange
+};
 
 const validateForm = () => {
     let isValid = true;
@@ -83,7 +109,19 @@ const validateForm = () => {
   return (
     <div className="movieReviewAdd">
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="movieName">
+
+      <Form.Group controlId="movieName">
+        <Form.Label>Movie Name</Form.Label>
+        <Autosuggest
+        suggestions={suggestions}
+        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={onSuggestionsClearRequested}
+        getSuggestionValue={(suggestion) => suggestion.MovieName}
+        renderSuggestion={(suggestion) => <div>{suggestion.MovieName}</div>}
+        inputProps={inputProps}
+      />
+      </Form.Group>
+        {/* <Form.Group controlId="movieName">
           <Form.Label>Movie Name</Form.Label>
           <Form.Control
             type="text"
@@ -92,7 +130,7 @@ const validateForm = () => {
             onChange={(event) => setMovieName(event.target.value)}
          />
          {movieNameError && <div className="error-message">{movieNameError}</div>}
-        </Form.Group>
+        </Form.Group> */}
   
         <Form.Group controlId="reviewText">
           <Form.Label>Review Text</Form.Label>

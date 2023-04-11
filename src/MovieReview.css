@@ -32,6 +32,12 @@
   
   .rating {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .stars {
+    display: flex;
   }
 
   .review-date {
@@ -66,7 +72,32 @@
   }
 
   .modal {
-    background-color: black;
+    background-color: transparent; /* Updated this line */
+  }
+  
+  
+  .trashcan-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: white !important;
+  }
+  
+  .delete-modal .modal-content {
+    background-color: red;
+    color: white;
+    border: 1px solid white;
+  }
+  
+  .delete-modal .modal-dialog {
+    max-width: 400px;
+  }
+  
+  .with-custom-backdrop + .modal-backdrop.show {
+    opacity: 0.2;
+    background-color: rgba(0, 0, 0, 0.8); /* Adjust this value to your preference */
   }
   
   

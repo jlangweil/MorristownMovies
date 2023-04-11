@@ -19,6 +19,8 @@ const MovieReview = () => {
     const [page, setPage] = useState(1);
     const [filter, setFilter] = useState("");
     const [showAddReviewModal, setShowAddReviewModal] = useState(false);
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
+
 
     const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -36,20 +38,27 @@ const MovieReview = () => {
       }
       setShowAddReviewModal(!showAddReviewModal);
     };
-    
+
+      const handleDeleteReviewClick = () => {
+        setShowConfirmModal(true);
+      };
+
+      
       const onReviewSubmitted = () => {
         // Reset state variables
         setPage(1);
         setHasMore(true);
         setLoading(true);
         setReviews([]);
-        
+      
         // Call fetchReviews
         fetchReviews();
       
         // Hide the MovieReviewAdd component
         setShowAddReviewModal(false);
       };
+      
+      
 
   
     const fetchMovies = useCallback(async () => {
@@ -73,7 +82,9 @@ const MovieReview = () => {
             setHasMore(false);
           } else {
             setReviews(prevReviews => (page === 1 ? response.data : [...prevReviews, ...response.data]));
-            setPage(prevPage => prevPage + 1);
+            if (page !== 1) {
+              setPage(prevPage => prevPage + 1);
+            }
           }
           setLoading(false);
         } catch (error) {
@@ -81,13 +92,19 @@ const MovieReview = () => {
           setLoading(false);
         }
       }, [page, filter]);
-    
+      
       useEffect(() => {
+        // Reset page state when filter changes
         setPage(1);
+        setHasMore(true);
+        setLoading(true);
+        setReviews([]);
+      
+        // Call fetchReviews
         fetchReviews();
       }, [filter, fetchReviews]);
-       
-    
+      
+      
       if (loading) {
         return <center><Spinner animation="border" role="status"/></center>;
       }
@@ -121,14 +138,14 @@ const MovieReview = () => {
                 <Modal.Title>Add a Movie Review</Modal.Title>
             </Modal.Header>
             <Modal.Body >
-                <MovieReviewAdd onReviewSubmitted={onReviewSubmitted} />
+                <MovieReviewAdd onReviewSubmitted={onReviewSubmitted} movies={movies}/>
             </Modal.Body>
         </Modal>
         <Row className="justify-content-center">
             <Col lg={8}>
                 <InfiniteScroll
                 dataLength={reviews.length}
-                next={fetchReviews}
+                next={() => fetchReviews(page)}
                 hasMore={hasMore}
                 loader={<h4>Loading...</h4>}
                 endMessage={<p><center>End of Reviews</center></p>}
@@ -142,15 +159,34 @@ const MovieReview = () => {
                     <p className="user-name">Reviewed by {review.UserName}</p>
                     <p className="review-date">Date: {review.DateOfReview}</p>
                     <div className="rating">
-                        {Array.from({ length: Math.floor(review.Rating) }, (_, index) => (
+                    <div className="stars">
+                      {Array.from({ length: Math.floor(review.Rating) }, (_, index) => (
                         <i className="fas fa-star full-star" key={index}></i>
-                        ))}
-                        {review.Rating % 1 !== 0 && (
+                      ))}
+                      {review.Rating % 1 !== 0 && (
                         <i className="fas fa-star-half-alt half-star" key="half"></i>
-                        )}
+                      )}
                     </div>
-                    </div>
+                    {currentUser && currentUser === review.UserName && (
+                    <i class="fa-solid fa-trash-can" onClick={handleDeleteReviewClick}></i>
+                    )}
+                  </div>
+                </div>
                 ))}
+               <Modal className="custom-modal delete-modal" show={showConfirmModal} onHide={() => setShowConfirmModal(false)} centered backdrop="static">
+                  <Modal.Header closeButton>
+                    <Modal.Title>Delete Review</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>Are you sure you want to delete this review?</Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowConfirmModal(false)}>
+                      Cancel
+                    </Button>
+                    <Button variant="danger"/* onClick={handleDeleteReview} */>
+                      Delete
+                    </Button>
+                  </Modal.Footer>
+                </Modal>
                 </InfiniteScroll>
             </Col>
         </Row>
