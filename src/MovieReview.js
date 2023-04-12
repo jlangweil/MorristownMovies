@@ -20,7 +20,7 @@ const MovieReview = () => {
     const [filter, setFilter] = useState("");
     const [showAddReviewModal, setShowAddReviewModal] = useState(false);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
-
+    const [reviewIdToDelete, setReviewIdToDelete] = useState(null);
 
     const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -39,9 +39,31 @@ const MovieReview = () => {
       setShowAddReviewModal(!showAddReviewModal);
     };
 
-      const handleDeleteReviewClick = () => {
-        setShowConfirmModal(true);
-      };
+    const handleDeleteReviewClick = (reviewId) => {
+      setReviewIdToDelete(reviewId);
+      setShowConfirmModal(true);
+    };
+
+    const handleDeleteReview = async () => {
+      try {
+        const response = await axios.delete(`${apiUrl}/reviews?id=${reviewIdToDelete}`);
+  
+        if (response.status === 200) {
+          // Refresh the reviews after deletion
+          setPage(1);
+          setHasMore(true);
+          setLoading(true);
+          setReviews([]);
+          fetchReviews();
+  
+          // Close the confirm modal
+          setShowConfirmModal(false);
+        }
+      } catch (error) {
+        console.error(error);
+        alert('Error deleting the review');
+      }
+    };
 
       
       const onReviewSubmitted = () => {
@@ -58,10 +80,7 @@ const MovieReview = () => {
         setShowAddReviewModal(false);
       };
       
-      
-
-  
-    const fetchMovies = useCallback(async () => {
+     const fetchMovies = useCallback(async () => {
         try {
           const response = await axios.get(`${process.env.REACT_APP_API_URL}/movies`);
           setMovies(response.data);
@@ -78,13 +97,14 @@ const MovieReview = () => {
         try {
           const response = await axios.get(`${apiUrl}/reviews?page=${page}&limit=10&movie=${encodeURIComponent(filter)}`);
           console.log(`URL: ${apiUrl}`);
-          if (response.data.length === 0) {
+          if (response.data.length < 10) {
             setHasMore(false);
           } else {
-            setReviews(prevReviews => (page === 1 ? response.data : [...prevReviews, ...response.data]));
-            if (page !== 1) {
-              setPage(prevPage => prevPage + 1);
-            }
+            setHasMore(true);
+          }
+          setReviews(prevReviews => (page === 1 ? response.data : [...prevReviews, ...response.data]));
+          if (page !== 1) {
+            setPage(prevPage => prevPage + 1);
           }
           setLoading(false);
         } catch (error) {
@@ -168,12 +188,15 @@ const MovieReview = () => {
                       )}
                     </div>
                     {currentUser && currentUser === review.UserName && (
-                    <i class="fa-solid fa-trash-can" onClick={handleDeleteReviewClick}></i>
+                     <div style={{ display: 'flex' }}>
+                      <i class="fa-solid fa-pen" title="Edit" /* onClick={() => handleDeleteReviewClick(review.id)} */></i>  
+                      <i class="fa-solid fa-trash-can" title="Delete" onClick={() => handleDeleteReviewClick(review.id)}></i>
+                    </div>
                     )}
                   </div>
                 </div>
                 ))}
-               <Modal className="custom-modal delete-modal" show={showConfirmModal} onHide={() => setShowConfirmModal(false)} centered backdrop="static">
+               <Modal className="custom-modal delete-modal with-custom-backdrop" show={showConfirmModal} onHide={() => setShowConfirmModal(false)} centered backdrop="static">
                   <Modal.Header closeButton>
                     <Modal.Title>Delete Review</Modal.Title>
                   </Modal.Header>
@@ -182,7 +205,7 @@ const MovieReview = () => {
                     <Button variant="secondary" onClick={() => setShowConfirmModal(false)}>
                       Cancel
                     </Button>
-                    <Button variant="danger"/* onClick={handleDeleteReview} */>
+                    <Button variant="danger" onClick={handleDeleteReview} >
                       Delete
                     </Button>
                   </Modal.Footer>

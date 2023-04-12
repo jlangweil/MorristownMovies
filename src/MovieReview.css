@@ -99,6 +99,24 @@
     opacity: 0.2;
     background-color: rgba(0, 0, 0, 0.8); /* Adjust this value to your preference */
   }
+
+  .fa-pen {
+    margin-right: 15px;
+  }
+
+  .fa-solid.fa-pen,
+.fa-solid.fa-trash-can {
+  transition: color 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+
+.fa-solid.fa-pen:hover,
+.fa-solid.fa-trash-can:hover {
+  color: #ff5e5e; /* Change the color as desired */
+  transform: scale(1.3); /* Change the scaling factor as desired */
+}
+
+  
   
   
   
