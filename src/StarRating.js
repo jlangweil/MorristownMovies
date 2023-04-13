@@ -2,6 +2,7 @@ import React from "react";
 import "./StarRating.css";
 
 const StarRating = ({ rating, setRating }) => {
+  
   const decreaseRating = () => {
     if (rating > 0) {
       setRating(rating - 0.5);

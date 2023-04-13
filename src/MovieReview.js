@@ -5,6 +5,7 @@ import { Container, Row, Col, Button, Modal, Spinner } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import FilterDropdown from './components/Utils/FilterDropdown';
 import MovieReviewAdd from './MovieReviewAdd';
+import MovieReviewEdit from './MovieReviewEdit';
 import { useAuth } from './AuthContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,11 +22,30 @@ const MovieReview = () => {
     const [showAddReviewModal, setShowAddReviewModal] = useState(false);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [reviewIdToDelete, setReviewIdToDelete] = useState(null);
+    const [showEditReviewModal, setShowEditReviewModal] = useState(false);
+
 
     const apiUrl = process.env.REACT_APP_API_URL;
 
     const { currentUser } = useAuth();
     const navigate = useNavigate();
+
+    //testing
+    const sampleReviewToEdit = {
+      _id: "60a8c34250e5a623d8a12345",
+      MovieName: "The Shawshank Redemption",
+      ReviewText: "A masterpiece! A must-watch movie with great storytelling and incredible performances.",
+      UserName: "johndoe",
+      DateOfReview: "2022-07-15T12:05:42.000Z",
+      Rating: 5,
+    };
+    const [reviewToEdit, setReviewToEdit] = useState(sampleReviewToEdit);
+    
+    const handleEditReviewClick = (review) => {
+      setReviewToEdit(review);
+      toggleEditReviewModal();
+    };
+    
 
     const toggleAddReviewModal = (submitted = false) => {
       if (!currentUser) {
@@ -38,6 +58,15 @@ const MovieReview = () => {
       }
       setShowAddReviewModal(!showAddReviewModal);
     };
+
+    const toggleEditReviewModal = () => {
+      if (!currentUser) {
+        navigate('/login');
+        return;
+      }
+      setShowEditReviewModal(!showEditReviewModal);
+    };
+    
 
     const handleDeleteReviewClick = (reviewId) => {
       setReviewIdToDelete(reviewId);
@@ -78,6 +107,20 @@ const MovieReview = () => {
       
         // Hide the MovieReviewAdd component
         setShowAddReviewModal(false);
+      };
+
+      const onReviewUpdated = () => {
+        // Reset state variables
+        setPage(1);
+        setHasMore(true);
+        setLoading(true);
+        setReviews([]);
+      
+        // Call fetchReviews
+        fetchReviews();
+      
+        // Hide the MovieReviewAdd component
+        setShowEditReviewModal(false);
       };
       
      const fetchMovies = useCallback(async () => {
@@ -135,6 +178,16 @@ const MovieReview = () => {
     
       return (
         <>
+        <Modal show={showEditReviewModal} onHide={toggleEditReviewModal} centered backdrop="static">
+  <Modal.Header closeButton>
+    <Modal.Title>Edit a Movie Review</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>
+    <MovieReviewEdit onReviewUpdated={onReviewUpdated} movies={movies} reviewToEdit={reviewToEdit} />
+  </Modal.Body>
+</Modal>{/* <button className="edit-review-button" onClick={toggleEditReviewModal}>
+  Edit Review
+</button> */}
         <Container>
         <Row className="justify-content-center">
             <Col lg={8}>
@@ -153,7 +206,7 @@ const MovieReview = () => {
             </div>
         </Col>
         </Row>
-        <Modal show={showAddReviewModal} onHide={toggleAddReviewModal} centered>
+        <Modal show={showAddReviewModal} onHide={toggleAddReviewModal} centered backdrop="static">
             <Modal.Header closeButton>
                 <Modal.Title>Add a Movie Review</Modal.Title>
             </Modal.Header>
@@ -189,8 +242,8 @@ const MovieReview = () => {
                     </div>
                     {currentUser && currentUser === review.UserName && (
                      <div style={{ display: 'flex' }}>
-                      <i class="fa-solid fa-pen" title="Edit" /* onClick={() => handleDeleteReviewClick(review.id)} */></i>  
-                      <i class="fa-solid fa-trash-can" title="Delete" onClick={() => handleDeleteReviewClick(review.id)}></i>
+                       <i className="fa-solid fa-pen" title="Edit" onClick={() => handleEditReviewClick(review)}></i>
+                       <i className="fa-solid fa-trash-can" title="Delete" onClick={() => handleDeleteReviewClick(review.id)}></i>
                     </div>
                     )}
                   </div>
