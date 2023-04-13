@@ -18,6 +18,7 @@ const MovieQuote = () => {
         <div className="movie-quote-container">
         <div className="movie-quote-text">
            <p>{movieQuote.quote}</p>
+           <br />
       </div>
         <div className="movie-quote-details">
          <p>{movieQuote.movie} ({movieQuote.year})</p>

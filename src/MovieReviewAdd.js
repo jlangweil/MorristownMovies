@@ -149,10 +149,14 @@ const validateForm = () => {
           <p style={{ color: 'white' }}>{currentUser}</p>
         </Form.Group>
 
-        <Form.Group controlId="rating">
-          <Form.Label>Rating</Form.Label>
-          <StarRating rating={rating} setRating={setRating} />
-        </Form.Group>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+  <Form.Group controlId="rating">
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <Form.Label style={{ marginBottom: '15px' }}>Rating</Form.Label>
+      <StarRating rating={Number(rating)} setRating={setRating} />
+    </div>
+  </Form.Group>
+</div>
         <br />
         <Button variant="primary" type="submit">
           Submit

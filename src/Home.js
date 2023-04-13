@@ -7,6 +7,7 @@ import meetupImage from './images/logo.jpg';
 import catsImage from './images/cats.jpg';
 import Latest from './Latest';
 import Blog from './components/Blog/Blog';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
 
@@ -36,7 +37,7 @@ const Home = () => {
        <Row className="justify-content-center">
         <Col xs="auto">
           <Button variant="primary" onClick={handleClick}>
-            Join Us!
+            Join Meetup!
           </Button>
         </Col>
       </Row>
@@ -58,7 +59,7 @@ const Home = () => {
         </Row>
 
         <Row className="justify-content-center">
-            <Col lg={8}>
+            <Col xs={12} lg={8}>
                 <Testimonial />
             </Col>
         </Row>
@@ -72,10 +73,12 @@ const Home = () => {
 
         <Row className="justify-content-center">
             <Col lg={7}>
-            <div className="image-caption-container">
-                <img src={catsImage} alt="cats" className="meetup-image" />
-                <div className="caption">Cats of Morristown Movies - Coming Soon!</div>
-            </div>
+            <Link to="/gallery" className="custom-link">
+              <div className="image-caption-container">
+                  <img src={catsImage} alt="cats" className="meetup-image" />
+                  <div className="caption">Cats of Morristown Movies - Coming Soon!</div>
+              </div>
+            </Link>
             </Col>
         </Row>
 

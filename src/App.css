@@ -166,7 +166,7 @@ article p {
 .banner-text {
   /* font-family: 'Great Vibes', cursive; */
   font-family: 'Film', serif;
-  font-size: 2.5rem;
+  font-size: 2.7rem;
   font-weight: normal;
   /* color: #ffdbb4; */
   color: #F1E4C0;
@@ -184,3 +184,4 @@ article p {
     font-size: 2rem; /* or any other size you want for mobile screens */
   }
 }
+

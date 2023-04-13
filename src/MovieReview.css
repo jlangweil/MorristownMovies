@@ -17,6 +17,7 @@
   .movie-name {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
+    color: #F1E4C0 !important;
   }
   
   .review-text {
@@ -116,7 +117,6 @@
   transform: scale(1.3); /* Change the scaling factor as desired */
 }
 
-  
-  
+
   
   

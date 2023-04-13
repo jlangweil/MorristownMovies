@@ -111,5 +111,24 @@ align-items: center;
     background-color: rgba(0, 0, 0, 0.9);
   }
 
-  
-  
+/* Custom styles for certain Link components */
+.custom-link {
+  background-color: transparent; /* Remove the white box */
+  text-decoration: none; /* Remove the underline */
+}
+
+.custom-link img {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Remove fade effect on hover */
+.custom-link:hover img {
+  opacity: 1 !important;
+  transition: none !important;
+}
+
+/* Remove color change on hover */
+.custom-link:hover {
+  color: inherit !important;
+}

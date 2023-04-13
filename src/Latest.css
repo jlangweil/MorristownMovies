@@ -110,5 +110,14 @@
     width: 100%;
   }
   
+  .no-underline {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .no-underline:hover {
+    color: inherit; /* If this doesn't work, change 'inherit' to the desired color, e.g., 'black' or '#333' */
+  }
+
   
   

@@ -24,7 +24,7 @@ const StarRating = ({ rating, setRating }) => {
         onClick={decreaseRating}
         disabled={rating === 0}
       >
-        -
+        <i class="fa-sharp fa-solid fa-minus" style={{color: '#ffffff'}}></i>
       </button>
       <div className="star-rating-input">
         <i className="fas fa-star fa-3x"></i>
@@ -37,7 +37,7 @@ const StarRating = ({ rating, setRating }) => {
         onClick={increaseRating}
         disabled={rating === 5}
       >
-        +
+        <i class="fa-sharp fa-solid fa-plus" style={{color: '#ffffff'}}></i>
       </button>
     </div>
   );
