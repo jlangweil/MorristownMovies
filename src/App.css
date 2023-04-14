@@ -26,7 +26,11 @@ body {
 .App-header {
   /* background-color: #d32f2f; */
   background-color: #A02222;
-  padding: 1rem;
+  background-image: url('images/midjourney.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 2rem;
 }
 
 .centered-div {
@@ -156,6 +160,7 @@ article p {
   margin-left: 1rem;
   padding: 5px 10px;
   cursor: pointer;
+  margin-top: 1rem;
 }
 
 .auth-buttons button:hover {
@@ -179,9 +184,14 @@ article p {
   font-family: 'Helvetica Neue', sans-serif;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 2000px) {
   .banner-text {
     font-size: 2rem; /* or any other size you want for mobile screens */
   }
+  .responsive-text {
+    /* font-size: 1rem !important; */
+    width: 80px !important;
+  }
 }
+
 

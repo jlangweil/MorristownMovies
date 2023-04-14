@@ -36,7 +36,7 @@ function Banner({ onButtonClick }) {
             )}
             {!loggedIn && (
               <Link to="/signup">
-                <Button variant="primary">Sign Up</Button>
+                <Button variant="primary" className="responsive-text">Sign Up</Button>
               </Link>
             )}
             <Button
