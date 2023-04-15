@@ -18,6 +18,9 @@ const [suggestions, setSuggestions] = useState('');
 const [reviewTextError, setReviewTextError] = useState('');
 const [serverError, setServerError] = useState('');
 const { currentUser } = useAuth();
+const { userId } = useAuth();
+
+
 
 const getSuggestions = (value) => {
   const inputValue = value.trim().toLowerCase();
@@ -70,12 +73,14 @@ const validateForm = () => {
       try {
         // Perform API call to save the review
         const currentDate = new Date().toISOString();
+
         const response = await axios.post(`${process.env.REACT_APP_API_URL}/reviews`, {
           MovieName: movieName,
           ReviewText: reviewText,
           UserName: currentUser,
           DateOfReview: currentDate,
           Rating: rating,
+          UserID: userId
         });
   
         // Clear form data

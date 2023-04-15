@@ -28,6 +28,8 @@ const MovieReview = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
 
     const { currentUser } = useAuth();
+    const { userId } = useAuth();
+
     const navigate = useNavigate();
 
     //testing
@@ -194,7 +196,7 @@ const MovieReview = () => {
             <div className="filter-add-container">
                 <h3>Member Reviews</h3>
             </div>
-        </Col>
+        </Col>  
         </Row>
         <Row className="justify-content-center">
             <Col lg={8}>
@@ -240,12 +242,12 @@ const MovieReview = () => {
                         <i className="fas fa-star-half-alt half-star" key="half"></i>
                       )}
                     </div>
-                    {currentUser && currentUser === review.UserName && (
+                    {userId && Number(userId) === Number(review.UserID) && (
                      <div style={{ display: 'flex' }}>
                        <i className="fa-solid fa-pen" title="Edit" onClick={() => handleEditReviewClick(review)}></i>
                        <i className="fa-solid fa-trash-can" title="Delete" onClick={() => handleDeleteReviewClick(review.id)}></i>
                     </div>
-                    )}
+                    )} 
                   </div>
                 </div>
                 ))}

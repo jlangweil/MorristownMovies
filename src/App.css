@@ -25,7 +25,7 @@ body {
 
 .App-header {
   /* background-color: #d32f2f; */
-  background-color: #A02222;
+  /* background-color: #A02222; */
   background-image: url('images/midjourney.png');
   background-size: cover;
   background-position: center;
@@ -193,5 +193,4 @@ article p {
     width: 80px !important;
   }
 }
-
 
