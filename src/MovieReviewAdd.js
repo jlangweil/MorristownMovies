@@ -81,7 +81,12 @@ const validateForm = () => {
           DateOfReview: currentDate,
           Rating: rating,
           UserID: userId
+        }, {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+          }
         });
+        
   
         // Clear form data
         setMovieName('');

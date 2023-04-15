@@ -140,7 +140,11 @@ const MovieReview = () => {
 
       const fetchReviews = useCallback(async () => {
         try {
-          const response = await axios.get(`${apiUrl}/reviews?page=${page}&limit=10&movie=${encodeURIComponent(filter)}`);
+          const response = await axios.get(`${apiUrl}/reviews?page=${page}&limit=10&movie=${encodeURIComponent(filter)}`, {
+            headers: {
+              Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+            },
+          });
           console.log(`URL: ${apiUrl}`);
           if (response.data.length < 10) {
             setHasMore(false);
