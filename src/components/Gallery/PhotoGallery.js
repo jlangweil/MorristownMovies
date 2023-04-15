@@ -16,7 +16,11 @@ const PhotoGallery = () => {
 
   const fetchImages = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/images`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/images`, {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+        }
+      });
       const imageUrls = response.data;
   
       const imageObjects = [];

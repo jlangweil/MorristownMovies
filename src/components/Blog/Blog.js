@@ -29,7 +29,11 @@ const Blog = () => {
     const fetchBlogPosts = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/blog`);
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/blog`, {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+          }
+        });
         const sortedPosts = response.data.sort((a, b) => new Date(b.BlogDateTime) - new Date(a.BlogDateTime));
         setBlogPosts(sortedPosts);
       } catch (error) {

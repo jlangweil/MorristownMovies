@@ -29,7 +29,11 @@ const BlogPostAdd = ({ onPostSubmitted, onCancel }) => {
 
   try {
     // Save the post to the server
-    const response = await axios.post(`${process.env.REACT_APP_API_URL}/blog`, data);
+    const response = await axios.post(`${process.env.REACT_APP_API_URL}/blog`, data, {
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+      }
+    });
 
     // Check if the response indicates success
     if (response.status === 201) {
