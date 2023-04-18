@@ -12,6 +12,7 @@ import MovieReview from './MovieReview';
 import SignUp from './components/SignUp/SignUp';
 import SignUpVerification from './components/SignUp/SignUpVerification';
 import PhotoGallery from './components/Gallery/PhotoGallery';
+import Restaurants from './components/Restaurant/Restaurants';
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -54,6 +55,7 @@ function App() {
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/signup-verification" element={<SignUpVerification />} />
                 <Route path="/gallery" element={<PhotoGallery />} />
+                <Route path="/food" element={<Restaurants />} />
               </Routes>
             </main>
 

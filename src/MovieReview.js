@@ -10,7 +10,14 @@ import { useAuth } from './AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 
-
+function debounce(func, wait) {
+  let timeout;
+  return function (...args) {
+    const context = this;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(context, args), wait);
+  };
+}
 const MovieReview = () => {
     const [reviews, setReviews] = useState([]);
     const [movies, setMovies] = useState([]);
@@ -137,8 +144,10 @@ const MovieReview = () => {
       useEffect(() => {
         fetchMovies();
       }, [fetchMovies]);
+      
 
-      const fetchReviews = useCallback(async () => {
+      const fetchReviews = useCallback(
+        debounce(async () => {
         try {
           const response = await axios.get(`${apiUrl}/reviews?page=${page}&limit=10&movie=${encodeURIComponent(filter)}`, {
             headers: {
@@ -160,7 +169,8 @@ const MovieReview = () => {
           setError(error);
           setLoading(false);
         }
-      }, [page, filter]);
+      }, 300),
+      [page, filter]);
       
       useEffect(() => {
         // Reset page state when filter changes

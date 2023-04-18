@@ -1,0 +1,89 @@
+.restaurants-container {
+    background-color: #222;
+    padding: 2rem;
+  }
+
+  
+  .restaurant-item {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    background-color: #333;
+    padding: 1rem;
+    position: relative;
+    max-width: 95%; 
+    margin: 0 auto;
+    overflow-x: hidden;
+    justify-content: space-between;
+    max-width: 100%; /* Ensures that the movie review does not overflow its container */
+    word-wrap: break-word; /* Prevent long words from overflowing */
+  }
+  
+   
+  .restaurant-name {
+    font-size: 1.5rem;
+    color: #FFD700;
+    margin-bottom: 0;
+  }
+  
+  .review-separator {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 1rem;
+  }
+  
+  .review {
+    font-size: 1rem;
+    color: #ddd;
+    margin-bottom: 2rem;
+   
+  }
+
+  .restaurant-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+  
+  .restaurant-address {
+    font-size: 1rem;
+    color: #aaa;
+    margin-bottom: 0;
+    align-self: flex-end;
+  }
+  
+  @media (min-width: 1700px) {
+    .restaurant-info {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  
+  .review-user {
+    font-style: italic;
+    font-size:1rem;
+    color: #bbb;
+    text-align: left;
+  }
+
+  .restaurant-header {
+    font-family: 'Playfair Display SC', serif;
+    color: white;
+    font-weight: bolder;
+    font-size: 3rem; /* change the font size to your desired size */
+    text-align: center; /* center the text */
+    margin-top: 0.5rem; /* add some top margin to space it from the container */
+    margin-bottom: 2rem;
+    background-image: linear-gradient(rgba(255, 44, 44, 0.3), rgba(255, 44, 44, 0.3)), url('../../images/food.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  }
+
+  .card {
+    box-sizing: border-box; /* include padding in total width calculation */
+  }
+
+
+  
+  
