@@ -183,10 +183,10 @@ useEffect(() => {
       restaurant.RestaurantName.toLowerCase().includes(restaurantNameFilter.toLowerCase())
     )
     .map((restaurant) => (
-      <Col key={restaurant.id} xs={12} lg={8} className="mb-3 mx-auto">
-        <Card className="restaurant-item">
+      <Col key={restaurant.id} xs={12} lg={8} className="mb-3 mx-auto" >
+        <Card className="restaurant-item" >
           <Card.Body className="restaurant-info-card" style={{ padding: "0.1rem" }}>
-            <Row>
+            <Row > 
               <Col xs={10}>
                 <h3 className="restaurant-name">
                   {restaurant.RestaurantName}

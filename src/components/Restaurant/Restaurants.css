@@ -7,7 +7,7 @@
   .restaurant-item {
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 10px;
-    background-color: #333;
+    background-color: #333 !important;
     padding: 1rem;
     position: relative;
     max-width: 95%; 
@@ -82,6 +82,7 @@
 
   .card {
     box-sizing: border-box; /* include padding in total width calculation */
+    background-color: #333 !important;
   }
 
 /* Add this new class for the toolbar */
