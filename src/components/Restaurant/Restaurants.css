@@ -1,6 +1,7 @@
 .restaurants-container {
     background-color: #222;
     padding: 2rem;
+    min-height: 1000px;
   }
 
   
@@ -125,6 +126,12 @@
 .filter-button:hover {
   background-color: #cc0000;
   border-color: white;
+}
+
+.add-review-button.disabled {
+  background-color: #ccc;
+  color: #888;
+  cursor: not-allowed;
 }
 
 /* Restaurants.css */

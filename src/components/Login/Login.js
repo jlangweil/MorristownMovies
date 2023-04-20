@@ -1,10 +1,11 @@
 // src/Login.js
 import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import './Login.css';
 import OAuthLogin from './OAuthLogin';
 import axios from 'axios';
 import bcrypt from 'bcryptjs';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../AuthContext';
 
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -118,15 +119,18 @@ const Login = () => {
           />
 
          <button type="submit">Login</button>
-         <text align="right">Forgot Password?</text>
+         <br/>
+         <center>Don't have an account?</center>
+         <center><Link to="/signup" as={Button} style={{marginTop: "10px"}}>Sign Up</Link></center>
+        {/*  <text align="right">Forgot Password?</text> */}
       </form>
       </div>
-      <center>or</center>
+      {/* <center>or</center>
       <br />
       <OAuthLogin
             onGoogleSuccess={handleGoogleSuccess}
             onGoogleFailure={handleGoogleFailure}
-          />
+          /> */}
       </div>
           
     

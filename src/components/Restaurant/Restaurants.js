@@ -1,9 +1,10 @@
 // Restaurants.js
 import React, { useState, useEffect, useCallback } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
-import InfiniteScroll from 'react-infinite-scroll-component';
+import Creatable from 'react-select/creatable';
 import axios from 'axios';
 import MapWithRestaurants from './MapWithRestaurants';
+import RestaurantReview from './RestaurantReview';
 import './Restaurants.css';
 
    // Add this function outside the Restaurants component
@@ -26,20 +27,25 @@ const Restaurants = () => {
   const [page, setPage] = useState(1);
   const [filter, setFilter] = useState("");
   const [restaurantNameFilter, setRestaurantNameFilter] = useState("");
+  const [showReview, setShowReview] = useState(false);
+  const [restaurantBeingReviewed, setRestaurantBeingReviewed] = useState("");
 
 
   const apiUrl = process.env.REACT_APP_API_URL;
   
-  const handleRestaurantNameFilterChange = (e) => {
-    setRestaurantNameFilter(e.target.value);
+  const handleRestaurantNameFilterChange = (newValue) => {
+    setRestaurantNameFilter(newValue ? newValue.value : "");
   };
-  
-  const filterRestaurants = () => {
-    setPage(1);
-    setFilter(restaurantNameFilter);
+
+  const handleInputChange = (inputValue) => {
+    setRestaurantBeingReviewed(inputValue || "");
   };
   
 
+  const restaurantOptions = restaurants.map((restaurant) => ({
+    value: restaurant.RestaurantName,
+    label: restaurant.RestaurantName,
+  }));
 
 // Inside the Restaurants component
 const fetchFood = useCallback(
@@ -84,7 +90,53 @@ const fetchRestaurants = async () => {
 useEffect(() => {
   fetchRestaurants();
 }, []);
- 
+
+const handleReviewSubmit = () => {
+  // Your logic for handling review submission
+  setShowReview(false);
+};
+
+const handleReviewCancel = () => {
+  setShowReview(false);
+  setRestaurantBeingReviewed('');
+  setRestaurantNameFilter('');
+};
+
+const customStyles = {
+  control: (provided) => ({
+    ...provided,
+    backgroundColor: 'black',
+    border: '1px solid #ccc',
+    borderRadius: '5px',
+    boxShadow: 'none',
+    '&:hover': {
+      borderColor: 'rgba(204,204,204,1)',
+    },
+  }),
+  input: (provided) => ({
+    ...provided,
+    color: 'white',
+    width: '250px',
+  }),
+  placeholder: (provided) => ({
+    ...provided,
+    color: 'rgba(255,255,255,.5)',
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: 'white',
+  }),
+  menu: (provided) => ({
+    ...provided,
+    backgroundColor: 'black',
+  }),
+  option: (provided) => ({
+    ...provided,
+    color: 'white',
+    backgroundColor: 'black',
+  }),
+};
+
 
   return (
     <Container  className="restaurants-container" style={{ overflowX: 'hidden' }}>
@@ -106,77 +158,39 @@ useEffect(() => {
       <Row className="justify-content-center">
         <Col xs={12} lg={8} className="mb-3 mx-auto">
           <div className="toolbar">
-            <input
-              type="text"
-              className="search-textbox"
+          <Creatable
+              options={restaurantOptions}
               placeholder="Enter restaurant name"
-              value={restaurantNameFilter}
+              value={
+                restaurantNameFilter
+                  ? { value: restaurantNameFilter, label: restaurantNameFilter }
+                  : null
+              }
               onChange={handleRestaurantNameFilterChange}
+              onInputChange={handleInputChange}
+              isClearable
+              isSearchable
+              styles={customStyles}
+              noOptionsMessage={() => 'Add new restaurant'}
+              formatCreateLabel={(inputValue) => `Click to review: "${inputValue}"`}
+              isDisabled={showReview}
             />
-           {/*  <button className="filter-button" onClick={filterRestaurants}>
-              Filter
-            </button> */}
-            <button className="add-review-button">
+            <button onClick={() => {
+              setRestaurantBeingReviewed(restaurantNameFilter);
+              setShowReview(true);
+            }} className={`add-review-button${!restaurantNameFilter ? " disabled" : ""}`}  disabled={!restaurantNameFilter}>
               New Review
             </button>
           </div>
         </Col>
       </Row>
-
-      {/* <Row className="justify-content-center" style={{ overflowX: 'hidden' }} >
-        <InfiniteScroll
-          dataLength={food.length}
-          next={() => {
-            setPage(prevPage => prevPage + 1);
-            fetchFood();
-          }}
-          hasMore={hasMore}
-          loader={<h4>Loading...</h4>}
-          endMessage={<p><center>End of Reviews</center></p>}
-        >
-        {food
-            .map(review => (
-            
-              <Col key={review.id} xs={12} lg={8} className="mb-3 mx-auto">
-
-                        <div className="restaurant-item">
-                          <div className="restaurant-info">
-                          <h3 className="restaurant-name">{review.RestaurantName} &nbsp;&nbsp;
-                          {review.cuisine && (
-                            <>
-                              &nbsp;&nbsp;
-                              <img
-                                src={`https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/${review.cuisine}.svg`}
-                                alt={`${review.cuisine.toUpperCase()} Flag`}
-                                width="32"
-                                height="24"
-                              />
-                            </>
-                          )}
-                          </h3>
-                            <p className="restaurant-address">
-                            
-
-                              {review.StreetAddress}, {review.City}, NJ
-                            </p>
-                          </div>
-                          <div className="review-separator"></div>
-                          <div className="reviews">
-                          {sampleReviews
-                            .filter((reviewItem) => reviewItem.restaurantId === review.id)
-                            .map((reviewItem) => (
-                              <div key={reviewItem.id} className="review">
-                                <p className="review-text">{reviewItem.text}</p>
-                                <p className="review-user">- {reviewItem.user}</p>
-                              </div>
-                            ))}
-
-                          </div>
-                        </div>  
-                        </Col>
-      ))}
-  </InfiniteScroll>
-  </Row> */}
+      {showReview && 
+      <Row className="justify-content-center">
+        <Col xs={12} className="mb-3 mx-auto">
+        <RestaurantReview onSubmit={handleReviewSubmit} onCancel={handleReviewCancel} restaurantBeingReviewed={restaurantBeingReviewed}/>
+        </Col>
+      </Row>}
+    
 <Row className="justify-content-center" style={{ overflowX: 'hidden' }}>
   {restaurants
     .filter((restaurant) =>
@@ -226,18 +240,9 @@ useEffect(() => {
       </Col>
     ))}
 </Row>
-
-
-                  
-     
-
-    </Container>
+</Container>
   );
 };
-
-
-
-
 
 
 export default Restaurants;

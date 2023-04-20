@@ -1,0 +1,27 @@
+.food-review form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .food-review form label {
+    font-weight: bold;
+    margin-top: 10px;
+    color: #fff;
+
+  }
+  
+  .food-review form input,
+  .food-review form textarea,
+  .food-review form textarea,
+  .food-review form select {
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: rgb(22, 21, 21);
+    color: white;
+  }
+
+  .food-review form textarea {
+    height: 200px;
+  }
