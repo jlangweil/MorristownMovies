@@ -6,7 +6,7 @@ import './RestaurantReview.css';
 
 function RestaurantReview(props) {
   const [review, setReview] = useState('');
-  const [rating, setRating] = useState(5);
+  const [rating, setRating] = useState(3);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,7 +23,7 @@ function RestaurantReview(props) {
     <div className="food-review">
         <Form onSubmit={handleSubmit}>
         <Row className="justify-content-center">
-            <Col xs={8} className="mb-3 mx-auto">
+            <Col xs={12} lg={8} className="mb-3 mx-auto">
                 <Form.Group controlId="reviewText">
                     <Form.Label>Review {props.restaurantBeingReviewed}</Form.Label>
                     <Form.Control
@@ -36,7 +36,7 @@ function RestaurantReview(props) {
             </Col>
       </Row>
       <Row className="justify-content-center">
-      <Col xs={8}>
+      <Col xs={12} lg={8} className="mb-3 mx-auto">
         <Form.Group controlId="reviewStars">
           <Form.Label className="d-flex justify-content-center">Rate the Restaurant:</Form.Label>
           <div className="d-flex justify-content-center">
@@ -54,7 +54,7 @@ function RestaurantReview(props) {
     </Row>
 
       <Row className="justify-content-center">
-        <Col xs={8} className="d-flex justify-content-end"> 
+        <Col xs={12} lg={8} className="d-flex justify-content-end mb-3 mx-auto"> 
            
             <Button variant="primary" type="submit">
             Submit

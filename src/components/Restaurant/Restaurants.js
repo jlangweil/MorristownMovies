@@ -8,14 +8,14 @@ import RestaurantReview from './RestaurantReview';
 import './Restaurants.css';
 
    // Add this function outside the Restaurants component
-   function debounce(func, wait) {
+/*    function debounce(func, wait) {
     let timeout;
     return function (...args) {
       const context = this;
       clearTimeout(timeout);
       timeout = setTimeout(() => func.apply(context, args), wait);
     };
-  }
+  } */
 
 const Restaurants = () => {
 
@@ -47,33 +47,32 @@ const Restaurants = () => {
     label: restaurant.RestaurantName,
   }));
 
-// Inside the Restaurants component
-const fetchFood = useCallback(
-  debounce(async () => {
-    try {
-      const response = await axios.get(`${apiUrl}/food?page=${page}&limit=10&movie=${encodeURIComponent(filter)}`, {
-        headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
-        },
-      });
-      if (response.data.length < 10) {
-        setHasMore(false);
-      } else {
-        setHasMore(true);
+  /* const fetchFood = useCallback(
+    async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/food`, {
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+          },
+        });
+        if (response.data.length < 10) {
+          setHasMore(false);
+        } else {
+          setHasMore(true);
+        }
+        setFood(response.data);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
       }
-      setFood(prevFood => (page === 1 ? response.data : [...prevFood, ...response.data]));
-      setLoading(false);
-    } catch (error) {
-      setError(error);
-      setLoading(false);
-    }
-  }, 300),
-  [apiUrl, filter, page]
-);
+    },
+    []
+  );
 
 useEffect(() => {
   fetchFood();
-}, [fetchFood]);
+}, [fetchFood]); */
 
   
 const fetchRestaurants = async () => {
