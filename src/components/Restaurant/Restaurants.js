@@ -3,6 +3,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import Creatable from 'react-select/creatable';
 import axios from 'axios';
+import { useAuth } from '../../AuthContext';
+import { useNavigate } from 'react-router-dom';
 import MapWithRestaurants from './MapWithRestaurants';
 import RestaurantReview from './RestaurantReview';
 import './Restaurants.css';
@@ -19,7 +21,7 @@ import './Restaurants.css';
 
 const Restaurants = () => {
 
-  const [food, setFood] = useState([]);  //food reviews
+  const [reviews, setReviews] = useState([]);  //food reviews
   const [restaurants, setRestaurants] = useState([]);  //list of distinct restaurants and geolocations
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -28,17 +30,55 @@ const Restaurants = () => {
   const [filter, setFilter] = useState("");
   const [restaurantNameFilter, setRestaurantNameFilter] = useState("");
   const [showReview, setShowReview] = useState(false);
-  const [restaurantBeingReviewed, setRestaurantBeingReviewed] = useState("");
-
-
+  const [restaurantBeingReviewed, setRestaurantBeingReviewed] = useState({});
+  const { currentUser } = useAuth();
+  const navigate = useNavigate();
   const apiUrl = process.env.REACT_APP_API_URL;
   
-  const handleRestaurantNameFilterChange = (newValue) => {
+ /*  const handleRestaurantNameFilterChange = (newValue) => {
     setRestaurantNameFilter(newValue ? newValue.value : "");
-  };
+  }; */
 
-  const handleInputChange = (inputValue) => {
+ /*  const handleInputChange = (inputValue) => {
     setRestaurantBeingReviewed(inputValue || "");
+  }; */
+
+const handleRestaurantNameFilterChange = (newValue) => {
+  if (newValue) {
+    setRestaurantNameFilter(newValue.value);
+
+    const selectedRestaurant = restaurants.find(
+      (restaurant) => restaurant.RestaurantName === newValue.value
+    );
+
+    if (selectedRestaurant) {
+      setRestaurantBeingReviewed(selectedRestaurant);
+    } else {
+      setRestaurantBeingReviewed({ RestaurantName: newValue.value });
+    }
+  } else {
+    // Handle the case when the input is empty or null
+    setRestaurantNameFilter("");
+    setRestaurantBeingReviewed({});
+  }
+};
+
+  
+
+  const handleInputChange = (inputValue, action) => {
+    if (action.action === 'set-value') {
+      const selectedRestaurant = restaurants.find(
+        (restaurant) => restaurant.RestaurantName === inputValue.value
+      );
+  
+      if (selectedRestaurant) {
+        setRestaurantBeingReviewed(selectedRestaurant);
+      } else {
+        setRestaurantBeingReviewed({ RestaurantName: inputValue.value });
+      }
+    } /* else if (action.action !== 'input-blur' && action.action !== 'menu-close') {
+      setInputValue(inputValue);
+    } */
   };
   
 
@@ -47,37 +87,34 @@ const Restaurants = () => {
     label: restaurant.RestaurantName,
   }));
 
-  /* const fetchFood = useCallback(
+  const fetchReviews = useCallback(
     async () => {
       try {
-        const response = await axios.get(`${apiUrl}/food`, {
+        const response = await axios.get(`${apiUrl}/restaurants?type=reviews`, {
           headers: {
             Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
           },
         });
-        if (response.data.length < 10) {
-          setHasMore(false);
-        } else {
-          setHasMore(true);
-        }
-        setFood(response.data);
-        setLoading(false);
+        setReviews(response.data);
       } catch (error) {
         setError(error);
-        setLoading(false);
       }
     },
     []
   );
 
 useEffect(() => {
-  fetchFood();
-}, [fetchFood]); */
+  fetchReviews();
+}, [fetchReviews]);
 
   
 const fetchRestaurants = async () => {
   try {
-    const response = await axios.get(`${apiUrl}/restaurants`);
+    const response = await axios.get(`${apiUrl}/restaurants`, {
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+      },
+    });
     setRestaurants(response.data);
     setLoading(false);
   } catch (error) {
@@ -91,8 +128,12 @@ useEffect(() => {
 }, []);
 
 const handleReviewSubmit = () => {
-  // Your logic for handling review submission
+  // handling review submission
   setShowReview(false);
+  setRestaurantNameFilter('')
+  setTimeout(() => {
+    fetchReviews();
+  }, 500); // Introduce a 500ms delay before fetching reviews
 };
 
 const handleReviewCancel = () => {
@@ -149,11 +190,11 @@ const customStyles = {
           <MapWithRestaurants restaurants={restaurants} />
         </Col>
       </Row>
-      <Row className="justify-content-center">
+     {/*  <Row className="justify-content-center">
         <Col xs={12} className="mb-3 mx-auto">
           <center><h3>Member reviews coming soon!</h3></center>
         </Col>
-      </Row>
+      </Row> */}
       <Row className="justify-content-center">
         <Col xs={12} lg={8} className="mb-3 mx-auto">
           <div className="toolbar">
@@ -171,14 +212,18 @@ const customStyles = {
               isSearchable
               styles={customStyles}
               noOptionsMessage={() => 'Add new restaurant'}
-              formatCreateLabel={(inputValue) => `Click to review: "${inputValue}"`}
+              formatCreateLabel={(inputValue) => `Click to add & review: "${inputValue}"`}
               isDisabled={showReview}
             />
             <button onClick={() => {
-              setRestaurantBeingReviewed(restaurantNameFilter);
+              // setRestaurantBeingReviewed(restaurantNameFilter);
+              if (!currentUser) {
+                navigate('/login');
+                return;
+              }
               setShowReview(true);
             }} className={`add-review-button${!restaurantNameFilter ? " disabled" : ""}`}  disabled={!restaurantNameFilter}>
-              New Review
+             Review
             </button>
           </div>
         </Col>
@@ -191,6 +236,7 @@ const customStyles = {
       </Row>}
     
 <Row className="justify-content-center" style={{ overflowX: 'hidden' }}>
+  
   {restaurants
     .filter((restaurant) =>
       restaurant.RestaurantName.toLowerCase().includes(restaurantNameFilter.toLowerCase())
@@ -219,23 +265,37 @@ const customStyles = {
             <Row>
               <Col xs={12}>
                 <p className="restaurant-address">
-                  {restaurant.StreetAddress}, {restaurant.City}, NJ
+                  {restaurant.StreetAddress}
                 </p>
               </Col>
             </Row>
-          </Card.Body>
-        </Card>
-        {/* <div className="review-separator"></div>
+          
+        <div className="review-separator"></div>
         <div className="reviews">
-          {sampleReviews
-            .filter((reviewItem) => reviewItem.restaurantId === restaurant.id)
+          
+          {reviews
+            .filter((reviewItem) => reviewItem.RestaurantID === restaurant.id)
             .map((reviewItem) => (
               <div key={reviewItem.id} className="review">
-                <p className="review-text">{reviewItem.text}</p>
-                <p className="review-user">- {reviewItem.user}</p>
+                <p className="review-text">{reviewItem.ReviewText}</p>
+                <div className="rating-stars">
+                {[...Array(5)].map((_, index) => {
+                  const filledStar = index < reviewItem.Rating;
+
+                  return (
+                    <i
+                      key={index}
+                      className={`fa${filledStar ? "s" : "r"} fa-star`}
+                      style={{ color: filledStar ? "gold" : "lightgray" }}
+                    ></i>
+                  );
+                })}
+              </div>
+                <p className="review-user">Reviewed on {reviewItem.ReviewDate} by {reviewItem.first_name} {reviewItem.last_name}</p>
               </div>
             ))}
-        </div> */}
+        </div></Card.Body>
+        </Card>
       </Col>
     ))}
 </Row>

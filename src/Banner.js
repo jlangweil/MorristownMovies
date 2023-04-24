@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import UserProfileIcon from './components/UserProfile/UserProfileIcon';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
 function Banner({ onButtonClick }) {
@@ -9,7 +9,7 @@ function Banner({ onButtonClick }) {
   const { currentUser, logout } = useAuth();
   const loggedIn = currentUser !== null;
   const navigate = useNavigate();
-  
+ 
 
   const handleLogout = async () => {
     await logout();
@@ -17,6 +17,7 @@ function Banner({ onButtonClick }) {
   };
 
   return (
+    <>
     <Container fluid>
       <Row className="align-items-center">
         <Col xl={2} className="text-end">
@@ -29,7 +30,10 @@ function Banner({ onButtonClick }) {
             </Link>
         </div>
         </Col>
-        <Col xl={2} className="d-flex justify-content-xl-end justify-content-center">
+        {/* <Col xl={2} className="text-end">
+         
+        </Col> */}
+        {/* <Col xl={2} className="d-flex justify-content-xl-end justify-content-center">
           <div className="auth-buttons d-flex align-items-center">
             {loggedIn && (
               <UserProfileIcon initial={currentUser[0]} />
@@ -45,13 +49,54 @@ function Banner({ onButtonClick }) {
             >
               {loggedIn ? 'Logout' : 'Login'}
             </Button>
-            <Button className="hamburger" onClick={onButtonClick}>
-              &#9776;
-            </Button>
+            
           </div>
-        </Col>
+        </Col> */}
       </Row>
+      <Row className="d-none d-xl-flex bg-darkred py-2">
+  <Col className="text-center">
+    <NavLink exact to="/" className="menu-link">Home</NavLink>
+  </Col>
+  <Col className="text-center">
+    <NavLink exact to="/events" className="menu-link">Events</NavLink>
+  </Col>
+  <Col className="text-center">
+    <NavLink exact to="/reviews" className="menu-link">Reviews</NavLink>
+  </Col>
+  <Col className="text-center">
+    <NavLink exact to="/blog" className="menu-link">Blog</NavLink>
+  </Col>
+  <Col className="text-center">
+    <NavLink exact to="/food" className="menu-link">Restaurants</NavLink>
+  </Col>
+  <Col className="text-center">
+    <NavLink exact to="/gallery" className="menu-link">Gallery</NavLink>
+  </Col>
+</Row>
+
+
     </Container>
+    <div className="auth-buttons pinned-hamburger">
+    {loggedIn && (
+              <UserProfileIcon initial={currentUser[0]} />
+            )}
+            {!loggedIn && (
+              <Link to="/signup">
+                <Button variant="primary" className="responsive-text">Sign Up</Button>
+              </Link>
+            )}
+            <Button
+              variant="secondary"
+              onClick={loggedIn ? handleLogout : () => navigate('/login')}
+            >
+              {loggedIn ? 'Logout' : 'Login'}
+            </Button>
+            <Button className="hamburger" onClick={onButtonClick}>
+    &#9776;
+  </Button>
+    </div>
+    
+  </>
   );
 }
 export default Banner;

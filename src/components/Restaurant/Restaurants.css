@@ -1,7 +1,7 @@
 .restaurants-container {
     background-color: #222;
     padding: 2rem;
-    min-height: 1000px;
+    min-height: 1200px;
   }
 
   
@@ -15,8 +15,9 @@
     margin: 0 auto;
     overflow-x: hidden;
     justify-content: space-between;
-    max-width: 100%; /* Ensures that the movie review does not overflow its container */
+    max-width: 100%; /* Ensures that the  review does not overflow its container */
     word-wrap: break-word; /* Prevent long words from overflowing */
+    margin-bottom: 1rem;
   }
   
    
@@ -24,20 +25,21 @@
     font-size: 1.5rem;
     color: #FFD700;
     margin-bottom: 0;
+    font-weight: bold;
   }
   
   .review-separator {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
+    margin-top: 0.5rem;
   }
   
   .review {
-    font-size: 1rem;
-    color: #ddd;
+    font-size: 1.1rem;
+    color: #FFEF99;
     margin-bottom: 2rem;
-   
   }
-
+  
   .restaurant-info {
     display: flex;
     flex-direction: column;
@@ -47,6 +49,7 @@
   
   .restaurant-address {
     font-size: 1rem;
+    font-weight: bold;
     color: #aaa;
     margin-bottom: 0;
     align-self: flex-end;
@@ -137,10 +140,10 @@
 /* Restaurants.css */
 
 @media (max-width: 767px) {
-  .add-review-button {
+/*   .add-review-button {
     font-size: 14px;
   }
-
+ */
   .restaurant-name {
     font-size: 18px;
   }
