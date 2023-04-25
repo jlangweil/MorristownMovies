@@ -6,7 +6,6 @@ import MovieQuote from './MovieQuote';
 import meetupImage from './images/logo.jpg';
 import catsImage from './images/cats.jpg';
 import Latest from './Latest';
-import Blog from './components/Blog/Blog';
 import { Link } from 'react-router-dom';
 
 const Home = () => {

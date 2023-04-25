@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import './Latest.css';
-import { Container, Row, Col, Button, Modal, Spinner } from 'react-bootstrap';
+import { Container, Row, Col, Button, Modal, Spinner, Card } from 'react-bootstrap';
 import DOMPurify from 'dompurify';
 import blogTitle from './images/blog.JPG';
 import { Link } from 'react-router-dom';
@@ -10,6 +10,7 @@ const Latest = () => {
   const [review, setReview] = useState(null);
   const [loading, setLoading] = useState(true);
   const [blogPost, setBlogPost] = useState(null);
+  const [foodPost, setFoodPost] = useState(null);
   const [error, setError] = useState(null);
 
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -20,17 +21,6 @@ const Latest = () => {
     return <p dangerouslySetInnerHTML={{ __html: sanitizedHTML }}></p>;
   };
 
-  const fetchLatestReview = useCallback(async () => {
-    try {
-      const response = await axios.get(`${apiUrl}/latestreview`);
-      setReview(response.data);
-      setLoading(false);
-    } catch (error) {
-      setError(error);
-      setLoading(false);
-    }
-  }, []);
-
   const fetchLatestContent = useCallback(async () => {
     try {
       const reviewResponse = await axios.get(`${apiUrl}/latestreview`);
@@ -38,6 +28,9 @@ const Latest = () => {
 
       const blogResponse = await axios.get(`${apiUrl}/latestblog`);
       setBlogPost(blogResponse.data);
+
+      const foodResponse = await axios.get(`${apiUrl}/latestreview?type=food`);
+      setFoodPost(foodResponse.data);
 
       setLoading(false);
     } catch (error) {
@@ -64,17 +57,13 @@ const Latest = () => {
 
   return (
     <>
-      {/* <Container>
-        <Row className="justify-content-center"> 
-          <Col lg={12}>  */}
-            <div className="justify-content-center">
-            <br/><br/><br/><br/><center><h3>Latest Reviews and News:</h3></center><br/>
+        <div className="justify-content-center">
+           <br/><br/><br/><br/><center><h3>Latest Reviews and News:</h3></center><br/><br/>
             </div>
-          {/* </Col>
-        </Row>
-        <Row className="justify-content-center">
-          <Col lg={12}> */}
             {review && (
+              <>
+              <center><i class="fa fa-film fa-xl"></i></center>
+              <br/>
               <Link to="/reviews" className="no-underline">
                 <div className="latest-movie-review" key={review.id}>
                   <h2 className="latest-movie-name">{review.MovieName}</h2>
@@ -91,21 +80,70 @@ const Latest = () => {
                   </div>
                 </div>
               </Link>
+              </>
             )}
-          {/* </Col>
-        </Row>
-      </Container> */}<br/><br/>
+      <br/><br/><br/>
+
+      {foodPost && (
+      <>
+      <center><i class="fa fa-utensils fa-xl"></i></center>
+      <br/>            
+      <div className="latest-movie-review">
+      <Link to="/food" className="no-underline">
+            <Row > 
+              <Col xs={10}>
+                <h3 className="restaurant-name">
+                  {foodPost.RestaurantName}
+                </h3>
+              </Col>
+              {foodPost.cuisine && (
+                <Col xs={2} className="d-flex justify-content-end">
+                  <img
+                    src={`https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/${foodPost.cuisine.toLowerCase()}.svg`}
+                    alt={`${foodPost.cuisine.toUpperCase()} Flag`}
+                    width="24"
+                    height="18"
+                  />
+                </Col>
+              )}
+            </Row>
+            <Row>
+              <Col xs={12}>
+                <p className="restaurant-address">
+                  {foodPost.StreetAddress}
+                </p>
+              </Col>
+            </Row>
+          
+        <div className="review-separator"></div>
+        <div className="review">
+        <p className="review-text">{foodPost.ReviewText}</p>
+          <div className="rating-stars">
+          {[...Array(5)].map((_, index) => {
+                  const filledStar = index < foodPost.Rating;
+
+                  return (
+                    <i
+                      key={index}
+                      className={`fa${filledStar ? "s" : "r"} fa-star`}
+                      style={{ color: filledStar ? "gold" : "lightgray" }}
+                    ></i>
+                  );
+                })}
+          </div>
+          <p className="review-user">Reviewed on {foodPost.ReviewDate} by {foodPost.first_name} {foodPost.last_name}</p>
+        </div>
+        </Link>
+        </div>
+        <br/><br/><br/>
+        </>
+      )}
+        
       <div>
-        {/* <Container className="blogPage">
-            <Row className="justify-content-center"> */}
-              <Link to="/blog" className="no-underline">
-                {/* <Col lg={12}> */}
-                <center><img src={blogTitle} alt="Morristown Movie Blog" className="blogPage-title"/></center>
-                {/* </Col> */}
-              </Link>
-            {/* </Row>
-            
-        </Container> */}<br/>
+        {/* <Link to="/blog" className="no-underline">
+          <center><img src={blogTitle} alt="Morristown Movie Blog" className="blogPage-title"/></center>
+        </Link>
+        <br/> */}
         {loading ? (
       <center>
         <Spinner animation="border" role="status" />
@@ -113,13 +151,16 @@ const Latest = () => {
     ) : (
       <div>
         {blogPost && (
+          <>
+          <center><i class="fa-solid fa-newspaper fa-xl"></i></center>
+          <br/> 
           <Link to="/blog" className="no-underline">
           <div key={blogPost.id} className="blogPage-post no-underline">
             <SafeHTML html={blogPost.BlogPost} />
             <p><i>Posted by: {blogPost.BlogAuthor} on {new Date(blogPost.BlogDateTime).toLocaleString()}</i></p>
           </div><br/><br/><br/>
           </Link>
-          
+          </>
         )}
       </div>
     )}
