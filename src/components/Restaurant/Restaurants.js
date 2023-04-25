@@ -55,6 +55,10 @@ const handleRestaurantNameFilterChange = (newValue) => {
       setRestaurantBeingReviewed(selectedRestaurant);
     } else {
       setRestaurantBeingReviewed({ RestaurantName: newValue.value });
+      //simulate clicking review here
+      if (currentUser) {
+        setShowReview(true);
+      }
     }
   } else {
     // Handle the case when the input is empty or null

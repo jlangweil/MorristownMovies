@@ -62,11 +62,9 @@ const Latest = () => {
             </div>
             {review && (
               <>
-              <center><i class="fa fa-film fa-xl"></i></center>
-              <br/>
               <Link to="/reviews" className="no-underline">
                 <div className="latest-movie-review" key={review.id}>
-                  <h2 className="latest-movie-name">{review.MovieName}</h2>
+                  <h2 className="latest-movie-name"><i class="fa fa-film fa-lg"/>&nbsp;&nbsp;{review.MovieName}</h2>
                   <p className="latest-review-text">{review.ReviewText}</p>
                   <p className="latest-user-name">Reviewed by {review.UserName}</p>
                   <p className="latest-review-date">Date: {review.DateOfReview}</p>
@@ -85,15 +83,13 @@ const Latest = () => {
       <br/><br/><br/>
 
       {foodPost && (
-      <>
-      <center><i class="fa fa-utensils fa-xl"></i></center>
-      <br/>            
+      <>     
       <div className="latest-movie-review">
       <Link to="/food" className="no-underline">
             <Row > 
               <Col xs={10}>
                 <h3 className="restaurant-name">
-                  {foodPost.RestaurantName}
+                <i class="fa fa-utensils fa-lg"></i>&nbsp;&nbsp;{foodPost.RestaurantName}
                 </h3>
               </Col>
               {foodPost.cuisine && (
@@ -101,8 +97,8 @@ const Latest = () => {
                   <img
                     src={`https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/${foodPost.cuisine.toLowerCase()}.svg`}
                     alt={`${foodPost.cuisine.toUpperCase()} Flag`}
-                    width="24"
-                    height="18"
+                    width="32"
+                    height="24"
                   />
                 </Col>
               )}
@@ -152,8 +148,6 @@ const Latest = () => {
       <div>
         {blogPost && (
           <>
-          <center><i class="fa-solid fa-newspaper fa-xl"></i></center>
-          <br/> 
           <Link to="/blog" className="no-underline">
           <div key={blogPost.id} className="blogPage-post no-underline">
             <SafeHTML html={blogPost.BlogPost} />

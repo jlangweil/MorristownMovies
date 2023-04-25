@@ -24,7 +24,7 @@ const testimonials = [
 const Testimonial = () => {
     return (
             <>
-            <br/ ><br/ ><center><h4>What others are saying:</h4><br/></center>
+            <br/ ><br/ ><center><h4>What others are saying:</h4></center>
               <div className="testimonial-carousel">
                 <Carousel autoPlay infiniteLoop interval={5000} showStatus={false} showThumbs={false} showIndicators={false}>
                   {testimonials.map((testimonial, index) => (

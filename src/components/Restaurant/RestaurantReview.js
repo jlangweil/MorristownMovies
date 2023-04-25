@@ -178,6 +178,14 @@ function RestaurantReview(props) {
       setNewRestaurant(false);
     }
   }, [props.restaurantBeingReviewed.RestaurantName]);
+
+  useEffect(() => {
+    if (addressOptions.length > 0) {
+      setSelectedAddress(addressOptions[0]);
+    } else {
+      setSelectedAddress(null);
+    }
+  }, [addressOptions]);
   
   
   
