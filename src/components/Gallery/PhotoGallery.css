@@ -4,3 +4,30 @@
     margin-bottom: 35px;
   }
   
+  .pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .page-item {
+    margin: 0 5px;
+  }
+  
+  .page-link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .page-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  
+  .active .page-link {
+    color: #ccc;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  

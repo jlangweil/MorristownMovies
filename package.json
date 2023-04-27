@@ -1,7 +1,6 @@
 {
   "name": "morristown-movie-meetup",
   "version": "0.1.0",
-  "proxy": "https://nominatim.openstreetmap.org",
   "private": true,
   "dependencies": {
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
@@ -28,6 +27,7 @@
     "react-images": "^1.2.0-beta.7",
     "react-infinite-scroll-component": "^6.1.0",
     "react-leaflet": "^4.2.1",
+    "react-paginate": "^8.2.0",
     "react-photo-gallery": "^8.0.0",
     "react-quill": "^2.0.0",
     "react-responsive-carousel": "^3.2.23",

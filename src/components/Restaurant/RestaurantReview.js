@@ -179,13 +179,13 @@ function RestaurantReview(props) {
     }
   }, [props.restaurantBeingReviewed.RestaurantName]);
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (addressOptions.length > 0) {
       setSelectedAddress(addressOptions[0]);
     } else {
       setSelectedAddress(null);
     }
-  }, [addressOptions]);
+  }, [addressOptions]); */
   
   
   
@@ -273,7 +273,7 @@ function RestaurantReview(props) {
                 <Creatable
                     value={selectedAddress}
                     options={addressOptions}
-                    placeholder="Enter or select closest address"
+                    placeholder="Enter or Select closest address"
                     onChange={handleAddressChange}
                     styles={customStyles} 
                     isLoading={isLoadingAddresses}

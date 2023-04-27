@@ -6,6 +6,7 @@ import { Spinner } from 'react-bootstrap';
 import ImageUpload from './ImageUpload';
 import './PhotoGallery.css';
 import { useAuth } from '../../AuthContext';
+import ReactPaginate from 'react-paginate';
 
 const PhotoGallery = () => {
   const [images, setImages] = useState([]);
@@ -13,10 +14,13 @@ const PhotoGallery = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const [loading, setLoading] = useState(true);
   const { currentUser } = useAuth();
+  const [currentPage, setCurrentPage] = useState(0);
+  const imagesPerPage = 8;
+
 
   const fetchImages = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/images`, {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/images?page=1&imagesPerPage=10`, {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
         }
@@ -78,11 +82,28 @@ const PhotoGallery = () => {
       { loading && (
         <center><Spinner animation="border" role="status"/></center>
       )}
-      <Gallery photos={images} onClick={openLightbox} />
+      <Gallery 
+        photos={images.slice(    currentPage * imagesPerPage, (currentPage + 1) * imagesPerPage)} onClick={openLightbox} />
       <br />
       { currentUser && (
       <center><ImageUpload onImageUpload={onImageUpload} /></center>
       )}
+      <ReactPaginate
+        previousLabel={"← Previous"}
+        nextLabel={"Next →"}
+        pageCount={Math.ceil(images.length / imagesPerPage)}
+        onPageChange={({ selected }) => setCurrentPage(selected)}
+        containerClassName={"pagination"}
+        pageClassName={"page-item"}
+        pageLinkClassName={"page-link"}
+        activeClassName={"active"}
+        previousClassName={"page-item"}
+        nextClassName={"page-item"}
+        previousLinkClassName={"page-link"}
+        nextLinkClassName={"page-link"}
+        breakClassName={"page-item"}
+        breakLinkClassName={"page-link"}
+      />
       <ModalGateway>
         {lightboxIsOpen && (
           <Modal onClose={closeLightbox}>
