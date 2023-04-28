@@ -66,7 +66,7 @@ const SignUp = () => {
         to: formData.email,
         templateId: 'd-a2094920100f4bd8a72cf78fe567a365',
         dynamicData: {
-        Weblink: 'https://morristownmovies.com/verify/?email=' + formData.email + '&token=' + response.data.token, 
+        Weblink: 'https://morristownmovies.com/verify?email=' + formData.email + '&token=' + response.data.token, 
         },
     }, {
     headers: {
