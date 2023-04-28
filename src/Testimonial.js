@@ -9,15 +9,15 @@ import UserProfileIcon from './components/UserProfile/UserProfileIcon';
 const testimonials = [
   {
     text: 'This group is fantastic! I made so many new friends.',
-    author: 'John Doe',
+    author: 'Josh Langweil',
   },
   {
     text: 'I love the movie nights and discussions afterward.',
-    author: 'Jane Smith',
+    author: 'Anonymous',
   },
   {
     text: 'Great way to explore new restaurants and enjoy movies with like-minded people.',
-    author: 'Michael Johnson',
+    author: 'Anonymous',
   },
 ];
 

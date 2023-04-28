@@ -45,8 +45,6 @@ const Login = () => {
     try {
       const requestUrl = `${apiUrl}/users?email=${email}`;
 
-      console.log('Request URL:', requestUrl);
-
       const response = await axios.get(requestUrl, {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
@@ -80,9 +78,12 @@ const Login = () => {
         setErrorMessage('E-mail or password is incorrect.');
       }
     } catch (error) {
-      console.error(error);
-  
-      setErrorMessage('E-mail or password is incorrect.');
+      if (error.response && error.response.data) {
+        setErrorMessage(error.response.data); // Update the error message with the server response
+      } else {
+        setErrorMessage('E-mail or password is incorrect.');
+      }
+     
     }
   };
 

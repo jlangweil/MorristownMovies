@@ -1,27 +1,37 @@
-/* This will be used to verify a user's email by checking their UUID
-1.  First a message will  be displayed informing them that an email has been sent 
-2.  Send the email
-3.  Link will contain api link */
-
 // Verify.js
-/* 
+
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-function Verify({ location }) {
+const apiUrl = process.env.REACT_APP_API_URL;
+
+function Verify() {
+  const location = useLocation();
+  const token = new URLSearchParams(location.search).get('token');  
+  const email = new URLSearchParams(location.search).get('email');  
   const [message, setMessage] = useState('');
 
   useEffect(() => {
     const verifyUser = async () => {
-      const token = new URLSearchParams(location.search).get('token');
-      if (!token) {
-        setMessage('Invalid or missing token');
+
+      if (!token || !email) {
+        setMessage('Invalid link.');  //give option to send link again
         return;
       }
 
       try {
-        const response = await axios.get(`https://your-api-domain.com/api/verifyToken?token=${token}`);
-        setMessage(response.data.message);
+        const response = await axios.put(`${apiUrl}/users`, {
+            email: email,
+            token: token,
+          }, {
+            headers: {
+              Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+            },
+          });
+          
+
+        setMessage('Thank you for verifying your email! Please click the login button to continue.');
       } catch (error) {
         setMessage('Verification failed');
       }
@@ -32,9 +42,29 @@ function Verify({ location }) {
 
   return (
     <div>
-      <h2>{message}</h2>
+      <h3>{message}</h3>
     </div>
   );
 }
 
-export default Verify; */
+export default Verify;
+/* Replace your-api-domain.com with your Vercel API domain.
+
+Add a route in your frontend app (e.g., in App.js):
+javascript
+Copy code
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Verify from './Verify';
+
+function App() {
+  return (
+    <Router>
+      <Switch>
+        <Route path="/verify" component={Verify} />
+      </Switch>
+    </Router>
+  );
+}
+
+export default App;
+This setup will direct the user to your main app domain when they click the verification link in the email. The frontend app will then communicate with the Vercel serverless API to verify the UUID token and update the user's status accordingly. */

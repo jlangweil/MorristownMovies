@@ -60,7 +60,21 @@ const SignUp = () => {
       //console.log(response.data);
   
       // Handle success, e.g., navigate to the next page, display a success message, etc.
-      navigate('/login');
+
+      // Send email after successful registration
+    const emailResponse = await axios.post(`${apiUrl}/email`, {
+        to: formData.email,
+        templateId: 'd-a2094920100f4bd8a72cf78fe567a365',
+        dynamicData: {
+        Weblink: 'https://morristownmovies.com/verify/?email=' + formData.email + '&token=' + response.data.token, 
+        },
+    }, {
+    headers: {
+    Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+    },
+    });
+
+      navigate('/register');
     } catch (error) {
       console.error(error);
   
