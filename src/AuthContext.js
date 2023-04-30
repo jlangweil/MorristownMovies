@@ -12,20 +12,33 @@ export const AuthProvider = ({ children }) => {
   const [userEmail, setUserEmail] = useState(null);
   const [userId, setUserId] = useState(null);
   const [sessionTimeout, setSessionTimeout] = useState(null);
+  const [city, setCity] = useState(null);
+  const [state, setState] = useState(null);
+  const [pic, setPic] = useState(null);
 
   const login = (userData) => {
     const userName = userData.first_name + ' ' + userData.last_name;
     setCurrentUser(userName);
     setUserEmail(userData.email);
     setUserId(userData.id);
-    setSessionTimeout(Date.now() + 15 * 60 * 1000); // 15 minutes
+    setCity(userData.city);
+    setState(userData.state);
+    setPic(userData.pic);
+    setSessionTimeout(Date.now() + 30 * 60 * 1000); // 30 minutes
+  };
+
+  const updatePic = (newPic) => {
+    setPic(newPic);
   };
 
   const logout = () => {
     setCurrentUser(null);
     setUserEmail(null);
     setUserId(null);
+    setState(null);
+    setCity(null);
     clearTimeout(sessionTimeout);
+    setPic(null);
   };
 
   useEffect(() => {
@@ -50,6 +63,10 @@ export const AuthProvider = ({ children }) => {
     currentUser,
     userEmail,
     userId,
+    pic,
+    city,
+    state,
+    updatePic,
     login,
     logout,
   };

@@ -78,7 +78,7 @@ function Banner({ onButtonClick }) {
     </Container>
     <div className="auth-buttons pinned-hamburger">
     {loggedIn && (
-              <UserProfileIcon initial={currentUser[0]} />
+              <Link to="/user"><UserProfileIcon initial={currentUser[0]} /></Link>
             )}
             {!loggedIn && (
               <Link to="/signup">

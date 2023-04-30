@@ -14,6 +14,7 @@ import SignUpVerification from './components/SignUp/SignUpVerification';
 import PhotoGallery from './components/Gallery/PhotoGallery';
 import Restaurants from './components/Restaurant/Restaurants';
 import Verify from './components/Login/Verify';
+import UserProfile from './components/UserProfile/UserProfile';
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -60,6 +61,7 @@ function App() {
                 <Route path="/food" element={<Restaurants />} />
                 <Route path="/verify" element={<Verify />} />
                 <Route path="/register" element={<SignUpVerification />} />
+                <Route path="/user" element={<UserProfile />} />
               </Routes>
             </main>
 

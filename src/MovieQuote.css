@@ -1,10 +1,10 @@
 .movie-quote-container {
     padding: 1.5rem;
-    margin-top: 2rem;
+    margin-top: 4rem;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
 
   }
   
@@ -25,13 +25,14 @@
   
   .movie-quote-details {
     color: #ccc;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     text-align: right;
     font-style: italic;
   }
   
   .movie-quote-details p {
     margin: 0;
+    margin-top: -40px;
   }
   
   .movie-quote-details p:before {

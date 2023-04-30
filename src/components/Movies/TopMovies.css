@@ -1,0 +1,28 @@
+  .top-movies {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .top-movie-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+    
+  /* Padding for small screens (1-2-2 configuration) */
+  @media (max-width: 768px) {
+    .top-movie-col {
+      margin-bottom: 20px;
+    }
+  }
+  
+  
+  
+ 
+ 
+  
+  

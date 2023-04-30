@@ -61,7 +61,10 @@ const Login = () => {
         if (passwordMatches) {
           // Set the logged in user details
           login(user);
-          console.log("Welcome ", currentUser);
+          setTimeout(() => {
+            window.scroll(0, 0);
+          }, 100);
+          
           // Redirect the user to the desired page after successful login
           navigate('/');
           
@@ -86,13 +89,6 @@ const Login = () => {
      
     }
   };
-
-  useEffect(() => {
-    console.log('Current User:', currentUser);
-    console.log('User Email:', userEmail);
-  }, [currentUser, userEmail]);
-  
-  
 
   return (
     <div className="login-section">

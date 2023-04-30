@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
+import { FaMeetup } from 'react-icons/fa';
 import './Home.css';
 import Testimonial from './Testimonial';
 import MovieQuote from './MovieQuote';
 import meetupImage from './images/logo.jpg';
 import catsImage from './images/cats.jpg';
 import Latest from './Latest';
+import TopMovies from './components/Movies/TopMovies';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
@@ -35,9 +37,12 @@ const Home = () => {
 
        <Row className="justify-content-center">
         <Col xs="auto">
-          <Button variant="primary" onClick={handleClick}>
-            Join Meetup!
+          <center><Link to="/signup"><Button variant="primary">
+            Register
+          </Button></Link>&nbsp;&nbsp;&nbsp;<Button variant="primary" style={{backgroundColor:'red'}} onClick={handleClick}>
+            Join Meetup! <FaMeetup/>
           </Button>
+          </center>
         </Col>
       </Row>
 
@@ -50,6 +55,8 @@ const Home = () => {
                 </div>
             </Col>
         </Row>
+        
+        <TopMovies/>
 
         <Row className="justify-content-center">
           <Col lg={8}>

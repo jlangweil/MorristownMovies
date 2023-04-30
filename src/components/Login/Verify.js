@@ -41,7 +41,7 @@ function Verify() {
   }, [location.search]);
 
   return (
-    <div>
+    <div align="center">
       <h3>{message}</h3>
     </div>
   );
