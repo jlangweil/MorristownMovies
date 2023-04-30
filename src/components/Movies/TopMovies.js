@@ -4,12 +4,13 @@ import { Container, Row, Col } from 'react-bootstrap';
 import './TopMovies.css';
 
 const TopMovies = () => {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const [topMovies, setTopMovies] = useState([]);
 
   useEffect(() => {
     const fetchTopMovies = async () => {
       try {
-        const response = await axios.get('http://192.168.50.136:4000/api/movies?topMovies=true');
+        const response = await axios.get(`${apiUrl}/movies?topMovies=true`);
         setTopMovies(response.data);
       } catch (error) {
         console.error('Error fetching top movies:', error);
