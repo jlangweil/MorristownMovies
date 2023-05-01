@@ -1,45 +1,73 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import cheerio from 'cheerio';
+import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './Events.css';
 
-/* const fetchEvents = async (setEvents) => {
-    const meetupUrl = 'https://api.meetup.com/YOUR_MEETUP_GROUP/events'; // Replace 'YOUR_MEETUP_GROUP' with your Meetup group's URL name
-    const apiKey = 'YOUR_MEETUP_API_KEY'; // Replace with your Meetup API key
-  
-    try {
-      const response = await axios.get(`${meetupUrl}?key=${apiKey}&status=upcoming&page=50`);
-      const fetchedEvents = response.data.map((event) => ({
-        title: event.name,
-        start: new Date(event.time),
-        end: new Date(event.time + event.duration),
-        url: event.link,
-      }));
-  
-      setEvents(fetchedEvents);
-    } catch (error) {
-      console.error('Error fetching events:', error);
-    }
-  }; */
 
 const Events = () => {
-    // const [events, setEvents] = useState([]);
+    const [events, setEvents] = useState([]);
+    const [transformedEvents, setTransformedEvents] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const localizer = momentLocalizer(moment);
-  
-    // useEffect(() => {
-    //   fetchEvents(setEvents);
-    // }, []);
+    const apiUrl = process.env.REACT_APP_API_URL;
 
-    const [events, setEvents] = useState([
-        {
-          title: 'In Person Event',
-          start: new Date(), // Sets the event start time to the current date and time
-          end: new Date(new Date().getTime() + 60 * 60 * 1000), // Sets the event end time to one hour after the start time
-        },
-      ]);
-      
+    const fetchMeetupEvents = async (url) => {
+      try {
+        const response = await axios.get(url);
+        const html = response.data;
+    
+        const $ = cheerio.load(html);
+    
+        const events = [];
+    
+        // Update this selector based on the HTML structure of the specific Meetup group page.
+        $('div.eventCard--link').each((_, element) => {
+          const title = $(element).find('div.eventCardHead--title').text().trim();
+          const date = $(element).find('div.eventTimeDisplay-startDate').text().trim();
+          const time = $(element).find('div.eventTimeDisplay-startTime').text().trim();
+    
+          events.push({ title, date, time });
+        });
+    
+        return events;
+      } catch (error) {
+        console.error('Error fetching Meetup events:', error);
+        return [];
+      }
+    };
+  
+    useEffect(() => {
+      async function fetchEvents() {
+        try {
+          const response = await axios.get(`${apiUrl}/events`);
+          setEvents(response.data);
+        } catch (error) {
+          console.error('Error fetching events:', error);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    
+      fetchEvents();
+    }, []);
+    
+    useEffect(() => {
+      setTransformedEvents(
+        events.map((event) => {
+          return {
+            title: event.name,
+            start: new Date(event.startDate),
+            end: new Date(event.endDate),
+            url: event.url,
+          };
+        })
+      );
+    }, [events]);
+          
   
     const eventStyleGetter = (event) => {
       const backgroundColor = '#3f51b5';
@@ -57,19 +85,67 @@ const Events = () => {
     };
   
     return (
-      <div style={{ height: '550px'}}>
-        <Calendar
-          localizer={localizer}
-          events={events}
-          startAccessor="start"
-          endAccessor="end"
-          style={{ height: '100%' }}
-          eventPropGetter={eventStyleGetter}
-          onSelectEvent={(event) => {
-            window.open(event.url, '_blank');
-          }}
-        />
-      </div>
+
+      <>
+       <h1>Upcoming Meetup Events</h1>
+      <Row className="justify-content-center">
+      {isLoading ? (
+      <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </Spinner>
+       ) : (
+      events.map((event) => {
+          const startDate = new Date(event.startDate);
+          const dateString = startDate.toLocaleDateString();
+          const timeString = startDate.toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+          });
+          const shortDescription =
+            event.description.length > 200
+              ? event.description.slice(0, 200) + '...'
+              : event.description;
+
+          return (
+            <Col xs={12} xl={5} key={event.url} className="event-item">
+              <h2 className="event-title">{event.name}</h2>
+              <p className="event-date-time">
+                {dateString} @ {timeString}
+              </p>
+              <p className="event-description">{shortDescription}</p>
+              <Button
+                href={event.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="primary"
+                className="event-button"
+              > 
+                View Event Details
+              </Button>
+                    </Col>
+          );
+        })
+      )}
+      </Row>
+      <Row className="justify-content-center">
+        <Col xs={12}>
+          <div className="calendar-container">
+          <Calendar
+            localizer={localizer}
+            events={transformedEvents}
+            startAccessor="start"
+            endAccessor="end"
+            style={{ height: '650px', width: '650px', margin: '0 auto' }}
+            eventPropGetter={eventStyleGetter}
+            onSelectEvent={(event) => {
+              window.open(event.url, '_blank');
+            }}
+          />
+          </div>
+        </Col>
+      </Row>
+
+      </>
     );
   };
   

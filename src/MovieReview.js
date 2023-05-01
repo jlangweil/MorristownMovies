@@ -30,7 +30,7 @@ const MovieReview = () => {
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [reviewIdToDelete, setReviewIdToDelete] = useState(null);
     const [showEditReviewModal, setShowEditReviewModal] = useState(false);
-
+    const [reviewToEdit, setReviewToEdit] = useState(null);
 
     const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -39,17 +39,6 @@ const MovieReview = () => {
 
     const navigate = useNavigate();
 
-    //testing
-    const sampleReviewToEdit = {
-      _id: "60a8c34250e5a623d8a12345",
-      MovieName: "The Shawshank Redemption",
-      ReviewText: "A masterpiece! A must-watch movie with great storytelling and incredible performances.",
-      UserName: "johndoe",
-      DateOfReview: "2022-07-15T12:05:42.000Z",
-      Rating: 5,
-    };
-    const [reviewToEdit, setReviewToEdit] = useState(sampleReviewToEdit);
-    
     const handleEditReviewClick = (review) => {
       setReviewToEdit(review);
       toggleEditReviewModal();

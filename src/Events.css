@@ -1,55 +1,110 @@
-.rbc-calendar {
-  background-color: #2c2c2c; /* dark gray background color */
-  border: 3px solid #3f51b5;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-  
-/* Style for calendar events */
-.rbc-event {
-  background-color: #3f51b5;
-  border: 1px solid #2c2c2c;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-  .rbc-calendar,
-.rbc-calendar * {
-  color: #f5f5f5; /* light gray text color */
-  font-weight: bold; /* bold text */
-}
-
-/* Style for header buttons */
+/* Style the buttons */
 .rbc-btn-group button {
-  color: #f5f5f5; /* light gray text color */
+  background-color: #4e88ff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin: 0 2px;
+  cursor: pointer;
 }
 
-/* Style for selected header buttons */
-.rbc-btn-group button.rbc-active {
-  color: #2c2c2c; /* dark gray text color */
+.rbc-toolbar-label {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
 }
 
-/* Style for selected date, today's date, and cells on hover */
-.rbc-day-bg.rbc-selected,
-.rbc-day-bg.rbc-today,
-.rbc-day-bg:hover {
-  color: #2c2c2c; /* dark gray text color */
+
+.rbc-btn-group button:hover {
+  background-color: #2f62ff;
 }
 
-/* Style for current day */
-.rbc-day-bg.rbc-today {
-  background-color: #161616; /* very light gray */
+/* Style the calendar cells */
+.rbc-day-bg {
+  background-color: #444;
 }
 
-/* Style for calendar events */
+.rbc-today {
+  background-color: #666;
+}
+
+.rbc-off-range-bg {
+  background-color: #333;
+}
+
+/* Style the calendar events */
 .rbc-event {
-  border: 1px solid white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  font-size: 0.8rem; /* adjust this value to achieve the desired font size */
-  white-space: normal; /* allow text to wrap */
-  text-overflow: clip; /* disable text truncating */
-  overflow: hidden; /* hide overflowing content */
-  word-break: break-word; /* break words if necessary to fit the content */
-  padding: 2px 4px; /* add padding for better readability */
-  height: 100%; /* set the height of the event box to fill the cell vertically */
+  background-color: #4e88ff;
+  color: #fff;
+  border-radius: 5px;
+  padding: 2px 5px;
+  cursor: pointer;
+}
+
+.rbc-event:hover {
+  background-color: #2f62ff;
+}
+
+.rbc-selected {
+  background-color: #2f62ff;
+}
+
+
+
+.events-container {
+  background-color: black;
+  color: white;
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+  
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.event-item {
+  background-color: #333;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 300px;
+}
+
+.event-title {
+  font-size: 2rem;
+  color: #e65100;
+  margin-bottom: 0.5rem;
+}
+
+.event-date-time {
+  font-weight: bold;
+  color: #42a5f5;
+  margin-bottom: 1rem;
+}
+
+.event-description {
+  white-space: pre-wrap;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.event-button {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
 }
