@@ -295,7 +295,7 @@ const customStyles = {
                   );
                 })}
               </div>
-                <p className="review-user">Reviewed on {reviewItem.ReviewDate} by {reviewItem.first_name} {reviewItem.last_name}</p>
+                <p className="review-user">Reviewed on {reviewItem.ReviewDate} by {reviewItem.first_name} {reviewItem.last_name[0]}</p>
               </div>
             ))}
         </div></Card.Body>

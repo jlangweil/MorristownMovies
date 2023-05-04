@@ -33,6 +33,7 @@ const MovieReview = () => {
     const [reviewToEdit, setReviewToEdit] = useState(null);
 
     const apiUrl = process.env.REACT_APP_API_URL;
+    //const apiUrl = 'http://localhost:4000/api';
 
     const { currentUser } = useAuth();
     const { userId } = useAuth();
@@ -234,7 +235,7 @@ const MovieReview = () => {
                     <div className="movie-review" key={review.id}>
                     <h2 className="movie-name">{review.MovieName}</h2>
                     <p className="review-text">{review.ReviewText}</p>
-                    <p className="user-name">Reviewed by {review.UserName}</p>
+                    <p className="user-name">Reviewed by {review.first_name} {review.last_name}</p>
                     <p className="review-date">Date: {review.DateOfReview}</p>
                     <div className="rating">
                     <div className="stars">

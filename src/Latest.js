@@ -66,7 +66,7 @@ const Latest = () => {
                 <div className="latest-movie-review" key={review.id}>
                   <h2 className="latest-movie-name"><i class="fa fa-film fa-lg"/>&nbsp;&nbsp;{review.MovieName}</h2>
                   <p className="latest-review-text">{review.ReviewText}</p>
-                  <p className="latest-user-name">Reviewed by {review.UserName}</p>
+                  <p className="latest-user-name">Reviewed by {review.first_name} {review.last_name}</p>
                   <p className="latest-review-date">Date: {review.DateOfReview}</p>
                   <div className="latest-rating">
                     {Array.from({ length: Math.floor(review.Rating) }, (_, index) => (
@@ -127,7 +127,7 @@ const Latest = () => {
                   );
                 })}
           </div>
-          <p className="review-user">Reviewed on {foodPost.ReviewDate} by {foodPost.first_name} {foodPost.last_name}</p>
+          <p className="review-user">Reviewed on {foodPost.ReviewDate} by {foodPost.first_name} {foodPost.last_name[0]}</p>
         </div>
         </Link>
         </div>
