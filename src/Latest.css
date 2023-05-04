@@ -25,6 +25,7 @@
     font-size: 1rem;
     margin-bottom: 0.5rem;
     color: #fff; /* Changed the text color to white */
+    white-space: pre-wrap;
   }
   
   .latest-user-name {
