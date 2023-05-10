@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Link, Outlet, Routes } from 'react-router-dom';
-import { FaHome, FaCalendar, FaStar, FaDiscord, FaNewspaper, FaMeetup, FaCamera, FaWineGlass } from 'react-icons/fa';
+import { FaHome, FaCalendar, FaStar, FaDiscord, FaNewspaper, FaMeetup, FaCamera, FaWineGlass, FaComments } from 'react-icons/fa';
 import './App.css';
 import Events from './Events';
 import Banner from './Banner';
@@ -15,6 +15,13 @@ import PhotoGallery from './components/Gallery/PhotoGallery';
 import Restaurants from './components/Restaurant/Restaurants';
 import Verify from './components/Login/Verify';
 import UserProfile from './components/UserProfile/UserProfile';
+import Members from './components/UserProfile/Members';
+import CategoryList from './components/Forum/CategoryList';
+import ThreadList from './components/Forum/ThreadList';
+import CreateThread from './components/Forum/CreateThread';
+import PostList from './components/Forum/PostList';
+import CreatePost from './components/Forum/CreatePost';
+
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -37,14 +44,17 @@ function App() {
             <Banner onButtonClick={toggleMenu} />
           </header>
           <nav className={`nav-links ${menuOpen ? 'show' : ''}`}>
-            <Link to="/" onClick={handleMenuClick}><FaHome />&nbsp;&nbsp;Home</Link>
-            <Link to="/events" onClick={handleMenuClick}><FaCalendar />&nbsp;&nbsp;Events</Link>
-            <Link to="/reviews" onClick={handleMenuClick}><FaStar />&nbsp;&nbsp;Movie Reviews</Link>
-            <Link to="/blog" onClick={handleMenuClick}><FaNewspaper />&nbsp;&nbsp;Blog</Link>
-            <Link to="/gallery" onClick={() => handleMenuClick('gallery')}><FaCamera />&nbsp;&nbsp;Gallery</Link>
-            <Link to="/food" onClick={() => handleMenuClick('food')}><FaWineGlass />&nbsp;&nbsp;Restaurants</Link>
-            <a href="https://discord.com/channels/964877736822837349/965064633704661042" target="_blank" rel="noopener noreferrer"><FaDiscord />&nbsp;&nbsp;Discord</a>
-            <a href="https://www.meetup.com/movies-594/" target="_blank" rel="noopener noreferrer"><FaMeetup />&nbsp;&nbsp;Meetup</a>
+            <Link to="/" onClick={handleMenuClick}>&nbsp;<FaHome />&nbsp;&nbsp;Home</Link>
+            <Link to="/events" onClick={handleMenuClick}>&nbsp;<FaCalendar />&nbsp;&nbsp;Events</Link>
+            <Link to="/reviews" onClick={handleMenuClick}>&nbsp;<FaStar />&nbsp;&nbsp;Movie Reviews</Link>
+            <Link to="/forum" onClick={() => handleMenuClick('forum')}>&nbsp;<FaComments />&nbsp;&nbsp;Forum</Link>
+            <Link to="/food" onClick={() => handleMenuClick('food')}>&nbsp;<FaWineGlass />&nbsp;&nbsp;Restaurants</Link>
+            <Link to="/blog" onClick={handleMenuClick}>&nbsp;<FaNewspaper />&nbsp;&nbsp;Blog</Link>
+            <Link to="/gallery" onClick={() => handleMenuClick('gallery')}>&nbsp;<FaCamera />&nbsp;&nbsp;Gallery</Link>
+            
+            
+            {/* <a href="https://discord.com/channels/964877736822837349/965064633704661042" target="_blank" rel="noopener noreferrer"><FaDiscord />&nbsp;&nbsp;Discord</a> */}
+            <a href="https://www.meetup.com/movies-594/" target="_blank" rel="noopener noreferrer">&nbsp;<FaMeetup />&nbsp;&nbsp;Meetup</a>
             {/* Add more links as needed */}
           </nav>
           
@@ -62,6 +72,12 @@ function App() {
                 <Route path="/verify" element={<Verify />} />
                 <Route path="/register" element={<SignUpVerification />} />
                 <Route path="/user" element={<UserProfile />} />
+                <Route path="/members" element={<Members />} />
+                <Route path="/forum" element={<CategoryList />} />
+                <Route path="/forum/threads/:categoryId" element={<ThreadList />} />
+                <Route path="/forum/create-thread/:categoryId" element={<CreateThread />} />
+                <Route path="/forum/posts/:threadId" element={<PostList />} />
+                <Route path="/forum/create-post/:threadId" element={<CreatePost />} />
               </Routes>
             </main>
 

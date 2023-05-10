@@ -1,0 +1,45 @@
+   .category-list {
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+  }
+  
+  .category-list h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .category-item {
+    background-color: #222831;
+    border: 1px solid #393e46;
+    border-radius: 4px;
+    padding: 2rem;
+    margin-bottom: 1rem;
+    
+  }
+  
+  .category-item h3 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .category-item p {
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+
+  .forum-header {
+    font-family: 'Playfair Display SC', serif;
+    color: white;
+    font-weight: bolder;
+    font-size: 3rem; /* change the font size to your desired size */
+    text-align: center; /* center the text */
+    margin-top: 0.5rem; /* add some top margin to space it from the container */
+    margin-bottom: 2rem;
+    background-image: linear-gradient(rgba(2, 124, 255, 0.6), rgba(14, 14, 255, 0.6)), url('../../images/forum.jpg');
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+  }
+  
+
+

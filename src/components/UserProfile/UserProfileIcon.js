@@ -2,17 +2,21 @@
 
 import React from 'react';
 import { useAuth } from '../../AuthContext';
-import styles from './UserProfileIcon.css';
+import './UserProfileIcon.css';
 
-const UserProfileIcon = ({ initial }) => {
+const UserProfileIcon = ({ initial, imageUrl, showArrow }) => {
 
   const { pic } = useAuth();
-  
+  const imageSrc = imageUrl || pic;
+  const wrapperClass = showArrow
+  ? 'profile-picture-wrapper profile-picture-wrapper-arrow'
+  : 'profile-picture-wrapper';
+
   return (
     <>
-    {pic ? (
-      <div class="profile-picture-wrapper">
-     <div className="profile-picture" style={{ backgroundImage: `url(${pic})` }}></div>
+    {imageSrc ? (
+      <div class={wrapperClass}>
+     <div className="profile-picture" style={{ backgroundImage: `url(${imageSrc})` }}></div>
     </div>
       
 

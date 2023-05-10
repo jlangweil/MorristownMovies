@@ -1,5 +1,6 @@
 // src/AuthContext.js
 import { useState, useEffect, createContext, useContext } from 'react';
+import useActivityListener from './useActivityListener';
 
 const AuthContext = createContext();
 
@@ -17,7 +18,7 @@ export const AuthProvider = ({ children }) => {
   const [pic, setPic] = useState(null);
 
   const login = (userData) => {
-    const userName = userData.first_name + ' ' + userData.last_name;
+    const userName = userData.first_name + ' ' + userData.last_name[0];
     setCurrentUser(userName);
     setUserEmail(userData.email);
     setUserId(userData.id);
@@ -26,6 +27,16 @@ export const AuthProvider = ({ children }) => {
     setPic(userData.pic);
     setSessionTimeout(Date.now() + 30 * 60 * 1000); // 30 minutes
   };
+
+  const resetSessionTimeout = () => {
+    setSessionTimeout(Date.now() + 30 * 60 * 1000); // 30 minutes
+  };
+
+  useActivityListener(
+    ['mousemove', 'keydown', 'mousedown'],
+    resetSessionTimeout,
+    [currentUser]
+  );
 
   const updatePic = (newPic) => {
     setPic(newPic);

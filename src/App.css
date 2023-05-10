@@ -97,7 +97,7 @@ body {
   background-color: #A02222;
   border-radius: 5px;
   padding: 10px;
-  display: flex; /* Add this to align text to the center */
+  
   justify-content: center; /* Add this to align text to the center */
   width: 100%; /* Set the button width to 100% */
   box-sizing: border-box; /* Add this to include padding in the button width */

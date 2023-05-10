@@ -1,6 +1,6 @@
 // UserProfile.js
 import React, { useState, useRef, useEffect } from 'react';
-import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import { Container, Row, Col, Button, Form, Spinner } from 'react-bootstrap';
 import { readAndCompressImage } from 'browser-image-resizer';
 import { BsUpload } from 'react-icons/bs';
 import { useAuth } from '../../AuthContext';
@@ -17,19 +17,21 @@ const UserProfile = () => {
   const [email, setEmail] = useState(userEmail || '');
   const [userCity, setUserCity] = useState(city || '');
   const [userState, setUserState] = useState(state || '');
-  
+  const [isUpdatingPic, setIsUpdatingPic] = useState(false);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const apiUrl = process.env.REACT_APP_API_URL;
-
+  console.log(pic);
 
   const handleFileChange = async (e) => {
+    
     const file = e.target.files[0];
     setSelectedFile(file);
-
+  
     if (file) {
+      setIsUpdatingPic(true);
       try {
         const config = {
           quality: 1.0,
@@ -41,39 +43,74 @@ const UserProfile = () => {
         const compressedImage = await readAndCompressImage(file, config);
         const reader = new FileReader();
         reader.readAsDataURL(compressedImage);
-        reader.onloadend = () => {
+        reader.onloadend = async () => {
           const base64 = reader.result;
           setBase64Image(base64);
+  
+          // Upload the compressed image to Cloudinary
+          const formData = new FormData();
+          formData.append('user_id', userId); // Replace `userId` with the actual user ID
+          formData.append('image', compressedImage);
+  
+          try {
+            const response = await axios.put(`${apiUrl}/images`, formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${process.env.REACT_APP_API_KEY}`, // Replace `API_AUTH_TOKEN` with your actual token
+              },
+            });
+  
+            // Check if the upload was successful
+            if (response.data && response.data.success) {
+              // Get the uploaded image URL from the response
+              const uploadedImageUrl = response.data.data.secure_url;
+              console.log(uploadedImageUrl);
+  
+              // Update the user's profile picture URL in your database
+              await updateProfilePicture(uploadedImageUrl);
+            } else {
+              console.error('Image upload failed:', response.data);
+            }
+          } catch (error) {
+            console.error('Error uploading image:', error);
+            setIsUpdatingPic(false);
 
+          }
         };
       } catch (error) {
         console.error('Error resizing image:', error);
+        setIsUpdatingPic(false);
+      }
+      finally {
+        setIsUpdatingPic(false);
       }
     }
   };
 
-  const updateProfilePicture = async () => {
+  const updateProfilePicture = async (uploadedImageUrl) => {
     try {
+      console.log("Payload:", { id: userId, pic: uploadedImageUrl });
+
       const response = await axios.patch(`${apiUrl}/users`, {
         id: userId,
-        pic: base64Image,
+        pic: uploadedImageUrl,
       }, {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
         },
       });
       console.log(response.data);
-      updatePic(base64Image);
+      updatePic(uploadedImageUrl);
     } catch (error) {
       console.error('Error updating profile picture:', error);
     }
   };
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (base64Image) {
       updateProfilePicture();
     }
-  }, [base64Image]);
+  }, [base64Image]); */
 
   const handleClick = () => {
     inputRef.current.click();
@@ -136,6 +173,17 @@ const UserProfile = () => {
         </div>
       </Col>
     </Row>
+    {isUpdatingPic && (
+    <Row>
+      <Col>
+        <center>
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Updating...</span>
+          </Spinner>
+        </center>
+      </Col>
+    </Row>
+          )}
     <Row className="justify-content-center">
       <Col xs={6}>
       <div className="upload-container" onClick={handleClick}>

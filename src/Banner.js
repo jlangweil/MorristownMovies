@@ -53,7 +53,7 @@ function Banner({ onButtonClick }) {
           </div>
         </Col> */}
       </Row>
-      <Row className="d-none d-xl-flex bg-darkred py-2">
+      <Row className="d-none d-lg-flex bg-darkred py-2">
   <Col className="text-center">
     <NavLink exact to="/" className="menu-link">Home</NavLink>
   </Col>
@@ -62,6 +62,9 @@ function Banner({ onButtonClick }) {
   </Col>
   <Col className="text-center">
     <NavLink exact to="/reviews" className="menu-link">Reviews</NavLink>
+  </Col>
+  <Col className="text-center">
+    <NavLink exact to="/forum" className="menu-link">Forum</NavLink>
   </Col>
   <Col className="text-center">
     <NavLink exact to="/blog" className="menu-link">Blog</NavLink>
@@ -78,7 +81,7 @@ function Banner({ onButtonClick }) {
     </Container>
     <div className="auth-buttons pinned-hamburger">
     {loggedIn && (
-              <Link to="/user"><UserProfileIcon initial={currentUser[0]} /></Link>
+              <Link to="/user"><UserProfileIcon initial={currentUser[0]} showArrow /></Link>
             )}
             {!loggedIn && (
               <Link to="/signup">

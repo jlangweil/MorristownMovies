@@ -1,0 +1,12 @@
+.forum-container {
+    width: 100%;
+    max-width: 1200px; 
+    margin: 0 auto; 
+  }
+  
+  .external-forum {
+    border: none; 
+    width: 100%; 
+    min-height: 1000px; 
+  }
+  

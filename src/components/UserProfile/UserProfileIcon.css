@@ -52,17 +52,18 @@
     position: relative; 
   }
 
-  .profile-picture-wrapper::after {
+  .profile-picture-wrapper-arrow::after {
     content: '';
     position: absolute;
     bottom: -4px;
     right: 0;
     width: 0;
     height: 0;
-    border-left: 8px solid transparent; /* Adjust this value to change the arrow size */
-    border-right: 8px solid transparent; /* Adjust this value to change the arrow size */
-    border-top: 8px solid #fff; /* Adjust this value to change the arrow size and color */
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #fff;
   }
+  
   
   
   
