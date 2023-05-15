@@ -24,6 +24,7 @@ const Footer = () => {
               <li><a href="#">Events</a></li>
               <li><Link to="/reviews">Movie Reviews</Link></li>
               <li><Link to="/food">Restaurant Reviews</Link></li>
+              <li><Link to="/forum">Discussion Forum</Link></li>
               <li><Link to="/blog">Blog</Link></li>
               <li><Link to="/gallery">Gallery</Link></li>
               <li><a href="#">Contact Us</a></li>

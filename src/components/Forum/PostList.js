@@ -90,6 +90,17 @@ const PostList = () => {
     setShowCreatePostForm(false);
     setFormPosition(null);
   };
+
+  const handleLikeClick = (postId) => {
+    // Call your API to like/unlike the post and update the local state
+  
+    // For now, just toggle the liked state for the clicked post in the local state
+    setPosts((prevPosts) =>
+      prevPosts.map((post) =>
+        post.id === postId ? { ...post, liked: !post.liked } : post
+      )
+    );
+  };
   
 
   const createPostHierarchy = (posts) => {
@@ -150,6 +161,12 @@ const PostList = () => {
               <div className="post-content">
                 <p>{post.content}</p>
               </div>
+              {/* <div className="like-button" onClick={() => handleLikeClick(post.id)}>
+                &nbsp;&nbsp;0 likes&nbsp;&nbsp;
+              <i className={`fa${post.liked ? 's' : 'r'} fa-thumbs-up`} aria-hidden="true"></i>
+
+
+            </div> */}
               <div className="reply-icon" onClick={() => handleReplyClick(post.id)}>
                 Reply &nbsp;<i className="fa-solid fa-reply"></i>
               </div>

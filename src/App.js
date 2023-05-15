@@ -21,6 +21,8 @@ import ThreadList from './components/Forum/ThreadList';
 import CreateThread from './components/Forum/CreateThread';
 import PostList from './components/Forum/PostList';
 import CreatePost from './components/Forum/CreatePost';
+import ForgotPassword from './components/Login/ForgotPassword';
+import ResetPassword from './components/Login/ResetPassword';
 
 
 function App() {
@@ -65,6 +67,8 @@ function App() {
                 <Route path="/reviews" element={<MovieReview />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/forgot" element={<ForgotPassword />} />
+                <Route path="/reset" element={<ResetPassword />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/signup-verification" element={<SignUpVerification />} />
                 <Route path="/gallery" element={<PhotoGallery />} />
