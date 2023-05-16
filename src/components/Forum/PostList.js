@@ -19,13 +19,64 @@ const PostList = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { userId } = useAuth();
+  const [shownLikesId, setShownLikesId] = useState(null);
+  const [postLikes, setPostLikes] = useState({});
+  const initialLoadingState = posts.reduce((acc, post) => {
+    acc[post.id] = false;
+    return acc;
+  }, {});
+  const [loadingLikes, setLoadingLikes] = useState(initialLoadingState);
+
+
+  const handleMouseEnter  = async (postId) => {
+    
+    setShownLikesId(postId);
+
+    if (!postLikes[postId]) {
+        setLoadingLikes(prevLoadingLikes => ({
+          ...prevLoadingLikes,
+          [postId]: true,
+        }));
+
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/forum?action=getLikes&postId=${postId}`,{
+          headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+          },
+        });
+  
+        // Store the likes data in the postLikes state
+        setPostLikes(prevPostLikes => ({
+          ...prevPostLikes,
+          [postId]: response.data,
+        }));
+      }catch (error) {
+      console.error('Failed to get post likes', error);
+    } finally {
+      setLoadingLikes(prevLoadingLikes => ({
+        ...prevLoadingLikes,
+        [postId]: false,
+      }));
+    }
+  }
+
+  };
+
+  const handleMouseLeave = () => {
+    setShownLikesId(null);
+  };
+
   
 
   const refreshPosts = async () => {
     try {
       handleCreatePostFormSubmitted();
       setIsLoading(true);
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/forum?action=getPosts&threadId=${threadId}`,{
+      let url = `${process.env.REACT_APP_API_URL}/forum?action=getPosts&threadId=${threadId}`;
+      if (userId !== null) {
+        url += `&userId=${userId}`;
+      }
+      const response = await axios.get(url,{
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
         },
@@ -42,7 +93,11 @@ const PostList = () => {
     const fetchPosts = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/forum?action=getPosts&threadId=${threadId}`,{
+        let url = `${process.env.REACT_APP_API_URL}/forum?action=getPosts&threadId=${threadId}`;
+        if (userId !== null) {
+          url += `&userId=${userId}`;
+        }
+        const response = await axios.get(url,{
             headers: {
               Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
             },
@@ -91,16 +146,49 @@ const PostList = () => {
     setFormPosition(null);
   };
 
-  const handleLikeClick = (postId) => {
-    // Call your API to like/unlike the post and update the local state
+  const handleLikeClick = async (postId) => {
+    // Find the index of the post in the array
+    const postIndex = posts.findIndex(post => post.id === postId);
+    if (postIndex === -1) {
+      // Handle error
+      return;
+    }
   
-    // For now, just toggle the liked state for the clicked post in the local state
-    setPosts((prevPosts) =>
-      prevPosts.map((post) =>
-        post.id === postId ? { ...post, liked: !post.liked } : post
-      )
-    );
+    // Create a new copy of the posts array
+    const newPosts = [...posts];
+  
+    // Save the current like status
+    const currentLikeStatus = Number(newPosts[postIndex].user_like);
+
+    // Toggle the like status
+    newPosts[postIndex].user_like = !newPosts[postIndex].user_like;
+
+    // Update the likes count based on the old like status
+    newPosts[postIndex].total_likes = Number(newPosts[postIndex].total_likes) + (currentLikeStatus ? -1 : 1);
+    postLikes[postId] = null;
+  
+    // Update the posts state
+    setPosts(newPosts);
+  
+     try {
+      // Send a request to the server to toggle the like status
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/forum?action=updateLike&userId=${userId}&postId=${postId}`,{},{
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+        },
+      });
+    } catch (error) {
+      // If the request fails, revert the likeStatus and likesCount of the specific post
+      // newPosts[postIndex].user_like = !newPosts[postIndex].user_like;
+      // newPosts[postIndex].total_likes += newPosts[postIndex].user_like ? 1 : -1;
+      
+      // Update the posts state
+      //setPosts(newPosts);
+  
+      console.error('Failed to update like status', error); 
+    }
   };
+  
   
 
   const createPostHierarchy = (posts) => {
@@ -161,12 +249,31 @@ const PostList = () => {
               <div className="post-content">
                 <p>{post.content}</p>
               </div>
-              {/* <div className="like-button" onClick={() => handleLikeClick(post.id)}>
-                &nbsp;&nbsp;0 likes&nbsp;&nbsp;
-              <i className={`fa${post.liked ? 's' : 'r'} fa-thumbs-up`} aria-hidden="true"></i>
+              <div className="like-button">
+                <div className="like-button" onMouseEnter={() => handleMouseEnter(post.id)} onMouseLeave={handleMouseLeave}>&nbsp;&nbsp;{post.total_likes} likes&nbsp;&nbsp;</div>
+                {userId && (
+                Number(post.user_like) == 0 ? (
+                  <i className="far fa-thumbs-up" aria-hidden="true" onClick={() => handleLikeClick(post.id)}></i>
+                ) : (
+                  <i className="fas fa-thumbs-up" aria-hidden="true" onClick={() => handleLikeClick(post.id)}></i>
+                )
+              )}
+            </div>
+            {shownLikesId === post.id && (
+  <div id={`likes-${post.id}`} className="likes-dropdown">
+    {loadingLikes[post.id] ? (
+      <div>Loading...</div>
+    ) : postLikes[post.id]?.length > 0 ? (
+      postLikes[post.id]?.map(user => (
+        <div>{user.user_name}</div>
+      ))
+    ) : (
+      <div>No likes yet</div>
+    )}
+  </div>
+)}
 
 
-            </div> */}
               <div className="reply-icon" onClick={() => handleReplyClick(post.id)}>
                 Reply &nbsp;<i className="fa-solid fa-reply"></i>
               </div>

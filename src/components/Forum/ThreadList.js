@@ -88,6 +88,7 @@ const ThreadList = () => {
 
   useEffect(() => {
     const fetchThreads = async () => {
+      setIsLoading(true);  
         try {
           const response = await axios.get(
             `${process.env.REACT_APP_API_URL}/forum?action=getThreads&categoryId=${categoryId}&offset=${
@@ -102,7 +103,9 @@ const ThreadList = () => {
           sessionStorage.setItem(`threads_${categoryId}_${currentPage}`, JSON.stringify(response.data.threads));
         } catch (error) {
           console.error("Error fetching threads:", error);
+          setIsLoading(false);
         }
+        setIsLoading(false);
       };
       
       const cachedData = sessionStorage.getItem(`threads_${categoryId}_${currentPage}`);
