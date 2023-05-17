@@ -235,3 +235,23 @@ article p {
   }
 }
 
+.user-menu {
+  background-color: white !important;
+  font-size: 1rem;
+  position: fixed !important;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.6) !important;
+  z-index: 101 !important;
+  padding: 5px 90px 5px 5px;
+  margin-top: 10px;
+}
+
+.user-menu a {
+  display: block;
+  padding: 0px 10px;
+  color: black;
+  text-decoration: none;
+}
+
+.user-menu a:hover {
+  background-color: lightblue;
+}
