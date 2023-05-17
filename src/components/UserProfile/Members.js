@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { Container, Row, Col, Modal, Button } from 'react-bootstrap';
+import { Container, Row, Col, Modal, Button, Spinner } from 'react-bootstrap';
 import { FaUserCircle } from 'react-icons/fa';
 import './Members.css';
+
+const apiUrl = process.env.REACT_APP_API_URL;
 
 function debounce(func, wait) {
   let timeout;
@@ -34,7 +36,7 @@ const Members = () => {
       setLoading(true);
 
       try {
-        const response = await axios.get('http://localhost:4000/api/users', {
+        const response = await axios.get(`${apiUrl}/users`, {
           headers: {
             'x-fetch-all-users': 'true',
             Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
@@ -75,6 +77,10 @@ const Members = () => {
     // Call fetchMembers
     fetchMembers(1);
   }, []);
+
+  if (loading) {
+    return <center><Spinner animation="border" role="status"/></center>;
+  }
 
   return (
     <>

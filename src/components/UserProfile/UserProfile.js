@@ -23,8 +23,7 @@ const UserProfile = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const apiUrl = process.env.REACT_APP_API_URL;
-  console.log(pic);
-
+  
   const handleFileChange = async (e) => {
     
     const file = e.target.files[0];
