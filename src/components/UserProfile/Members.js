@@ -94,7 +94,7 @@ const Members = () => {
         >
           {members.map((member) => (
             <Row key={member.id} className="member-row">
-                <Col xs={6} className="member-card">
+                <Col xs={10} sm={8} md={6} className="member-card">
                 {member.pic ? (
                     <a onClick={() => handleModal(member.pic)}>
                     <img src={member.pic} alt={`${member.firstName} ${member.lastName}`} className="member-image" />

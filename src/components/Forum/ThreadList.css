@@ -1,5 +1,5 @@
 .thread-item {
-    border: 1px solid #ccc;
+    border: 2px solid #ccc !important;
     padding: 15px;
     margin-bottom: 20px;
     background-color: #222831;
@@ -41,8 +41,7 @@
 }
 .thread-list thead th {
     color: #ffffff;
-    border-color: #ffffff;
-    border: 2px solid #ffffff;
+    border: 2px solid #ccc;
     background-color: rgb(6, 38, 90);
     font-style: italic;
   }

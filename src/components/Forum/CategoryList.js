@@ -34,24 +34,41 @@ const CategoryList = () => {
 
   return (
     <Container style={{ maxWidth: '1200px' }}>
-      <Row>
-        <Col>
-          <center><div className="forum-header">Discussion Forum</div></center>
-          <div className="category-list">
-            <div>
-              {categories.map((category) => (
-                <div key={category.id} className="category-item">
-                  <Link to={`/forum/threads/${category.id}?categoryTitle=${encodeURIComponent(category.name)}`}>
-                    <h3>{category.name}</h3>
-                  </Link>
-                  <p>{category.description}</p>
+  <Row>
+    <Col>
+      <div className="forum-header">Discussion Forum</div>
+      <div className="category-list">
+        {categories.map((category) => (
+          <Row key={category.id} className="category-item">
+            <Col xs={8} sm={8}>
+              <Link to={`/forum/threads/${category.id}?categoryTitle=${encodeURIComponent(category.name)}`}>
+                <h3>{category.name}</h3>
+              </Link>
+              <p>{category.description}</p>
+            </Col>
+            <Col xs={2} sm={2}>
+            <div className="category-count">
+                <div className="post-info">
+                  {category.thread_count}
+                  <div className="posts-text">Topics</div>
                 </div>
-              ))}
-            </div>
-          </div>
-        </Col>
-      </Row>
-    </Container>
+              </div>
+            </Col>
+            <Col xs={2} sm={2}>
+              <div className="category-count">
+                <div className="post-info">
+                  {category.post_count}
+                  <div className="posts-text">Posts</div>
+                </div>
+              </div>
+            </Col>
+          </Row>
+        ))}
+      </div>
+    </Col>
+  </Row>
+</Container>
+
   );
   
 };
