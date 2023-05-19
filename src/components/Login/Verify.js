@@ -21,7 +21,7 @@ function Verify() {
       }
 
       try {
-        const response = await axios.put(`${apiUrl}/users`, {
+        await axios.put(`${apiUrl}/users`, {
             email: email,
             token: token,
           }, {

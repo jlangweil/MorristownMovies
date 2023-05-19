@@ -128,30 +128,10 @@ section {
   margin-top: 50px;
 }
 
-h2 {
-  /* other styles */
-}
-
-ul {
-  /* other styles */
-}
-
-li {
-  /* other styles */
-}
 
 article {
   margin-top: 20px;
 }
-
-article h3 {
-  /* other styles */
-}
-
-article p {
-  /* other styles */
-}
-
 
 .auth-buttons {
   display: flex;

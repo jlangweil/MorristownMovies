@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { Container, Row, Col, Modal, Button, Spinner } from 'react-bootstrap';
+import { Row, Col, Modal, Button, Spinner } from 'react-bootstrap';
 import { FaUserCircle } from 'react-icons/fa';
 import './Members.css';
 
@@ -90,7 +90,7 @@ const Members = () => {
         dataLength={members.length}
         next={() => fetchMembers(page)}
         hasMore={hasMore}
-        endMessage={<p><center>End of Members</center></p>}
+        endMessage={<center>End of Members</center>}
         >
           {members.map((member) => (
             <Row key={member.id} className="member-row">

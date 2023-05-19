@@ -172,7 +172,7 @@ const PostList = () => {
   
      try {
       // Send a request to the server to toggle the like status
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/forum?action=updateLike&userId=${userId}&postId=${postId}`,{},{
+      await axios.post(`${process.env.REACT_APP_API_URL}/forum?action=updateLike&userId=${userId}&postId=${postId}`,{},{
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
         },
@@ -231,7 +231,7 @@ const PostList = () => {
     if (isLoading) {
         return <center><Spinner animation="border" role="status"/></center>;
       }
-    return posts.map((post, index) => {
+    return posts.map((post) => {
       
   
       return (
@@ -265,7 +265,7 @@ const PostList = () => {
       <div>Loading...</div>
     ) : postLikes[post.id]?.length > 0 ? (
       postLikes[post.id]?.map(user => (
-        <div>{user.user_name}</div>
+        <div key={post.id}>{user.user_name}</div>
       ))
     ) : (
       <div>No likes yet</div>

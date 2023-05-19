@@ -1,10 +1,9 @@
 // UserProfile.js
-import React, { useState, useRef, useEffect } from 'react';
-import { Container, Row, Col, Button, Form, Spinner } from 'react-bootstrap';
+import React, { useState, useRef } from 'react';
+import { Container, Row, Col, Form, Spinner } from 'react-bootstrap';
 import { readAndCompressImage } from 'browser-image-resizer';
 import { BsUpload } from 'react-icons/bs';
 import { useAuth } from '../../AuthContext';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './UserProfile.css';
 
@@ -13,7 +12,6 @@ const UserProfile = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [base64Image, setBase64Image] = useState('');
   const inputRef = useRef();
-  const navigate = useNavigate();
   const [email, setEmail] = useState(userEmail || '');
   const [userCity, setUserCity] = useState(city || '');
   const [userState, setUserState] = useState(state || '');

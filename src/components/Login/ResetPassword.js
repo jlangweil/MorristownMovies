@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './ResetPassword.css';
 
@@ -11,7 +11,6 @@ const ResetPassword = () => {
   const [success, setSuccess] = useState(false);
   const location = useLocation();
 
-  const navigate = useNavigate();
   const token = new URLSearchParams(location.search).get('token');  
   const email = new URLSearchParams(location.search).get('email');  
 

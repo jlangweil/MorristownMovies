@@ -1,8 +1,8 @@
 // src/Login.js
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
 import './Login.css';
-import OAuthLogin from './OAuthLogin';
+//import OAuthLogin from './OAuthLogin';
 import axios from 'axios';
 import bcrypt from 'bcryptjs';
 import { useNavigate, Link } from 'react-router-dom';
@@ -15,14 +15,12 @@ const Login = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const { currentUser, userEmail } = useAuth();
-
+ 
   const navigate = useNavigate();
 
-  const handleGoogleSuccess = (response) => {
+  /* const handleGoogleSuccess = (response) => {
     const profile = response.getBasicProfile();
     const userData = {
       id: profile.getId(),
@@ -37,7 +35,7 @@ const Login = () => {
   const handleGoogleFailure = (error) => {
     console.error('Google Login Error:', error);
   };
-
+ */
 
   const handleSubmit = async (event) => {
     event.preventDefault();

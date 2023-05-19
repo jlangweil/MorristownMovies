@@ -227,7 +227,7 @@ const MovieReview = () => {
                 next={() => fetchReviews(page)}
                 hasMore={hasMore}
                 loader={<h4>Loading...</h4>}
-                endMessage={<p><center>End of Reviews</center></p>}
+                endMessage={<center>End of Reviews</center>}
                 >
                 {reviews
                 .filter(review => (filter === '' || review.MovieName === filter))

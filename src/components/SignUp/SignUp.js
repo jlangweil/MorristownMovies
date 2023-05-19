@@ -62,7 +62,7 @@ const SignUp = () => {
       // Handle success, e.g., navigate to the next page, display a success message, etc.
 
       // Send email after successful registration
-    const emailResponse = await axios.post(`${apiUrl}/email`, {
+    await axios.post(`${apiUrl}/email`, {
         to: formData.email,
         templateId: 'd-a2094920100f4bd8a72cf78fe567a365',
         dynamicData: {
@@ -160,7 +160,7 @@ const SignUp = () => {
             <div className="custom-dropdown-container">
                 <Form.Control as="select" name="state" value={formData.state} onChange={handleChange} required>
                 {states.map((state, index) => (
-                    <option key={index} selected={state === 'New Jersey'}>{state}</option>
+                    <option key={index} defaultValue={state === 'New Jersey'}>{state}</option>
                 ))}
                 </Form.Control>
             </div>

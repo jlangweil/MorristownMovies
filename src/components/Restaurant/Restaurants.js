@@ -186,7 +186,7 @@ const customStyles = {
     <Container  className="restaurants-container" style={{ overflowX: 'hidden' }}>
       <Row className="justify-content-center ">
         <Col>
-            <div class="restaurant-header">Restaurants</div>
+            <div className="restaurant-header">Restaurants</div>
         </Col>
       </Row>
       <Row className="justify-content-center">

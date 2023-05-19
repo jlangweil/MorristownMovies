@@ -8,8 +8,13 @@ const customStyles = {
     ...provided,
     backgroundColor: 'black',
   }),
+  input: (provided) => ({
+    ...provided,
+    color: 'white',
+  }),
   option: (provided, state) => ({
     ...provided,
+    backgroundColor: state.isFocused ? '#3C3F41' : provided.backgroundColor,
     color: 'white',
     fontWeight: state.isSelected || state.data.className === 'all-movies-option' ? 'bold' : 'normal',
     fontStyle: state.isSelected || state.data.className === 'all-movies-option' ? 'italic' : 'normal',
@@ -57,6 +62,8 @@ const FilterDropdown = ({ setFilter }) => {
         options={movieOptions}
         onChange={handleChange}
         styles={customStyles}
+        placeholder='Select or Search'
+        isSearchable
       />
     </div>
   );

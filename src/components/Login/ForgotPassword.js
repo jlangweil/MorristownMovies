@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
-import { useNavigate, Link } from 'react-router-dom';
+import { Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import './ForgotPassword.css';
 

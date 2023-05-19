@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import './Latest.css';
-import { Container, Row, Col, Button, Modal, Spinner, Card } from 'react-bootstrap';
+import { Row, Col, Spinner } from 'react-bootstrap';
 import DOMPurify from 'dompurify';
-import blogTitle from './images/blog.JPG';
 import { Link } from 'react-router-dom';
 
 const Latest = () => {
@@ -23,6 +22,7 @@ const Latest = () => {
 
   const fetchLatestContent = useCallback(async () => {
     try {
+      setLoading(true);
       const reviewResponse = await axios.get(`${apiUrl}/latestreview`);
       setReview(reviewResponse.data);
 
@@ -43,13 +43,13 @@ const Latest = () => {
     fetchLatestContent();
   }, [fetchLatestContent]);
 
-  if (loading) {
+ /*  if (loading) {
     return (
       <center>
         <Spinner animation="border" role="status" />
       </center>
     );
-  }
+  } */
 
   if (error) {
     return <center>Error: {error.message}</center>;
@@ -64,7 +64,7 @@ const Latest = () => {
               <>
               <Link to="/reviews" className="no-underline">
                 <div className="latest-movie-review" key={review.id}>
-                  <h2 className="latest-movie-name"><i class="fa fa-film fa-lg"/>&nbsp;&nbsp;{review.MovieName}</h2>
+                  <h2 className="latest-movie-name"><i className="fa fa-film fa-lg"/>&nbsp;&nbsp;{review.MovieName}</h2>
                   <p className="latest-review-text">{review.ReviewText}</p>
                   <p className="latest-user-name">Reviewed by {review.first_name} {review.last_name}</p>
                   <p className="latest-review-date">Date: {review.DateOfReview}</p>
@@ -89,7 +89,7 @@ const Latest = () => {
             <Row > 
               <Col xs={10}>
                 <h3 className="restaurant-name">
-                <i class="fa fa-utensils fa-lg"></i>&nbsp;&nbsp;{foodPost.RestaurantName}
+                <i className="fa fa-utensils fa-lg"></i>&nbsp;&nbsp;{foodPost.RestaurantName}
                 </h3>
               </Col>
               {foodPost.cuisine && (
