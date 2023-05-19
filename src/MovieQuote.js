@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
 import './MovieQuote.css';
 import quotesData from './quotes.json';
 

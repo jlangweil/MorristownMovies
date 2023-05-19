@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import cheerio from 'cheerio';
-import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
+import { Row, Col, Button, Spinner } from 'react-bootstrap';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -14,32 +13,7 @@ const Events = () => {
     const [isLoading, setIsLoading] = useState(true);
     const localizer = momentLocalizer(moment);
     const apiUrl = process.env.REACT_APP_API_URL;
-
-    const fetchMeetupEvents = async (url) => {
-      try {
-        const response = await axios.get(url);
-        const html = response.data;
-    
-        const $ = cheerio.load(html);
-    
-        const events = [];
-    
-        // Update this selector based on the HTML structure of the specific Meetup group page.
-        $('div.eventCard--link').each((_, element) => {
-          const title = $(element).find('div.eventCardHead--title').text().trim();
-          const date = $(element).find('div.eventTimeDisplay-startDate').text().trim();
-          const time = $(element).find('div.eventTimeDisplay-startTime').text().trim();
-    
-          events.push({ title, date, time });
-        });
-    
-        return events;
-      } catch (error) {
-        console.error('Error fetching Meetup events:', error);
-        return [];
-      }
-    };
-  
+ 
     useEffect(() => {
       async function fetchEvents() {
         try {

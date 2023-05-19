@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import BlogPostAdd from './BlogPostAdd';
-import { Container, Row, Col, Button, Modal, Spinner } from 'react-bootstrap';
+import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import DOMPurify from 'dompurify';
 import axios from 'axios';
 import { useAuth } from '../../AuthContext';

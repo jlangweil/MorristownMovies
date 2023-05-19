@@ -2,34 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import axios from 'axios';
 import './MapsWithRestaurants.css';
 
-/* const getCoordinates = async (address) => {
-    try {
-      const response = await axios.get(`/search`, {
-        params: {
-          q: address,
-          format: 'json',
-        },
-      });
-  
-      if (response.data && response.data.length > 0) {
-        const { lat, lon } = response.data[0];
-        console.log(lat);
-        return [parseFloat(lat), parseFloat(lon)];
-      } else {
-        throw new Error('No results found for address');
-      }
-    } catch (error) {
-      console.error(`Error getting coordinates for address: ${address}`, error);
-      return null;
-    }
-  };
-   */
-  
-
-// Fix for the marker icon issue
 const defaultIcon = new L.Icon({
   iconUrl: require('leaflet/dist/images/marker-icon.png'),
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),

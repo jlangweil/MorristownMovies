@@ -2,8 +2,6 @@ import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './Home.css';
-import { Container, Row, Col } from 'react-bootstrap';
-import UserProfileIcon from './components/UserProfile/UserProfileIcon';
 
 
 const testimonials = [
