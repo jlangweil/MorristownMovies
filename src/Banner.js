@@ -87,7 +87,7 @@ function Banner({ onButtonClick }) {
             >
               {loggedIn ? 'Logout' : 'Login'}
             </Button>
-            <Button className="hamburger" onClick={onButtonClick}>
+            <Button className="hamburger d-lg-none" onClick={onButtonClick}>
     &#9776;
   </Button>
     </div>
