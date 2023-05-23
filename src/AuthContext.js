@@ -26,6 +26,9 @@ export const AuthProvider = ({ children }) => {
     setState(userData.state);
     setPic(userData.pic);
     setSessionTimeout(Date.now() + 30 * 60 * 1000); // 30 minutes
+
+    // Store user data in sessionStorage
+    sessionStorage.setItem("userData", JSON.stringify(userData));
   };
 
   const resetSessionTimeout = () => {
@@ -50,9 +53,19 @@ export const AuthProvider = ({ children }) => {
     setCity(null);
     clearTimeout(sessionTimeout);
     setPic(null);
+
+    // Clear user data from sessionStorage
+    sessionStorage.removeItem("userData");
   };
 
   useEffect(() => {
+    // Check for user data in sessionStorage when component mounts
+    const storedUserData = sessionStorage.getItem("userData");
+
+    if (storedUserData) {
+      login(JSON.parse(storedUserData));
+    }
+
     if (sessionTimeout && currentUser) {
       const warningTimeoutId = setTimeout(() => {
         alert('Due to inactivity, your session will expire in 1 minute.');

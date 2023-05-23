@@ -293,12 +293,13 @@ function RestaurantReview(props) {
             {[1, 2, 3, 4, 5].map((starIndex) => (
               <i
                 key={starIndex}
-                className={`fa-star ${rating >= starIndex ? 'fas' : 'far'}`}
+                className={`fa-star fa-2x ${rating >= starIndex ? 'fas' : 'far'}`}
                 style={{ color: 'yellow', cursor: 'pointer', margin: '0 3px' }}
                 onClick={() => handleStarClick(starIndex)}
               ></i>
             ))}
           </div>
+          <div><center><h3>{rating} / 5</h3></center></div>
         </Form.Group>
       </Col>
     </Row>
