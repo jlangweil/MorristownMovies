@@ -26,8 +26,13 @@ const Latest = () => {
       const reviewResponse = await axios.get(`${apiUrl}/latestreview`);
       setReview(reviewResponse.data);
 
-      const blogResponse = await axios.get(`${apiUrl}/latestblog`);
-      setBlogPost(blogResponse.data);
+      const blogResponse = await axios.get(`${apiUrl}/blog?action=latest`, {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+        },
+      });
+      console.log(blogResponse);
+      setBlogPost(blogResponse.data[0]);
 
       const foodResponse = await axios.get(`${apiUrl}/latestreview?type=food`);
       setFoodPost(foodResponse.data);
@@ -41,7 +46,7 @@ const Latest = () => {
 
   useEffect(() => {
     fetchLatestContent();
-  }, [fetchLatestContent]);
+  }, []);
 
  /*  if (loading) {
     return (

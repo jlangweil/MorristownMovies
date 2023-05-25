@@ -1,6 +1,6 @@
 // src/Login.js
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 import './Login.css';
 //import OAuthLogin from './OAuthLogin';
 import axios from 'axios';
@@ -16,6 +16,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
  
   const navigate = useNavigate();
@@ -39,6 +40,7 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
     // Perform authentication here
     try {
       const requestUrl = `${apiUrl}/users?email=${email}`;
@@ -62,7 +64,7 @@ const Login = () => {
           setTimeout(() => {
             window.scroll(0, 0);
           }, 100);
-          
+          setIsLoading(false);
           // Redirect the user to the desired page after successful login
           navigate('/');
           
@@ -71,14 +73,17 @@ const Login = () => {
   
           // Handle success, e.g., navigate to the next page, display a success message, etc.
         } else {
+          setIsLoading(false);
           // Handle error, e.g., display an error message
           setErrorMessage('E-mail or password is incorrect.');
         }
       } else {
+        setIsLoading(false);
         // Handle error, e.g., display an error message
         setErrorMessage('E-mail or password is incorrect.');
       }
     } catch (error) {
+      setIsLoading(false);
       if (error.response && error.response.data) {
         setErrorMessage(error.response.data); // Update the error message with the server response
       } else {
@@ -88,6 +93,38 @@ const Login = () => {
     }
   };
 
+  const handleSubmit2 = async (event) => {
+    event.preventDefault();
+    try {
+      setIsLoading(true);
+      const requestUrl = `${apiUrl}/users`;
+      const response = await axios.post(
+        requestUrl, 
+        { email, password },
+        { headers: { 'x-authenticate': true, Authorization: `Bearer ${process.env.REACT_APP_API_KEY}` } },
+      );
+  
+      if (response.data && response.data.user) {
+        // Set the logged in user details
+        login(response.data.user);
+        setTimeout(() => {
+          window.scroll(0, 0);
+        }, 100);
+        setIsLoading(false);
+        // Redirect the user to the desired page after successful login
+        navigate('/');
+      } else {
+        setIsLoading(false);
+        // Handle error, e.g., display an error message
+        setErrorMessage('E-mail or password is incorrect.');
+      }
+    } catch (error) {
+      setIsLoading(false);
+        setErrorMessage('E-mail or password is incorrect.');
+    }
+  };
+  
+
   return (
     <div className="login-section">
       <div className="login-box">
@@ -95,7 +132,7 @@ const Login = () => {
         <div style={{ minHeight: '1.5em' }}>
           {errorMessage && <p className="text-danger">{errorMessage}</p>}
         </div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit2}>
 
           <label htmlFor="email">Email:</label>
           <input
@@ -112,8 +149,17 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-
-         <button type="submit">Login</button>
+        <Button
+          variant="secondary"
+          type="submit"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <Spinner animation="border" size="sm" />
+          ) : (
+            'Login'
+          )}
+        </Button>
          <div style={{textAlign: "right"}}><Link to="/forgot">Forgot password?</Link></div>
          <br/>
          <center>Don't have an account?</center>

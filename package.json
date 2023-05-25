@@ -16,6 +16,7 @@
     "dompurify": "^3.0.1",
     "face-api.js": "^0.22.2",
     "leaflet": "^1.9.3",
+    "lodash": "^4.17.21",
     "mdb-react-ui-kit": "^6.0.0",
     "micro-cors": "^0.1.1",
     "moment": "^2.29.4",

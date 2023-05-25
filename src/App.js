@@ -23,6 +23,8 @@ import PostList from './components/Forum/PostList';
 import CreatePost from './components/Forum/CreatePost';
 import ForgotPassword from './components/Login/ForgotPassword';
 import ResetPassword from './components/Login/ResetPassword';
+import Wordle from './components/Game/Wordle';
+import Trivia from './components/Game/Trivia';
 
 
 function App() {
@@ -77,6 +79,8 @@ function App() {
                 <Route path="/register" element={<SignUpVerification />} />
                 <Route path="/user" element={<UserProfile />} />
                 <Route path="/members" element={<Members />} />
+                <Route path="/game" element={<Wordle />} />
+                <Route path="/trivia" element={<Trivia />} />
                 <Route path="/forum" element={<CategoryList />} />
                 <Route path="/forum/threads/:categoryId" element={<ThreadList />} />
                 <Route path="/forum/create-thread/:categoryId" element={<CreateThread />} />
