@@ -36,7 +36,7 @@ function Banner({ onButtonClick }) {
       </div>
       </Col>
   </Row>
-  <Row className="d-none d-lg-flex bg-darkred py-2">
+  <Row className="d-none d-xl-flex bg-darkred py-2">
   <Col className="text-center">
     <NavLink exact to="/" className="menu-link">Home</NavLink>
   </Col>
@@ -57,6 +57,9 @@ function Banner({ onButtonClick }) {
   </Col>
   <Col className="text-center">
     <NavLink exact to="/gallery" className="menu-link">Gallery</NavLink>
+  </Col>
+  <Col className="text-center">
+    <NavLink exact to="/games" className="menu-link">Games</NavLink>
   </Col>
 </Row>
 
@@ -87,7 +90,7 @@ function Banner({ onButtonClick }) {
             >
               {loggedIn ? 'Logout' : 'Login'}
             </Button>
-            <Button className="hamburger d-lg-none" onClick={onButtonClick}>
+            <Button className="hamburger d-xl-none" onClick={onButtonClick}>
     &#9776;
   </Button>
     </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
-import { FaHome, FaCalendar, FaStar, FaNewspaper, FaMeetup, FaCamera, FaWineGlass, FaComments } from 'react-icons/fa';
+import { FaHome, FaCalendar, FaStar, FaNewspaper, FaMeetup, FaCamera, FaWineGlass, FaComments, FaGamepad, FaPuzzlePiece } from 'react-icons/fa';
 import './App.css';
 import Events from './Events';
 import Banner from './Banner';
@@ -25,6 +25,7 @@ import ForgotPassword from './components/Login/ForgotPassword';
 import ResetPassword from './components/Login/ResetPassword';
 import Wordle from './components/Game/Wordle';
 import Trivia from './components/Game/Trivia';
+import Games from './components/Game/Games';
 
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
             <Link to="/food" onClick={handleMenuClick}>&nbsp;<FaWineGlass />&nbsp;&nbsp;Restaurants</Link>
             <Link to="/blog" onClick={handleMenuClick}>&nbsp;<FaNewspaper />&nbsp;&nbsp;Blog</Link>
             <Link to="/gallery" onClick={handleMenuClick}>&nbsp;<FaCamera />&nbsp;&nbsp;Gallery</Link>
+            <Link to="/games" onClick={handleMenuClick}>&nbsp;<FaPuzzlePiece />&nbsp;&nbsp;Games</Link>
             
             
             {/* <a href="https://discord.com/channels/964877736822837349/965064633704661042" target="_blank" rel="noopener noreferrer"><FaDiscord />&nbsp;&nbsp;Discord</a> */}
@@ -79,7 +81,8 @@ function App() {
                 <Route path="/register" element={<SignUpVerification />} />
                 <Route path="/user" element={<UserProfile />} />
                 <Route path="/members" element={<Members />} />
-                <Route path="/game" element={<Wordle />} />
+                <Route path="/wordle" element={<Wordle />} />
+                <Route path="/games" element={<Games />} />
                 <Route path="/trivia" element={<Trivia />} />
                 <Route path="/forum" element={<CategoryList />} />
                 <Route path="/forum/threads/:categoryId" element={<ThreadList />} />
