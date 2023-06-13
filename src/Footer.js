@@ -26,6 +26,7 @@ const Footer = () => {
               <li><Link to="/food">Restaurant Reviews</Link></li>
               <li><Link to="/forum">Discussion Forum</Link></li>
               <li><Link to="/blog">Blog</Link></li>
+              <li><Link to="/games">Games</Link></li>
               <li><Link to="/gallery">Gallery</Link></li>
               <li><a href="#">Contact Us</a></li>
             </ul>

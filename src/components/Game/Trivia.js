@@ -64,7 +64,7 @@ function Trivia() {
       )}
       {!loading && questions.length > 0 && !showScore && (
         <>
-          <div className="questionStatus">Question {currentQuestionIndex + 1}/5</div>
+          <div className="questionStatus">Question {currentQuestionIndex + 1}/10</div>
           <h2 className="question">{questions[currentQuestionIndex].question}</h2>
           {['choicea', 'choiceb', 'choicec', 'choiced'].map((choice, index) => (
             <div

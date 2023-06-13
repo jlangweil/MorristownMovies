@@ -1,0 +1,21 @@
+.story-container {
+    white-space: pre-line;
+    color: black;
+    padding: 50px;
+    font-family: 'Times New Roman';
+    font-size: 28px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #f3e9e0;
+    box-shadow: 5px 5px 10px #888888;
+    width: 60% !important;
+    margin: 20px auto;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .story-container {
+        width: 100% !important;
+        margin: 0;
+    }
+}

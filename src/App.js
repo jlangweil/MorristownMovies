@@ -26,6 +26,7 @@ import ResetPassword from './components/Login/ResetPassword';
 import Wordle from './components/Game/Wordle';
 import Trivia from './components/Game/Trivia';
 import Games from './components/Game/Games';
+import Blanks from './components/Game/Blanks';
 
 
 function App() {
@@ -84,6 +85,7 @@ function App() {
                 <Route path="/wordle" element={<Wordle />} />
                 <Route path="/games" element={<Games />} />
                 <Route path="/trivia" element={<Trivia />} />
+                <Route path="/blanks" element={<Blanks />} />
                 <Route path="/forum" element={<CategoryList />} />
                 <Route path="/forum/threads/:categoryId" element={<ThreadList />} />
                 <Route path="/forum/create-thread/:categoryId" element={<CreateThread />} />

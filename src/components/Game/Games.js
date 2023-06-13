@@ -25,6 +25,14 @@ const Games = () => {
             </div>
           </div>
         </Link>
+        <Link to="/blanks" style={{ textDecoration: 'none' }}>
+          <div className="game-card">
+            <div className="gameLink">Hollywood MadLibs</div>
+            <div className="game-description">
+              Mad Libs with a Movie and TV vibe.<br/>Select AI generated stories and fill in the blanks!
+            </div>
+          </div>
+        </Link>
       </div>
     </>
   );
