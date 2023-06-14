@@ -70,7 +70,6 @@ const Blanks = () => {
   };
 
   const handleInputChange = (event, blankId) => {
-    alert('test2');
     setUserInputs({
       ...userInputs,
       [blankId]: event.target.value,
