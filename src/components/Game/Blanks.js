@@ -14,20 +14,31 @@ const Blanks = () => {
   const [showBlanks, setShowBlanks] = useState(false);
   const [showStory, setShowStory] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoading2, setIsLoading2] = useState(false);
   
   useEffect(() => {
-    axios.patch(`${process.env.REACT_APP_API_URL}/games`, { 'getTitles': true } , {
-        headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
-        }
-      })
-      .then(response => {
-        setStories(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching the story titles:', error);
-      });
-  }, []);
+    const storedStories = sessionStorage.getItem('stories');
+    if (storedStories) {
+        setStories(JSON.parse(storedStories));
+    } else {
+        setIsLoading2(true);
+        axios.patch(`${process.env.REACT_APP_API_URL}/games`, { 'getTitles': true }, {
+            headers: {
+                Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+            }
+        })
+        .then(response => {
+            setStories(response.data);
+            sessionStorage.setItem('stories', JSON.stringify(response.data));
+            setIsLoading2(false);
+        })
+        .catch(error => {
+            console.error('Error fetching the story titles:', error);
+            setIsLoading2(false);
+        });
+    }
+}, []);
+
 
   const fetchBlanks = (storyId) => {
     setIsLoading(true);
@@ -170,28 +181,35 @@ const Blanks = () => {
   return (
     <>
         <Form.Control
-            as="select"
-            onChange={handleStoryChange}
-            style={{
-                width: '300px',
-                backgroundColor: 'black',
-                color: 'white',
-                borderColor: 'white',
-                borderRadius: '5px',
-                margin: '20px auto',
-                display: 'block',
-                appearance: 'none',
-                padding: '10px',
-                backgroundImage: 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'%23ffffff\'><polygon points=\'0,0 20,0 10,20\'/></svg>")',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'right 0.7em top 50%',
-                backgroundSize: '1.25em'
-            }}>
+    as="select"
+    onChange={handleStoryChange}
+    style={{
+        width: '300px',
+        backgroundColor: 'black',
+        color: 'white',
+        borderColor: 'white',
+        borderRadius: '5px',
+        margin: '20px auto',
+        display: 'block',
+        appearance: 'none',
+        padding: '10px',
+        backgroundImage: 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' fill=\'%23ffffff\'><polygon points=\'0,0 20,0 10,20\'/></svg>")',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'right 0.7em top 50%',
+        backgroundSize: '1.25em'
+    }}>
+    {isLoading2 ? (
+        <option>Loading...</option>
+    ) : (
+        <>
             <option>Select a story</option>
             {stories.map(story => (
                 <option key={story.storyid} value={story.storyid}>{story.title}</option>
             ))}
-        </Form.Control>
+        </>
+    )}
+</Form.Control>
+
 
         {isLoading ? (
             <div style={{ textAlign: 'center', margin: '20px' }}>
