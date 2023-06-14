@@ -14,7 +14,7 @@ const Blanks = () => {
   const [showBlanks, setShowBlanks] = useState(false);
   const [showStory, setShowStory] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  
   useEffect(() => {
     axios.patch(`${process.env.REACT_APP_API_URL}/games`, { 'getTitles': true } , {
         headers: {
@@ -53,13 +53,13 @@ const Blanks = () => {
   };
 
   const handleStoryChange = (event) => {
-    const storyId = event.target.value;
-    setSelectedStory(storyId);
-    fetchBlanks(storyId);
+    setSelectedStory(event.target.value);
+    fetchBlanks(event.target.value);
     setShowBlanks(true);
   };
 
   const handleInputChange = (event, blankId) => {
+    alert('test2');
     setUserInputs({
       ...userInputs,
       [blankId]: event.target.value,
@@ -111,7 +111,7 @@ const Blanks = () => {
       try {
         const response = await axios.patch(
           `${process.env.REACT_APP_API_URL}/games`,
-          { storyId: 1, fetchStory: true },
+          { storyId: selectedStory, fetchStory: true },
           {
             headers: {
               Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
