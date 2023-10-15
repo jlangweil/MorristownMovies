@@ -48,14 +48,6 @@ const Latest = () => {
     fetchLatestContent();
   }, []);
 
- /*  if (loading) {
-    return (
-      <center>
-        <Spinner animation="border" role="status" />
-      </center>
-    );
-  } */
-
   if (error) {
     return <center>Error: {error.message}</center>;
   }
@@ -141,10 +133,6 @@ const Latest = () => {
       )}
         
       <div>
-        {/* <Link to="/blog" className="no-underline">
-          <center><img src={blogTitle} alt="Morristown Movie Blog" className="blogPage-title"/></center>
-        </Link>
-        <br/> */}
         {loading ? (
       <center>
         <Spinner animation="border" role="status" />

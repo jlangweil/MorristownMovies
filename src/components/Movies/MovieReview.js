@@ -3,10 +3,10 @@ import axios from 'axios';
 import './MovieReview.css';
 import { Container, Row, Col, Button, Modal, Spinner } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import FilterDropdown from './components/Utils/FilterDropdown';
+import FilterDropdown from '../Utils/FilterDropdown';
 import MovieReviewAdd from './MovieReviewAdd';
 import MovieReviewEdit from './MovieReviewEdit';
-import { useAuth } from './AuthContext';
+import { useAuth } from '../../AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 

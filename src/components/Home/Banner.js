@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import UserProfileIcon from './components/UserProfile/UserProfileIcon';
+import UserProfileIcon from '../UserProfile/UserProfileIcon';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { useAuth } from './AuthContext';
+import { useAuth } from '../../AuthContext';
 
 function Banner({ onButtonClick }) {
 

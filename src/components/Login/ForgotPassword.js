@@ -41,6 +41,7 @@ const ForgotPassword = () => {
 
       setError('');
     } catch (err) {
+      console.error(err.message);
       setMessage('');
       setLoading(false);
       setError('An error occurred while sending the password reset link. Please try again.');

@@ -231,7 +231,7 @@ const Blanks = () => {
                                     borderBottom: '3px solid white',
                                     textAlign: 'center',
                                     fontSize: '20px',
-                                    fontFamily: 'Cursive'
+                                    fontFamily: 'Cursive, Helvetica',
                                 }}
                                 value={userInputs[blank.blankid] || ''}
                                 onChange={event => handleInputChange(event, blank.blankid)}

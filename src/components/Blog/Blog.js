@@ -84,24 +84,7 @@ const Blog = () => {
         
     </Container>
       
-      
-{/*       <div className="blogPage-post">
-  <h2 className="blogPage-postTitle">The Iconic Suit of Cary Grant in 'North by Northwest'</h2>
-  <div className="blogPage-postDetails">
-   
-  </div>
-  <p>
-    In Alfred Hitchcock's classic 1959 film, <em>North by Northwest</em>, Cary Grant plays the role of Roger Thornhill, a man mistaken for a fictional government agent. One of the film's most memorable elements is Grant's iconic suit. This <a href="https://crimereads.com/north-by-northwest-cary-grants-suit/" target="_blank" rel="noopener noreferrer">article</a> delves into the history and significance of the suit in the film.
-  </p>
-  <p>
-    Designed by the legendary costume designer Edith Head, the suit represents the perfect blend of style and functionality. It plays a crucial role in the film, symbolizing Thornhill's transformation and endurance throughout the story. The suit's impeccable tailoring, lightweight fabric, and timeless design have made it a classic that continues to influence men's fashion today.
-  </p>
-  <p>
-    To learn more about the story behind Cary Grant's suit in <em>North by Northwest</em>, read the full <a href="https://crimereads.com/north-by-northwest-cary-grants-suit/" target="_blank" rel="noopener noreferrer">article</a> on CrimeReads.
-  </p>
-  <span className="blogPage-postAuthor">Posted By John Doe</span>
-    <span>March 24, 2023</span>
-</div><hr /> */}
+
       {loading ? (
       <center>
         <Spinner animation="border" role="status" />

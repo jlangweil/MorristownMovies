@@ -3,11 +3,11 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import { FaMeetup } from 'react-icons/fa';
 import './Home.css';
 import Testimonial from './Testimonial';
-import MovieQuote from './MovieQuote';
-import meetupImage from './images/logo.jpg';
-import catsImage from './images/cats.jpg';
+import MovieQuote from '../Movies/MovieQuote';
+import meetupImage from '../../images/logo.jpg';
+import catsImage from '../../images/cats.jpg';
 import Latest from './Latest';
-import TopMovies from './components/Movies/TopMovies';
+import TopMovies from '../Movies/TopMovies';
 import { Link } from 'react-router-dom';
 
 const Home = () => {

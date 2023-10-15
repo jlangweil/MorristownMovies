@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
-import { useAuth } from './AuthContext';
-import StarRating from './StarRating';
+import { useAuth } from '../../AuthContext';
+import StarRating from '../Utils/StarRating';
 import Autosuggest from 'react-autosuggest';
 
 import './MovieReviewAdd.css';
