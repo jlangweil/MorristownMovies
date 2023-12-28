@@ -135,43 +135,59 @@ const MovieReview = () => {
         fetchMovies();
       }, [fetchMovies]);
       
+      const onFilterChange = (newFilter) => {
+        setFilter(newFilter); // Assuming newFilter is the value from FilterDropdown
+        console.log("Filter updated to:", newFilter); // Debug: Check if filter is updated
+      };
+      
 
-      const fetchReviews = useCallback(
-        debounce(async () => {
+      const fetchReviews = useCallback(async () => {
+        console.log("fetchreviews");
         try {
           const response = await axios.get(`${apiUrl}/reviews?page=${page}&limit=10&movie=${encodeURIComponent(filter)}`, {
             headers: {
               Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
             },
           });
-          console.log(`URL: ${apiUrl}`);
+          
+          // Determine if there are more reviews to load
           if (response.data.length < 10) {
             setHasMore(false);
           } else {
             setHasMore(true);
           }
-          setReviews(prevReviews => (page === 1 ? response.data : [...prevReviews, ...response.data]));
-          if (page !== 1) {
-            setPage(prevPage => prevPage + 1);
-          }
+      
+          // Append new reviews to the existing list
+          setReviews(prevReviews => {
+            // If it's the first page, just return the new data
+            if (page === 1) {
+              return response.data;
+            }
+      
+            // Otherwise, append the new data
+            return [...prevReviews, ...response.data];
+          });
+      
           setLoading(false);
         } catch (error) {
           setError(error);
           setLoading(false);
         }
-      }, 300),
-      [page, filter]);
+      }, [page, filter, apiUrl]);
+      
+      
       
       useEffect(() => {
-        // Reset page state when filter changes
-        setPage(1);
-        setHasMore(true);
-        setLoading(true);
-        setReviews([]);
-      
-        // Call fetchReviews
         fetchReviews();
-      }, [filter, fetchReviews]);
+      }, [page]);
+
+      useEffect(() => {
+        setReviews([]);
+        setPage(1);
+        fetchReviews();
+      }, [filter]);
+      
+      
       
       
       if (loading) {
@@ -205,7 +221,7 @@ const MovieReview = () => {
         <Row className="justify-content-center">
             <Col lg={8}>
             <div className="filter-add-container">
-                <FilterDropdown movies={movies} setFilter={setFilter} />
+                <FilterDropdown movies={movies} setFilter={onFilterChange} />
                 <button className="add-review-button" onClick={toggleAddReviewModal}>
                 <i className="fas fa-plus"></i>
                 </button>
@@ -224,13 +240,16 @@ const MovieReview = () => {
             <Col lg={8}>
                 <InfiniteScroll
                 dataLength={reviews.length}
-                next={() => fetchReviews(page)}
+                next={() => {
+                  // Increment page here when next set of data is needed
+                  setPage(prevPage => prevPage + 1);
+                }}
                 hasMore={hasMore}
                 loader={<h4>Loading...</h4>}
                 endMessage={<center>End of Reviews</center>}
                 >
                 {reviews
-                .filter(review => (filter === '' || review.MovieName === filter))
+                //.filter(review => (filter === '' || review.MovieName === filter))
                 .map(review => (
                     <div className="movie-review" key={review.id}>
                     <h2 className="movie-name">{review.MovieName}</h2>
